@@ -19,6 +19,14 @@ body {
   margin-left: 300px;
   margin-right: auto;
 }
+.comunidad{
+  font-size: 25px;
+  position: absolute;
+  top: .1%;
+  left: 60%;
+
+
+}
 .formulario {
   position: absolute;
   top: 30%;
