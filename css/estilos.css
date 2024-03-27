@@ -133,6 +133,9 @@ input[type="submit"]{
     border-radius: 20px;
     background-color: #0c457f4f ;
 }
+
+
+
 @media screen and (max-width: 768px) {
   .imagen {
     display: flex;
