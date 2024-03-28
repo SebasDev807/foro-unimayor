@@ -1,13 +1,44 @@
 /*Estilos para las paginas*/
-
+body {
+  font-family: "Montserrat", sans-serif;
+}
 .encabezado {
   background-image: url("/imagenes/Header.png");
   background-size: cover;
   background-repeat: no repeat;
-  height: 80px
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
 }
 
-.encabezado img{
-    width: 10rem;
-    padding: 10px;
+.encabezado img {
+  width: 10rem;
+  height: auto;
+  padding: 10px;
+}
+
+.encabezado input {
+  width: 45%;
+  height: 50px;
+  margin: 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.626);
+  text-align: center;
+}
+
+.encabezado input:focus {
+  outline: none;
+}
+
+.encabezado .menus {
+  width: 3rem;
+}
+.encabezado .menu-usuario {
+  display: flex;
+  padding: 20px;
 }
