@@ -47,7 +47,7 @@ body {
 }
 .username {
   text-align: center;
-  font-size: 30px;
+  font-size: 18px;
 }
 .username input {
   width: 80%;
@@ -67,7 +67,7 @@ body {
 .username input::placeholder {
   color: rgba(126, 126, 126, 0.479);
   text-align: center;
-  font-size: 30px;
+  font-size: 18px;
 }
 .contra {
   height: 56px;
@@ -78,7 +78,7 @@ body {
 }
 .contraseña {
   text-align: center;
-  font-size: 30px;
+  font-size: 18px;
 }
 .contraseña input {
   width: 80%;
@@ -98,7 +98,7 @@ body {
 .contraseña input::placeholder {
   color: rgba(126, 126, 126, 0.479);
   text-align: center;
-  font-size: 30px;
+  font-size: 18px;
 }
 
 .recovery{
