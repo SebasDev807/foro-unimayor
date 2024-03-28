@@ -4,25 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="../imagenes/png" href="image 2.png" />
-    <link rel="preload" href="../css/normalize.css" as="style" />
     <link rel="stylesheet" href="../css/normalize.css" as="style" />
-    <link rel="preload" href="../css/estilos.css" />
     <link rel="stylesheet" href="../css/estilos.css" as="style" />
     <title>FUM</title>
   </head>
 
   <body>
+    <!-- Logo UniMayor -->
     <img src="../imagenes/Logo.png" | alt="" class="imagen" />
     <div class="comunidad">
+    
+      <!-- Texto -->
       <h1>¡Únete para ser parte de la comunidad!</h1>
     </div>
+
+    <!-- Login/Inicio de sesión -->
     <form action="pagina-principal.html">
+<<<<<<< HEAD
+      <div class="formulario sombra"> <!-- Sombra del formulario -->
+        <img src="../imagenes/user.png" alt="" class="user" />
+
+        <!-- Correo del usuario -->
+=======
       <div class="formulario sombra">
         <img src="../imagenes/User.png" alt="" class="user" />
+>>>>>>> b032c05d56731fc28bc4eea7d5d077d2b22faf6a
         <div class="username">
           <input type="email" name="correo" required placeholder="Usuario" id="texto-email"/>
         </div>
         <img src="../imagenes/openmoji_key.png" alt="" class="contra" />
+
+        <!-- Contraseña del usuario -->
         <div class="contraseña">
           <input
             type="password"
@@ -32,6 +44,8 @@
           /><br /><br />
         </div>
       </div>
+
+      <!-- Botón "Iniciar sesión" -->
       <div class="recovery">
         <input type="submit" value="Iniciar sesión" class="boton" id="boton" />
         <div class="restablecer">
