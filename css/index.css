@@ -1,1 +1,13 @@
 /*Estilos para las paginas*/
+
+.encabezado {
+  background-image: url("/imagenes/Header.png");
+  background-size: cover;
+  background-repeat: no repeat;
+  height: 80px
+}
+
+.encabezado img{
+    width: 10rem;
+    padding: 10px;
+}
