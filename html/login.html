@@ -16,11 +16,11 @@
     <div class="comunidad">
       <h1>¡Únete para ser parte de la comunidad!</h1>
     </div>
-    <form action="paginaprincipal.html">
+    <form action="pagina-principal.html">
       <div class="formulario sombra">
         <img src="../imagenes/User-60.png" alt="" class="user" />
         <div class="username">
-          <input type="email" name="correo" required placeholder="Usuario" />
+          <input type="email" name="correo" required placeholder="Usuario" id="texto-email"/>
         </div>
         <img src="../imagenes/openmoji_key.png" alt="" class="contra" />
         <div class="contraseña">
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="recovery">
-        <input type="submit" value="Iniciar sesión" class="boton" />
+        <input type="submit" value="Iniciar sesión" class="boton" id="boton" />
         <div class="restablecer">
           <a href="#">¿Olvidaste tu contraseña?</a>
           <a href="#" class="borde">Clic aquí para restablecer</a>
@@ -42,5 +42,6 @@
     </form>
 
     <div></div>
+    <script src="/javascript/validar-correo.js"></script>
   </body>
 </html>
