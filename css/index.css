@@ -1,6 +1,12 @@
 /*Estilos para las paginas*/
 body {
+  background-image: url("/imagenes/unimayor-transparente.png");
+  background-size: 25%; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
   font-family: "Montserrat", sans-serif;
+  padding: 2%;
 }
 
 /*elementos del encabezado*/
@@ -60,11 +66,35 @@ body {
   justify-content: space-between;
 }
 
+/*box de "estudiante" del contenedor*/
+.estudiante{
+  background-color: #cacaca2f;
+  border-radius: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.estudiante img{
+  height: 25px;
+  float: left;
+  margin-left: 30px;  
+}
+
+/*Más activos*/
 .estudiantes {
   margin-top: 10px;
   padding: 30px;
+  border-color: #cacaca;
 }
-
+.articulo-estudiante p{
+  color: #727272;
+}
+/*Chulito que aparece al lado de los más activos*/
+ /*Falta que se acomode bien, no pude jajajsjasjajaja*/
+.check{
+  display: inline-flex;
+  height: 20px;
+}
 article {
   text-align: center;
   border: 1px solid black;
@@ -96,6 +126,7 @@ article {
   width: 100%;
   margin: 10;
   border-radius: 35px;
+  border-color: #cacaca;
 }
 
 .submit-pregunta {
@@ -104,9 +135,45 @@ article {
   margin: 20px;
   align-items: center;
 }
+.imagenes-pregunta {
+  padding-left: 50px;
+}
+
+/*Publicaciones*/
+.posts{
+  display: flex;
+  align-items: flex-start;
+  margin-top: 5%;
+  padding: 2%;
+  border-color: #cacaca;
+  color: #363636;
+}
+.post-header{
+  font-size: 13px;
+  margin-right: 50%;
+  justify-content: space-between;
+}
+
+.username{
+  margin-left: 8%;
+}
+.fecha{
+  display: flex;
+  margin-left: auto;
+}
+.cuerpo-post h3{
+  font-size: 25px;
+}
+.post-footer{
+  display: flex;
+}
 
 .busqueda {
   display: flex;
+  padding-left: 20px;
+}
+.busqueda img{
+  height: 50px;
 }
 
 .busqueda input {
@@ -146,8 +213,44 @@ article {
   text-align: center;
   display: flexbox;
 }
-.modulos a {
+
+/*Imagen*/
+.books{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.books img{ 
+  float: left;
+  height: 60px;
+}
+
+/*Ciencias básicas*/
+.cb {
   text-decoration: none;
   font-weight: bold;
-  color: #1a44c0;
+  color: #C9322B;
+}
+
+/*Ciencias computación*/
+.cc{
+  text-decoration: none;
+  font-weight: bold;
+  color: #2E9538;
+}
+
+/*Habilidades de comunicación*/
+.hc{
+  text-decoration: none;
+  font-weight: bold;
+  color: #1CC0CB;
+}
+
+/*Emprendimiento*/
+.em{
+  text-decoration: none;
+  font-weight: bold;
+  color: #ECAD34;
 }
