@@ -2,6 +2,8 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+/*elementos del encabezado*/
 .encabezado {
   background-image: url("/imagenes/Header.png");
   background-size: cover;
@@ -42,3 +44,18 @@ body {
   display: flex;
   padding: 20px;
 }
+
+/*elementos del contenedor*/
+.contenedor{
+  display: 	flex;
+  padding: 10px;
+  margin: 10px;
+  justify-content: space-between;
+
+}
+
+ .secciones {
+  box-shadow: 1px 0 4px rgb(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
