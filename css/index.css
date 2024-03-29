@@ -8,13 +8,20 @@ body {
   background-image: url("/imagenes/Header.png");
   background-size: cover;
   background-repeat: no repeat;
-  height: 80px;
+  height: 60px;
+  width: 100%;
   display: flex;
+  position: fixed;
+  z-index: 10000;
   justify-content: space-between;
   padding: 10px;
+  top: 0;
+  left: 0;
   align-items: center;
+  
+  
 }
-
+/*Estilos para la imagen del encabezado*/
 .encabezado img {
   width: 10rem;
   height: auto;
@@ -49,7 +56,7 @@ body {
 .contenedor {
   display: flex;
   padding: 10px;
-  margin: 10px;
+  margin-top: 80px;
   justify-content: space-between;
 }
 
@@ -84,14 +91,12 @@ article {
 }
 
 .pregunta {
-  border: 1px 0 4px rgb(0, 0, 0, 0.1);
+  border: 1px 0 4px rgb(105, 102, 102);
   padding: 10px;
   width: 100%;
   margin: 10;
+  border-radius: 35px;
 }
-
-
-
 
 .submit-pregunta {
   display: flex;
@@ -112,8 +117,12 @@ article {
   margin-left: 10px;
   position: relative;
 }
+.busqueda input:focus {
+ outline: none;
+}
+
 .busqueda input::placeholder {
-  color: #CACACA;
+  color: #cacaca;
   font-weight: bold;
 }
 
@@ -126,12 +135,19 @@ article {
   height: 3rem;
   font-size: 20px;
   cursor: pointer;
-  
 }
 .boton:hover {
-  
   background-color: #5b6b9e;
   transition: 0.5s;
-  
+}
 
+.modulos {
+  position: relative;
+  text-align: center;
+  display: flexbox;
+}
+.modulos a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #1a44c0;
 }
