@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/normalize.css" as="style" />
 
     <title>FUM</title>
@@ -27,29 +27,45 @@
       <aside class="articulo-estudiante">
         <!-- seccion del perfil activo -->
         <article class="estudiantes">
-          <img src="/imagenes/user.png" alt="" />
-          <h3>Estudiante</h3>
+          <img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" />
+          <!-- box del estudiante -->
+          <div class="estudiante">
+            <img src="/imagenes/ion_book.png" alt="" />
+            <h3>Estudiante</h3>
+          </div>
           <p>Programa</p>
           <p>Desarrollo de Software</p>
         </article>
 
         <article class="estudiantes">
+          <!-- imagen top -->
+          <img src="/imagenes/time.png" alt="" class="time" />
           <h2>Más activos</h2>
           <div class="mas-activos">
-            <a href="#"><img src="/imagenes/user.png" /></a>
-            <p>San_Torres</p>
+            <a href="#"><img src="/imagenes/san.png" /></a>
+            <p>
+              San_Torres <img src="/imagenes/check.png" alt="" class="check" />
+            </p>
           </div>
           <div class="mas-activos">
-            <a href="#"><img src="/imagenes/user.png" /></a>
-            <p>BurritoVolador69</p>
+            <a href="#"><img src="/imagenes/alej.png" /></a>
+            <p>
+              BurritoVolador69
+              <img src="/imagenes/check.png" alt="" class="check" />
+            </p>
           </div>
           <div class="mas-activos">
-            <a href="#"><img src="/imagenes/user.png" /></a>
-            <p>SGalletaLoca007</p>
+            <a href="#"><img src="/imagenes/jd.png" /></a>
+            <p>
+              SGalletaLoca007
+              <img src="/imagenes/check.png" alt="" class="check" />
+            </p>
           </div>
           <div class="mas-activos">
-            <a href="#"><img src="/imagenes/user.png" /></a>
-            <p>StarGhost</p>
+            <a href="#"><img src="/imagenes/gb.png" /></a>
+            <p>
+              StarGhost <img src="/imagenes/check.png" alt="" class="check" />
+            </p>
           </div>
         </article>
       </aside>
@@ -57,27 +73,101 @@
       <section class="seccion-preguntas">
         <article class="pregunta">
           <div class="busqueda">
-            <img src="/imagenes/user.png" alt="">
-            <input type="text" placeholder="¿Que Preguntas tienes hoy?" class="input-pregunta">
+            <img src="/imagenes/leonpregunta.png" alt="" />
+            <input
+              type="text"
+              placeholder="¡¿Que Preguntas tienes hoy?!"
+              class="input-pregunta"
+            />
           </div>
-            <div class="submit-pregunta">
-              <a href="#"><img src="/imagenes/ver.png" alt=""></a>
-              <button type="submit" class="boton">Publicar</button>
+          <div class="submit-pregunta">
+            <div class="imagenes-pregunta">
+              <a href="#" class="galeria"
+                ><img src="/imagenes/galeria.png" alt=""
+              /></a>
+              <a href="#" class="gif"><img src="/imagenes/gif.png" alt="" /></a>
+              <a href="#" class="poll"
+                ><img src="/imagenes/poll.png" alt=""
+              /></a>
             </div>
-          </form>
+            <button type="submit" class="boton">Publicar</button>
+          </div>
+          <!--Aquí habia un </form> pero no se había iniciado -->
+        </article>
+
+        <!-- Post de los usuarios-->
+        <article class="posts">
+          <div class="foto-usuario">
+            <img src="/imagenes/nik.png" alt="" />
+          </div>
+
+          <div class="cuerpo-post">
+            <div class="post-header">
+              <div class="post-headertexto">
+                <span class="usuario">
+                  Nikol Perrisimos
+                  <span class="username"> 
+                    @nikol_perros 
+                  </span>
+                  <span class="fecha">21/03/2024</span>
+                </span>
+              </div>
+              <h3>
+                ¡El lunes traigo puntas!
+              </h3>
+            </div>
+
+            <div class="descripcion-post">
+              <p>
+                Hola amigos, voy hacer puntas para el lunes para el que quiera
+                pedir jejeje. Las puntas incluyen (proteína de preferencia, pan,
+                queso, lechuga, ripio y salsa de la casa) Punta de pollo $5.000
+                Punta de carne $5.000 Las mixtas (pollo y carne) tienen un valor
+                de 7 mil pero si piden varias se les puede hacer un descuentico
+                ☺️ Para los pedidos me pueden escribir al DM, besos.
+              </p>
+            </div>
+
+            <div class="post-footer">
+              <button class="boton-subir">
+                <img src="/imagenes/up-botton-blue.png" alt="" />
+              </button>
+
+              <button class="boton-bajar">
+                <img src="/imagenes/down-botton-white.png" alt="" />
+              </button>
+
+              <button class="comentarios">
+                <img src="/imagenes/comentarios.png" alt="" />
+              </button>
+              <div class="materia">
+                <p>Emprendimiento</p>
+              </div>
+              <div class="hora">
+                <p>6:54pm</p>
+              </div>
+            </div>
+
+
+          </div>
         </article>
       </section>
 
       <aside class="modulos">
-        <h2>Módulos</h2>
+        <!-- books = imagen al lado de "módulos" -->
+        <div class="books">
+          <img src="/imagenes/books.png" alt="" />
+          <h2>Módulos</h2>
+          <hr />
+        </div>
         <nav>
-          <a href="#">CIENCIAS BASICAS</a>
-          <hr>
-          <a href="#">CIENCIAS DE COMPUTACIÖN</a>
-          <hr>
-          <a href="#">HABILIDADES DE COMUNICACIÓN</a>
-          <hr>
-          <a href="#">EMPRENDIMIENTO</a>
+          <a href="#" class="cb">CIENCIAS BASICAS</a>
+          <hr />
+          <a href="#" class="cc">CIENCIAS DE COMPUTACIÖN</a>
+          <hr />
+          <a href="#" class="hc">HABILIDADES DE COMUNICACIÓN</a>
+          <hr />
+          <a href="#" class="em">EMPRENDIMIENTO</a>
         </nav>
       </aside>
     </div>
