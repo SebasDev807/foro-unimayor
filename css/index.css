@@ -64,6 +64,8 @@ body {
   padding: 10px;
   margin-top: 80px;
   justify-content: space-between;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 /*box de "estudiante" del contenedor*/
@@ -109,6 +111,7 @@ article {
 .mas-activos {
   display: flex;
   padding: 10;
+  align-items: center;
 }
 
 .seccion-preguntas {
@@ -228,28 +231,28 @@ article {
 }
 
 /*Ciencias básicas*/
-.cb {
+#cb {
   text-decoration: none;
   font-weight: bold;
   color: #C9322B;
 }
 
 /*Ciencias computación*/
-.cc{
+#cc{
   text-decoration: none;
   font-weight: bold;
   color: #2E9538;
 }
 
 /*Habilidades de comunicación*/
-.hc{
+#hc{
   text-decoration: none;
   font-weight: bold;
   color: #1CC0CB;
 }
 
 /*Emprendimiento*/
-.em{
+#em{
   text-decoration: none;
   font-weight: bold;
   color: #ECAD34;
