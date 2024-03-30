@@ -143,6 +143,8 @@ article {
 }
 .imagenes-pregunta {
   padding-left: 50px;
+  display: flex;
+  align-items: center;
 }
 
 /*Publicaciones*/
