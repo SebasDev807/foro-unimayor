@@ -1,6 +1,13 @@
+.contenedor2 {
+    display: flex;
+    padding: 10px;
+    margin-top: 80px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
 .perfil {
-  flex-flow: row wrap;
   margin: 10px;
+  margin-bottom: 215px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   border: 1px solid #c4c4c4;
 }
@@ -34,3 +41,14 @@
 .informacion ul li{
     font-weight: 400;
 }
+.post-perfil{
+    position: absolute;
+    margin: 10px;
+    top: 64%;
+    left: 26%;
+    margin-bottom: 215px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border: 1px solid #c4c4c4;
+}
+
+
