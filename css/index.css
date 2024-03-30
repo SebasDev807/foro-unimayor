@@ -1,12 +1,14 @@
 /*Estilos para las paginas*/
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 body {
   background-image: url("/imagenes/unimayor-transparente.png");
-  background-size: 25%; 
-  background-position: center; 
+  background-size: 25%;
+  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
-  font-family: "Montserrat", sans-serif;
-  padding: 2%;
+  background-attachment: fixed;
+  padding: 0 150px;
+  font-size: 15px;
+  font-family: "Manrope", sans-serif;
 }
 
 /*elementos del encabezado*/
@@ -24,14 +26,13 @@ body {
   top: 0;
   left: 0;
   align-items: center;
-  
-  
 }
 /*Estilos para la imagen del encabezado*/
 .encabezado img {
   width: 10rem;
   height: auto;
   padding: 10px;
+  margin-left: 10%;
 }
 
 .encabezado input {
@@ -69,17 +70,17 @@ body {
 }
 
 /*box de "estudiante" del contenedor*/
-.estudiante{
+.estudiante {
   background-color: #cacaca2f;
   border-radius: 30px;
   height: 40px;
   display: flex;
   align-items: center;
 }
-.estudiante img{
+.estudiante img {
   height: 25px;
   float: left;
-  margin-left: 30px;  
+  margin-left: 30px;
 }
 
 /*Más activos*/
@@ -88,12 +89,12 @@ body {
   padding: 30px;
   border-color: #cacaca;
 }
-.articulo-estudiante p{
+.articulo-estudiante p {
   color: #727272;
 }
 /*Chulito que aparece al lado de los más activos*/
- /*Falta que se acomode bien, no pude jajajsjasjajaja*/
-.check{
+/*Falta que se acomode bien, no pude jajajsjasjajaja*/
+.check {
   display: inline-flex;
   height: 20px;
 }
@@ -118,9 +119,9 @@ article {
   box-shadow: 1px 0 4px rgb(0, 0, 0, 0.2);
   padding: 50px;
   justify-content: center;
-  padding: 10;
   width: 80%;
   margin: 10px;
+  border-radius: 30px;
 }
 
 .pregunta {
@@ -145,39 +146,68 @@ article {
 }
 
 /*Publicaciones*/
-.posts{
-  display: flex;
-  align-items: flex-start;
+.posts {
+  position: relative;
   margin-top: 5%;
-  padding: 2%;
   border-color: #cacaca;
   color: #363636;
 }
-.post-header{
-  font-size: 13px;
-  margin-right: 50%;
-  justify-content: space-between;
+.header {
+  display: flex;
+  margin-left: 15px;
+  margin: 22px;
 }
 
-.username{
-  margin-left: 8%;
+.usuario {
+  margin-inline: 21px;
 }
-.fecha{
-  display: flex;
-  margin-left: auto;
+
+.lineas {
+  position: absolute;
+  right: 0px;
+  background: none;
+  border: none;
 }
-.cuerpo-post h3{
-  font-size: 25px;
+.titulo {
+  position: absolute;
+  top: 12%;
+  left: 14%;
 }
-.post-footer{
-  display: flex;
+.footer {
+  margin: 3%;
+}
+.boton-footer {
+  position: absolute;
+}
+.materia {
+  width: 23%;
+  position: relative;
+  border-radius: 30px;
+  background-color: #ecad34;
+  bottom: -21%;
+  left: 74%;
+}
+.materia2{
+  width: 23%;
+  position: relative;
+  border-radius: 30px;
+  background-color: #d61d1d;
+  bottom: -21%;
+  left: 74%;
+}
+.materia2 p{
+  color: aliceblue;
+}
+.boton-footer button {
+  background: none;
+  border: none;
 }
 
 .busqueda {
   display: flex;
   padding-left: 20px;
 }
-.busqueda img{
+.busqueda img {
   height: 50px;
 }
 
@@ -191,7 +221,7 @@ article {
   background: none;
 }
 .busqueda input:focus {
- outline: none;
+  outline: none;
 }
 
 .busqueda input::placeholder {
@@ -222,14 +252,14 @@ article {
 }
 
 /*Imagen*/
-.books{
+.books {
   height: 40px;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.books img{ 
+.books img {
   float: left;
   height: 60px;
 }
@@ -238,26 +268,26 @@ article {
 #cb {
   text-decoration: none;
   font-weight: bold;
-  color: #C9322B;
+  color: #c9322b;
 }
 
 /*Ciencias computación*/
-#cc{
+#cc {
   text-decoration: none;
   font-weight: bold;
-  color: #2E9538;
+  color: #2e9538;
 }
 
 /*Habilidades de comunicación*/
-#hc{
+#hc {
   text-decoration: none;
   font-weight: bold;
-  color: #1CC0CB;
+  color: #1cc0cb;
 }
 
 /*Emprendimiento*/
-#em{
+#em {
   text-decoration: none;
   font-weight: bold;
-  color: #ECAD34;
+  color: #ecad34;
 }
