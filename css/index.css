@@ -65,9 +65,9 @@ body {
   padding: 10px;
   margin-top: 80px;
   justify-content: space-between;
-  margin-right: 20px;
-  margin-left: 20px;
+  
 }
+
 
 /*box de "estudiante" del contenedor*/
 .estudiante {
@@ -118,7 +118,7 @@ article {
 .seccion-preguntas {
   box-shadow: 1px 0 4px rgb(0, 0, 0, 0.2);
   padding: 50px;
-  justify-content: center;
+  align-items: center;
   width: 80%;
   margin: 10px;
   border-radius: 30px;
@@ -131,6 +131,8 @@ article {
   margin: 10;
   border-radius: 35px;
   border-color: #cacaca;
+  justify-content: center;
+
 }
 
 .submit-pregunta {
@@ -145,17 +147,42 @@ article {
   display: flex;
 }
 
+
+
 /*Publicaciones*/
-.posts {
-  position: relative;
+.lista-posts {
   margin-top: 5%;
   border-color: #cacaca;
   color: #363636;
+  
 }
+
+.pregunta-post{
+  list-style-type: none;
+  border: none;
+  justify-content: space-around;
+}
+
+.contenedor-post{
+  margin: 10px;
+  
+  padding: 10px;
+}
+
+.contenedor-post p{
+  margin: 10px;
+  width: 100%;
+}
+
+.contenedor-usuario{
+  display: flex;
+}
+
 .header {
   display: flex;
   margin-left: 15px;
   margin: 22px;
+  align-items: center;
 }
 
 .usuario {
@@ -227,7 +254,7 @@ article {
 .busqueda input::placeholder {
   color: #cacaca;
   font-weight: bold;
-  font-size: 35px;
+  font-size: 1.5rem;
 }
 
 .boton {
@@ -235,7 +262,7 @@ article {
   background-color: #7991db;
   color: white;
   border: none;
-  width: 8rem;
+  width: 40%;
   height: 3rem;
   font-size: 20px;
   cursor: pointer;
