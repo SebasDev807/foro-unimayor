@@ -16,7 +16,9 @@
         <input type="text" placeholder="Buscar" />
         <div class="menu-usuario">
           <a href=""><img src="/imagenes/notificacion.png" class="menus" /></a>
-          <a href=""><img src="/imagenes/leon-foto-perfil.png" class="menus" /></a>
+          <a href=""
+            ><img src="/imagenes/leon-foto-perfil.png" class="menus"
+          /></a>
         </div>
       </div>
     </header>
@@ -47,7 +49,7 @@
               San_Torres <img src="/imagenes/check.png" alt="" class="check" />
             </p>
           </div>
-         
+
           <div class="mas-activos">
             <a href="#"><img src="/imagenes/alej.png" /></a>
             <p>BurritoVolador69</p>
@@ -57,18 +59,18 @@
           <div class="mas-activos">
             <a href="#"><img src="/imagenes/jd.png" /></a>
             <p>SGalletaLoca007</p>
-              <img src="/imagenes/check.png" alt="" class="check" />
-            
+            <img src="/imagenes/check.png" alt="" class="check" />
           </div>
           <div class="mas-activos">
             <a href="#"><img src="/imagenes/gb.png" /></a>
-            <p>StarGhost<p></p> <img src="/imagenes/check.png" alt="" class="check" />
-           
+            <p>StarGhost</p>
+            <p></p>
+            <img src="/imagenes/check.png" alt="" class="check" />
           </div>
         </article>
       </aside>
 
-      <section class="seccion-preguntas">
+      <section class="seccion-preguntas" id="seccion-preguntas">
         <article class="pregunta">
           <div class="busqueda">
             <img src="/imagenes/leonpregunta.png" alt="" />
@@ -92,97 +94,12 @@
           </div>
           <!--Aquí habia un </form> pero no se había iniciado -->
         </article>
+        <ul class="lista-posts"></ul>
+      </section>
+      <!-- Post de los usuarios-->
       
-
-       <!-- Post de los usuarios-->
-       <article class="posts">
-        <section>
-          <div class="header">
-            <img src="/imagenes/nik.png" alt="" class="foto-usuario"/>
-                <span class="usuario">
-                  Nikol Perrisimos
-                </span>
-                  <span class="username"> @nikol_perros </span>
-                  <button class="lineas">
-                    <img src="/imagenes/lines.png" alt="">
-                  </button>
-                </div>
-                <div class="titulo">
-                  <h1>
-                    ¡El lunes traigo puntas!
-                  </h1>
-                </div>
-        </section>
-        <section>
-          <div class="footer">
-          <p>Hola amigos, voy hacer puntas para el lunes para el que quiera pedir jejeje.
-            Las puntas incluyen (proteína de preferencia, pan, queso, lechuga, ripio y salsa de la casa)
-            Punta de pollo $5.000
-            Punta de carne $5.000
-            Las mixtas (pollo y carne) tienen un valor de 7 mil pero si piden varias se les puede hacer un descuentico ☺️
-            Para los pedidos me pueden escribir al DM, besos.</p>
-        <div class="boton-footer">
-          <button class="boton-subir">
-            <img src="/imagenes/up-botton-blue.png" alt="" />
-          </button>
-
-          <button class="boton-bajar">
-            <img src="/imagenes/down-botton-white.png" alt="" />
-          </button>
-
-          <button class="comentarios">
-            <img src="/imagenes/comentarios.png" alt="" />
-          </button>
-        </div>
-        <div class="materia">
-          <p>Emprendimiento</p>
-        </div>
-      </div>
-      </section>
-      </article>
-
-      <article class="posts">
-        <section>
-          <div class="header">
-            <img src="/imagenes/gabriela.png" alt="" class="foto-usuario"/>
-                <span class="usuario">
-                  Gabriela Vazques
-                </span>
-                  <span class="username"> @gabigol </span>
-                  <button class="lineas">
-                    <img src="/imagenes/lines.png" alt="">
-                  </button>
-                </div>
-                <div class="titulo">
-                  <h1>
-                    ¿Qué es una función?
-                  </h1>
-                </div>
-        </section>
-        <section>
-          <div class="footer">
-          <p>Buenas muchachos alquien podría colaborarme con una explicación</p>
-        <div class="boton-footer">
-          <button class="boton-subir">
-            <img src="/imagenes/up-botton-blue.png" alt="" />
-          </button>
-
-          <button class="boton-bajar">
-            <img src="/imagenes/down-botton-white.png" alt="" />
-          </button>
-
-          <button class="comentarios">
-            <img src="/imagenes/comentarios.png" alt="" />
-          </button>
-        </div>
-        <div class="materia2">
-          <p>Cálculo diferencial</p>
-        </div>
-      </div>
-      </section>
-      </article>
-    </section>
-
+        <!-- Se agregan dinamicamente los posts -->
+      </ul>
 
       <aside class="modulos">
         <!-- books = imagen al lado de "módulos" -->
@@ -204,5 +121,6 @@
     </div>
 
     <!-- /cuerpo de la pagína -->
+    <script src="/javascript/agregar-pregunta.js"></script>
   </body>
 </html>
