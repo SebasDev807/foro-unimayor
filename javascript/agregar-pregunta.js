@@ -14,7 +14,7 @@ botonPublicar.addEventListener("click", () => {
 
   let contenedorBotonesPost = document.createElement("div");
 
-  fotoDePerfil.src = "/imagenes/user.png";
+  fotoDePerfil.src = "/imagenes/leonpregunta.png";
   nombreUsuario.textContent = "NekitoKawaii";
   hashTag.textContent = "#SempaiMaster";
 
