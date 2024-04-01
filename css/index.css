@@ -58,16 +58,55 @@ body {
   display: flex;
   padding: 20px;
 }
-
+.perfil-encabezado {
+  position: relative;
+  width: 200px;
+  padding: 10px;
+}
+.perfil-encabezado img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.opciones {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 5px;
+  -webkit-box-shadow: -9px 10px 18px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: -9px 10px 18px -8px rgba(0,0,0,0.75);
+  box-shadow: -9px 10px 18px -8px rgba(0,0,0,0.75);
+}
+.perfil-encabezado:hover .opciones {
+  display: block;
+}
+.opciones p,
+.opciones a {
+  font-weight: bold;
+  margin: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  line-height: 30px;
+}
+.opciones a:visited {
+  color: inherit;
+}
+.opciones p:hover,
+.opciones a:hover {
+  color: white;
+  background-color: #0c467f;
+}
 /*elementos del contenedor*/
 .contenedor {
   display: flex;
   padding: 10px;
   margin-top: 80px;
   justify-content: space-between;
-  
 }
-
 
 /*box de "estudiante" del contenedor*/
 .estudiante {
@@ -132,7 +171,6 @@ article {
   border-radius: 35px;
   border-color: #cacaca;
   justify-content: center;
-
 }
 
 .submit-pregunta {
@@ -147,34 +185,31 @@ article {
   display: flex;
 }
 
-
-
 /*Publicaciones*/
 .lista-posts {
   margin-top: 5%;
   border-color: #cacaca;
   color: #363636;
-  
 }
 
-.pregunta-post{
+.pregunta-post {
   list-style-type: none;
   border: none;
   justify-content: space-around;
 }
 
-.contenedor-post{
+.contenedor-post {
   margin: 10px;
-  
+  border-color: #cacaca;
   padding: 10px;
 }
 
-.contenedor-post p{
+.contenedor-post p {
   margin: 10px;
   width: 100%;
 }
 
-.contenedor-usuario{
+.contenedor-usuario {
   display: flex;
 }
 
@@ -214,7 +249,7 @@ article {
   bottom: -21%;
   left: 74%;
 }
-.materia2{
+.materia2 {
   width: 23%;
   position: relative;
   border-radius: 30px;
@@ -222,7 +257,7 @@ article {
   bottom: -21%;
   left: 74%;
 }
-.materia2 p{
+.materia2 p {
   color: aliceblue;
 }
 .boton-footer button {
