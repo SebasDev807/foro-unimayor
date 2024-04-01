@@ -6,11 +6,13 @@ botonPublicar.addEventListener("click", () => {
   let elemento = document.createElement("li");
   let articulo = document.createElement("article");
   let pregunta = document.createElement("p");
+  let hora = document.createElement("p");
 
   let contenedorElementosUsuarios = document.createElement("div");
   let fotoDePerfil = document.createElement("img");
   let nombreUsuario = document.createElement("p");
   let hashTag = document.createElement("p");
+  let fecha = document.createElement("p");
 
   let contenedorBotonesPost = document.createElement("div");
 
@@ -24,9 +26,12 @@ botonPublicar.addEventListener("click", () => {
   elemento.classList.add("pregunta-post");
   articulo.classList.add("contenedor-post");
 
+  fecha.textContent = new Date().toLocaleDateString();
+
   contenedorElementosUsuarios.appendChild(fotoDePerfil);
   contenedorElementosUsuarios.appendChild(nombreUsuario);
   contenedorElementosUsuarios.appendChild(hashTag);
+  contenedorElementosUsuarios.appendChild(fecha);
 
   articulo.appendChild(contenedorElementosUsuarios);
   articulo.appendChild(pregunta);
