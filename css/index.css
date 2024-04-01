@@ -212,6 +212,7 @@ article {
 
 .contenedor-usuario {
   display: flex;
+  font-size: 12px;
 }
 
 .header {
