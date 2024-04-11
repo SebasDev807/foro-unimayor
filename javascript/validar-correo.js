@@ -5,7 +5,7 @@ botonValidar.addEventListener("click", (event) => {
   let correo = textoCorreo.value.trim();
 
   if (!correo.endsWith("@unimayor.edu.co")) {
-    alert("Solo se permite acceso a estudiantes de unimayor");
+    alert("Solo unimayor lokas");
     event.preventDefault();
   }
 });
