@@ -355,3 +355,13 @@ article {
   font-weight: bold;
   color: #ecad34;
 }
+
+.contenedor-botones-post{
+  justify-content: space-between;
+  display: flex;
+  font-size: 12px;
+}
+
+.contenedor-botones-post button{
+  width: 20%;
+}
