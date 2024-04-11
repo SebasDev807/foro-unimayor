@@ -213,6 +213,15 @@ article {
 .contenedor-usuario {
   display: flex;
   font-size: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*
+ Aqui modifican la imagen como les parezca mejor
+*/
+.contenedor-usuario img{
+  width: 15%;
 }
 
 .header {
