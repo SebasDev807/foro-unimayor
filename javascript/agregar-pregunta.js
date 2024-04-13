@@ -1,11 +1,13 @@
-import { obtenerHora } from "./helpers/obtener-horas.js";
+import { obtenerHora, obtenerFecha } from "./helpers/obtener-tiempo.js";
 
 console.log(obtenerHora());
+
 const listaPreguntas = document.querySelector(".lista-posts");
 const botonPublicar = document.querySelector(".boton");
 const inputPregunta = document.querySelector(".input-pregunta");
 
 botonPublicar.addEventListener("click", () => {
+  // Creación de elementos
   let elemento = document.createElement("li");
   let articulo = document.createElement("article");
   let pregunta = document.createElement("p");
@@ -16,72 +18,54 @@ botonPublicar.addEventListener("click", () => {
   let hashTag = document.createElement("p");
   let horas = document.createElement("p");
   let fecha = document.createElement("p");
-  horas.textContent = obtenerHora();
-  fecha.textContent = obtenerFecha();
 
-  /**
-   *
-   * Sección de botones
-   */
   const contenedorBotonesPost = document.createElement("div");
   const botonSubir = document.createElement("button");
   const botonBajar = document.createElement("button");
   const botonComentar = document.createElement("button");
   let seccion = document.createElement("p");
 
+  // Configuración de los elementos
   botonSubir.textContent = "sube";
   botonBajar.textContent = "baja";
   botonComentar.textContent = "comenta";
   seccion.textContent = "Emprendimiento";
 
+  fotoDePerfil.src = "/imagenes/leonpregunta.png";
+  nombreUsuario.textContent = "NekitoKawai";
+  hashTag.textContent = "#SempaiMaster";
+  horas.textContent = obtenerHora();
+  pregunta.textContent = inputPregunta.value;
+  horas.textContent = obtenerHora();
+  fecha.textContent = obtenerFecha();
+
+  // Asignación de clases
   contenedorBotonesPost.classList.add("contenedor-botones-post");
   botonSubir.classList.add("btn-subir");
-  botonSubir.classList.add("btn-bajar");
-  botonSubir.classList.add("btn-comentar");
+  botonBajar.classList.add("btn-bajar");
+  botonComentar.classList.add("btn-comentar");
+  contenedorElementosUsuarios.classList.add("contenedor-usuario");
+  elemento.classList.add("pregunta-post");
+  articulo.classList.add("contenedor-post");
 
+  // Estructura del DOM
   contenedorBotonesPost.appendChild(botonSubir);
   contenedorBotonesPost.appendChild(botonBajar);
   contenedorBotonesPost.appendChild(botonComentar);
   contenedorBotonesPost.appendChild(seccion);
   contenedorBotonesPost.appendChild(horas);
 
-  fotoDePerfil.src = "/imagenes/leonpregunta.png";
-  nombreUsuario.textContent = "NekitoKawai";
-  hashTag.textContent = "#SempaiMaster";
-  horas.textContent = obtenerHora();
-
-  pregunta.textContent = inputPregunta.value;
-
-  contenedorElementosUsuarios.classList.add("contenedor-usuario");
-  elemento.classList.add("pregunta-post");
-  articulo.classList.add("contenedor-post");
-
   contenedorElementosUsuarios.appendChild(fotoDePerfil);
   contenedorElementosUsuarios.appendChild(nombreUsuario);
-  contenedorElementosUsuarios.appendChild(hashTag);
   contenedorElementosUsuarios.appendChild(hashTag);
   contenedorElementosUsuarios.appendChild(fecha);
 
   articulo.appendChild(contenedorElementosUsuarios);
   articulo.appendChild(pregunta);
-  elemento.appendChild(articulo);
   articulo.appendChild(contenedorBotonesPost);
 
-/**
- * Agrega la ultima pregunta al inicio del contenedor
- */
+  elemento.appendChild(articulo);
   listaPreguntas.insertBefore(elemento, listaPreguntas.firstChild);
 
   inputPregunta.value = "";
 });
-
-function obtenerFecha() {
-  let now = new Date();
-  let diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-  let dia = diasSemana[now.getDay()];
-
-  let mes = now.getMonth() + 1;
-  let year = now.getFullYear();
-
-  return `${dia}/${mes}/${year}`;
-}

@@ -16,4 +16,15 @@ function obtenerHora() {
   return horaFormateada;
 }
 
-export { obtenerHora };
+function obtenerFecha() {
+  let now = new Date();
+  let diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  let dia = diasSemana[now.getDay()];
+
+  let mes = now.getMonth() + 1;
+  let year = now.getFullYear();
+
+  return `${dia}/${mes}/${year}`;
+}
+
+export { obtenerHora, obtenerFecha };
