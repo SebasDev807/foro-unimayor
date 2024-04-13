@@ -82,11 +82,12 @@
         <article class="pregunta">
           <div class="busqueda">
             <img src="/imagenes/leonpregunta.png" alt="" />
-            <input
-              type="text"
-              placeholder="¡¿Que Preguntas tienes hoy?!"
-              class="input-pregunta"
-            />
+            
+            <div class="input-pregunta">
+              <input type="text"placeholder="Titulo de tu post"class="titulo-pregunta"/>
+              <!-- cambie input por textarea para permitir los saltos de linea  -->
+              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" oninput="autoResize(this)"></textarea>
+            </div>
           </div>
           <div class="submit-pregunta">
             <div class="imagenes-pregunta">
@@ -130,6 +131,6 @@
 
     <!-- /cuerpo de la pagína -->
     <script src="/javascript/agregar-pregunta.js" type="module"></script>
-
+    <script src="/javascript/aumentar-area-texto.js"></script>
   </body>
 </html>

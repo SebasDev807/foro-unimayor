@@ -1,3 +1,15 @@
+/**
+ * TODO: Hay que actualizar el codigo 
+ * Se agregaron dos elementos nuevos en la
+ * seccion de pregunta,  por lo que varios
+ * elementos declarados aquí quedaron inutilizables
+ * se debe actualizar la función para adaptarse a los
+ * cambios, buenas noches :D..
+ * 
+ * */ 
+
+
+
 import { obtenerHora, obtenerFecha } from "./helpers/obtener-tiempo.js";
 
 console.log(obtenerHora());
