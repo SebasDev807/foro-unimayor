@@ -278,13 +278,52 @@ article {
 
 .busqueda {
   display: flex;
-  padding-left: 20px;
+  /* padding-left: px; */
+  justify-content: space-around;
 }
+
+
 .busqueda img {
   height: 50px;
 }
 
-.busqueda input {
+.input-pregunta input{
+  border: none;
+  text-align: center;
+}
+
+.titulo-pregunta{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+.titulo-pregunta:focus{
+  outline: none;
+}
+
+
+.titulo-pregunta::placeholder{
+  font-size: 1.5rem;
+  color:#cacaca;
+}
+
+.cuerpo-pregunta{
+  border: none;
+  resize: none;
+  outline: none;
+  width: 300px;
+  background: none;
+}
+
+.cuerpo-pregunta:focus{
+  outline: none;
+}
+
+
+
+
+/* .busqueda input {
   display: flex;
   width: 100%;
   border: none;
@@ -301,7 +340,7 @@ article {
   color: #cacaca;
   font-weight: bold;
   font-size: 1.5rem;
-}
+} */
 
 .boton {
   border-radius: 10px;

@@ -1,4 +1,4 @@
-function obtenerHora() {
+const obtenerHora = () => {
   let now = new Date();
   let horas = now.getHours();
   let minutos = now.getMinutes();
@@ -10,13 +10,11 @@ function obtenerHora() {
     horas = 12;
   }
 
-  let horaFormateada = `${horas}:${
-    minutos < 10 ? "0" + minutos : minutos
-  } ${ampm}`;
+  let horaFormateada = `${horas}:${minutos < 10 ? "0" + minutos : minutos} ${ampm}`;
   return horaFormateada;
-}
+};
 
-function obtenerFecha() {
+const obtenerFecha = () => {
   let now = new Date();
   let diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
   let dia = diasSemana[now.getDay()];
@@ -25,6 +23,6 @@ function obtenerFecha() {
   let year = now.getFullYear();
 
   return `${dia}/${mes}/${year}`;
-}
+};
 
 export { obtenerHora, obtenerFecha };
