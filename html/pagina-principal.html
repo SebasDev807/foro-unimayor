@@ -1,136 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="../imagenes/png" href="../imagenes/image 2.png" />
-    <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="/css/normalize.css" as="style" />
 
-    <title>FUM</title>
-  </head>
-  <body>
-    <!-- encabezado de la pagina -->
-    <header>
-      <div class="encabezado">
-        <img src="/imagenes/FUM logo.png" alt="logo fum" class="logo-fum" />
-        <input type="text" placeholder="Buscar" />
-        <div class="menu-usuario">
-          <a href=""><img src="/imagenes/notificacion.png" class="menus" /></a>
-          <div class="perfil-encabezado">
-          <a href=""
-            ><img src="/imagenes/leon-foto-perfil.png" class="menus"/>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="../imagenes/png" href="../imagenes/image 2.png" />
+  <link rel="stylesheet" href="/css/index.css" />
+  <link rel="stylesheet" href="/css/normalize.css" as="style" />
+
+  <title>FUM</title>
+</head>
+
+<body>
+  <!-- encabezado de la pagina -->
+  <header>
+    <div class="encabezado">
+      <img src="/imagenes/FUM logo.png" alt="logo fum" class="logo-fum" />
+      <input type="text" placeholder="Buscar" />
+      <div class="menu-usuario">
+        <a href=""><img src="/imagenes/notificacion.png" class="menus" /></a>
+        <div class="perfil-encabezado">
+          <a href=""><img src="/imagenes/leon-foto-perfil.png" class="menus" />
           </a>
           <div class="opciones">
-            <a href="ver-perfil.html" target="_blank"><p>Ver perfil</p></a>
-            <a href="ver-perfil.html" target="_blank"><p>Editar perfil</p></a>
-            <a href="login.html" target="_blank"><p>Cerrar sesión</p></a>
+            <a href="ver-perfil.html" target="_blank">
+              <p>Ver perfil</p>
+            </a>
+            <a href="ver-perfil.html" target="_blank">
+              <p>Editar perfil</p>
+            </a>
+            <a href="login.html" target="_blank">
+              <p>Cerrar sesión</p>
+            </a>
           </div>
-        </div>
         </div>
       </div>
-    </header>
-    <!-- encabezado de la pagina -->
-
-    <!-- cuerpo de la pagína -->
-    <div class="contenedor">
-      <aside class="articulo-estudiante">
-        <!-- seccion del perfil activo -->
-        <article class="estudiantes">
-          <a href="ver-perfil.html"><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
-          <!-- box del estudiante -->
-          <div class="estudiante">
-            <img src="/imagenes/ion_book.png" alt="" />
-            <h3>Estudiante</h3>
-          </div>
-          <p>Programa</p>
-          <p>Desarrollo de Software</p>
-        </article>
-
-        <article class="estudiantes">
-          <!-- imagen top -->
-          <img src="/imagenes/time.png" alt="" class="time" />
-          <h2>Más activos</h2>
-          <div class="mas-activos">
-            <a href="#"><img src="/imagenes/san.png" /></a>
-            <p>
-              San_Torres <img src="/imagenes/check.png" alt="" class="check" />
-            </p>
-          </div>
-
-          <div class="mas-activos">
-            <a href="#"><img src="/imagenes/alej.png" /></a>
-            <p>BurritoVolador69</p>
-            <img src="/imagenes/check.png" alt="" class="check" />
-          </div>
-
-          <div class="mas-activos">
-            <a href="#"><img src="/imagenes/jd.png" /></a>
-            <p>SGalletaLoca007</p>
-            <img src="/imagenes/check.png" alt="" class="check" />
-          </div>
-          <div class="mas-activos">
-            <a href="#"><img src="/imagenes/gb.png" /></a>
-            <p>StarGhost</p>
-            <p></p>
-            <img src="/imagenes/check.png" alt="" class="check" />
-          </div>
-        </article>
-      </aside>
-
-      <section class="seccion-preguntas" id="seccion-preguntas">
-        <article class="pregunta">
-          <div class="busqueda">
-            <img src="/imagenes/leonpregunta.png" alt="" />
-            
-            <div class="input-pregunta">
-              <input type="text"placeholder="Titulo de tu post"class="titulo-pregunta"/>
-              <!-- cambie input por textarea para permitir los saltos de linea  -->
-              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" oninput="autoResize(this)"></textarea>
-            </div>
-          </div>
-          <div class="submit-pregunta">
-            <div class="imagenes-pregunta">
-              <a href="#" class="galeria"
-                ><img src="/imagenes/galeria.png" alt=""
-              /></a>
-              <a href="#" class="gif"><img src="/imagenes/gif.png" alt="" /></a>
-              <a href="#" class="poll"
-                ><img src="/imagenes/poll.png" alt=""
-              /></a>
-            </div>
-            <button type="submit" class="boton">Publicar</button>
-          </div>
-          <!--Aquí habia un </form> pero no se había iniciado -->
-        </article>
-        <ul class="lista-posts"></ul>
-      </section>
-      <!-- Post de los usuarios-->
-      
-        <!-- Se agregan dinamicamente los posts -->
-      </ul>
-
-      <aside class="modulos">
-        <!-- books = imagen al lado de "módulos" -->
-        <div class="books">
-          <img src="/imagenes/books.png" alt="" />
-          <h2>Módulos</h2>
-          <hr />
-        </div>
-        <nav>
-          <a href="#" id="cb">CIENCIAS BASICAS</a>
-          <hr />
-          <a href="#" id="cc">CIENCIAS DE COMPUTACIÓN</a>
-          <hr />
-          <a href="#" id="hc">HABILIDADES DE COMUNICACIÓN</a>
-          <hr />
-          <a href="#" id="em">EMPRENDIMIENTO</a>
-        </nav>
-      </aside>
     </div>
+  </header>
+  <!-- encabezado de la pagina -->
 
-    <!-- /cuerpo de la pagína -->
-    <script src="/javascript/agregar-pregunta.js" type="module"></script>
-    <script src="/javascript/aumentar-area-texto.js"></script>
-  </body>
+  <!-- cuerpo de la pagína -->
+  <div class="contenedor">
+    <aside class="articulo-estudiante">
+      <!-- seccion del perfil activo -->
+      <article class="estudiantes">
+        <a href="ver-perfil.html"><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
+        <!-- box del estudiante -->
+        <div class="estudiante">
+          <img src="/imagenes/ion_book.png" alt="" />
+          <h3>Estudiante</h3>
+        </div>
+        <p>Programa</p>
+        <p>Desarrollo de Software</p>
+      </article>
+
+      <article class="estudiantes">
+        <!-- imagen top -->
+        <img src="/imagenes/time.png" alt="" class="time" />
+        <h2>Más activos</h2>
+        <div class="mas-activos">
+          <a href="#"><img src="/imagenes/san.png" /></a>
+          <p>
+            San_Torres <img src="/imagenes/check.png" alt="" class="check" />
+          </p>
+        </div>
+
+        <div class="mas-activos">
+          <a href="#"><img src="/imagenes/alej.png" /></a>
+          <p>BurritoVolador69</p>
+          <img src="/imagenes/check.png" alt="" class="check" />
+        </div>
+
+        <div class="mas-activos">
+          <a href="#"><img src="/imagenes/jd.png" /></a>
+          <p>SGalletaLoca007</p>
+          <img src="/imagenes/check.png" alt="" class="check" />
+        </div>
+        <div class="mas-activos">
+          <a href="#"><img src="/imagenes/gb.png" /></a>
+          <p>StarGhost</p>
+          <p></p>
+          <img src="/imagenes/check.png" alt="" class="check" />
+        </div>
+      </article>
+    </aside>
+
+    <section class="seccion-preguntas" id="seccion-preguntas">
+      <article class="pregunta">
+        <div class="busqueda">
+          <img src="/imagenes/leonpregunta.png" alt="" />
+
+          <div class="input-pregunta">
+            <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" />
+            <!-- cambie input por textarea para permitir los saltos de linea  -->
+            <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta"
+              oninput="autoResize(this)"></textarea>
+          </div>
+        </div>
+        <div class="submit-pregunta">
+          <div class="imagenes-pregunta">
+            <a href="#" class="galeria"><img src="/imagenes/galeria.png" alt="" /></a>
+            <a href="#" class="gif"><img src="/imagenes/gif.png" alt="" /></a>
+            <a href="#" class="poll"><img src="/imagenes/poll.png" alt="" /></a>
+          </div>
+          <button type="submit" class="boton">Publicar</button>
+        </div>
+        <!--Aquí habia un </form> pero no se había iniciado -->
+      </article>
+      <ul class="lista-posts"></ul>
+    </section>
+    <!-- Post de los usuarios-->
+
+    <!-- Se agregan dinamicamente los posts -->
+    </ul>
+
+    <aside class="modulos">
+      <!-- books = imagen al lado de "módulos" -->
+      <div class="books">
+        <img src="/imagenes/books.png" alt="" />
+        <h2>Módulos</h2>
+        <hr />
+      </div>
+      <nav>
+        <a href="#" id="cb">CIENCIAS BASICAS</a>
+        <hr />
+        <a href="#" id="cc">CIENCIAS DE COMPUTACIÓN</a>
+        <hr />
+        <a href="#" id="hc">HABILIDADES DE COMUNICACIÓN</a>
+        <hr />
+        <a href="#" id="em">EMPRENDIMIENTO</a>
+      </nav>
+    </aside>
+  </div>
+
+  <!-- /cuerpo de la pagína -->
+  <script type="module" src="/javascript/agregar-pregunta.js"></script>
+  <script src="/javascript/aumentar-area-texto.js"></script>
+</body>
+
 </html>
