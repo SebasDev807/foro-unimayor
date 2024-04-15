@@ -1,5 +1,6 @@
 /*Estilos para las paginas*/
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
 body {
   background-image: url("/imagenes/unimayor-transparente.png");
   background-size: 25%;
@@ -76,9 +77,9 @@ body {
   width: 100%;
   background-color: #fff;
   padding: 5px;
-  -webkit-box-shadow: -9px 10px 18px -8px rgba(0,0,0,0.75);
-  -moz-box-shadow: -9px 10px 18px -8px rgba(0,0,0,0.75);
-  box-shadow: -9px 10px 18px -8px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -9px 10px 18px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -9px 10px 18px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: -9px 10px 18px -8px rgba(0, 0, 0, 0.75);
 }
 .perfil-encabezado:hover .opciones {
   display: block;
@@ -220,7 +221,7 @@ article {
 /*
  Aqui modifican la imagen como les parezca mejor
 */
-.contenedor-usuario img{
+.contenedor-usuario img {
   width: 15%;
 }
 
@@ -228,23 +229,33 @@ article {
   display: flex;
   margin-left: 15px;
   margin: 22px;
+  justify-content: space-between;
   align-items: center;
+}
+.header > img {
+  width: 42px;
+  height: 42px;
 }
 
 .usuario {
   margin-inline: 21px;
 }
 
+#user-post {
+  width: 80%;
+}
+
 .lineas {
-  position: absolute;
+  /* position: absolute; */
   right: 0px;
   background: none;
   border: none;
 }
 .titulo {
-  position: absolute;
+  /* position: absolute; */
   top: 12%;
   left: 14%;
+  font-size: 1.5rem;
 }
 .footer {
   margin: 3%;
@@ -282,33 +293,30 @@ article {
   justify-content: space-around;
 }
 
-
 .busqueda img {
   height: 50px;
 }
 
-.input-pregunta input{
+.input-pregunta input {
   border: none;
   text-align: center;
 }
 
-.titulo-pregunta{
+.titulo-pregunta {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-
-.titulo-pregunta:focus{
+.titulo-pregunta:focus {
   outline: none;
 }
 
-
-.titulo-pregunta::placeholder{
+.titulo-pregunta::placeholder {
   font-size: 1.5rem;
-  color:#cacaca;
+  color: #cacaca;
 }
 
-.cuerpo-pregunta{
+.cuerpo-pregunta {
   border: none;
   resize: none;
   outline: none;
@@ -316,12 +324,9 @@ article {
   background: none;
 }
 
-.cuerpo-pregunta:focus{
+.cuerpo-pregunta:focus {
   outline: none;
 }
-
-
-
 
 /* .busqueda input {
   display: flex;
@@ -404,12 +409,12 @@ article {
   color: #ecad34;
 }
 
-.contenedor-botones-post{
+.contenedor-botones-post {
   justify-content: space-between;
   display: flex;
   font-size: 12px;
 }
 
-.contenedor-botones-post button{
+.contenedor-botones-post button {
   width: 20%;
 }

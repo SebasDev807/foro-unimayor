@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 
+// TODO: correct configuration when building the final application
 // export default defineConfig({
 //   root: './',
 //   build: {
