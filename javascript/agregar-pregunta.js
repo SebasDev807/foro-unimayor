@@ -1,14 +1,11 @@
 /**
  * TODO: Hay que actualizar el codigo 
- * Se agregaron dos elementos nuevos en la
- * seccion de pregunta,  por lo que varios
- * elementos declarados aquí quedaron inutilizables
- * se debe actualizar la función para adaptarse a los
- * cambios, buenas noches :D..
+ *
+ * Me di cuenta que como despues se va a hacer
+ * el UPDATE de los posts es necesario meter los
+ * parrafos dentro de un textArea, aueda pendiente.
  * 
  * */ 
-
-
 
 import { obtenerHora, obtenerFecha } from "./helpers/obtener-tiempo.js";
 
@@ -16,13 +13,15 @@ console.log(obtenerHora());
 
 const listaPreguntas = document.querySelector(".lista-posts");
 const botonPublicar = document.querySelector(".boton");
-const inputPregunta = document.querySelector(".input-pregunta");
+const inputTitulo = document.querySelector(".titulo-pregunta");
+const inputCuerpo = document.querySelector('.cuerpo-pregunta')
 
 botonPublicar.addEventListener("click", () => {
   // Creación de elementos
   let elemento = document.createElement("li");
   let articulo = document.createElement("article");
-  let pregunta = document.createElement("p");
+  let tituloPregunta = document.createElement("h2");
+  let textoCuerpo = document.createElement("p");
 
   let contenedorElementosUsuarios = document.createElement("div");
   let fotoDePerfil = document.createElement("img");
@@ -47,7 +46,10 @@ botonPublicar.addEventListener("click", () => {
   nombreUsuario.textContent = "NekitoKawai";
   hashTag.textContent = "#SempaiMaster";
   horas.textContent = obtenerHora();
-  pregunta.textContent = inputPregunta.value;
+
+  tituloPregunta.textContent = inputTitulo.value;
+  textoCuerpo.textContent = inputCuerpo.value
+  
   horas.textContent = obtenerHora();
   fecha.textContent = obtenerFecha();
 
@@ -73,11 +75,18 @@ botonPublicar.addEventListener("click", () => {
   contenedorElementosUsuarios.appendChild(fecha);
 
   articulo.appendChild(contenedorElementosUsuarios);
-  articulo.appendChild(pregunta);
+  articulo.appendChild(tituloPregunta);
+  articulo.appendChild(textoCuerpo);
   articulo.appendChild(contenedorBotonesPost);
 
   elemento.appendChild(articulo);
   listaPreguntas.insertBefore(elemento, listaPreguntas.firstChild);
 
-  inputPregunta.value = "";
+  inputTitulo.value = "";
+  inputCuerpo.value = "";
+  const p = document.querySelector('.pregunta');
+  inputCuerpo.style.height = ''
+  console.log(p.children);
+
 });
+
