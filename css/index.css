@@ -204,7 +204,7 @@ article {
 .contenedor-post {
   margin: 10px;
   border-color: #cacaca;
-  width: 410px;
+  width: 380px;
   padding: 10px;
   overflow: hidden;
   font-size: 12px;
@@ -212,7 +212,6 @@ article {
 
 .contenedor-post p {
   margin: 10px;
-  width: 450px;
   max-width: 450px;
   overflow-wrap: break-word;
 }
