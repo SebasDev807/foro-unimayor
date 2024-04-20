@@ -18,15 +18,15 @@
         <div class="menu-usuario">
           <a href=""><img src="/imagenes/notificacion.png" class="menus" /></a>
           <div class="perfil-encabezado">
-          <a href=""
-            ><img src="/imagenes/leon-foto-perfil.png" class="menus"/>
-          </a>
-          <div class="opciones">
-            <a href="ver-perfil.html" target="_blank"><p>Ver perfil</p></a>
-            <a href="ver-perfil.html" target="_blank"><p>Editar perfil</p></a>
-            <a href="login.html" target="_blank"><p>Cerrar sesión</p></a>
+            <a href=""
+              ><img src="/imagenes/leon-foto-perfil.png" class="menus" />
+            </a>
+            <div class="opciones">
+              <a href="ver-perfil.html" target="_blank"><p>Ver perfil</p></a>
+              <a href="ver-perfil.html" target="_blank"><p>Editar perfil</p></a>
+              <a href="login.html" target="_blank"><p>Cerrar sesión</p></a>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </header>
@@ -37,7 +37,9 @@
       <aside class="articulo-estudiante">
         <!-- seccion del perfil activo -->
         <article class="estudiantes">
-          <a href="ver-perfil.html"><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
+          <a href="ver-perfil.html"
+            ><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro"
+          /></a>
           <!-- box del estudiante -->
           <div class="estudiante">
             <img src="/imagenes/ion_book.png" alt="" />
@@ -79,16 +81,25 @@
       </aside>
 
       <section class="seccion-preguntas" id="seccion-preguntas">
-       
-
-        <article class="pregunta">
+        <article class="pregunta" id="pregunta">
           <div class="busqueda">
             <img src="/imagenes/leonpregunta.png" alt="" />
-            
+
             <div class="input-pregunta">
-              <input type="text"placeholder="Titulo de tu post"class="titulo-pregunta"/>
+              <input
+                type="text"
+                placeholder="Titulo de tu post"
+                class="titulo-pregunta"
+                id="titulo-pregunta"
+              />
               <!-- cambié input por textarea para permitir los saltos de linea  -->
-              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" oninput="autoResize(this)"></textarea>
+              <textarea
+                type="text"
+                placeholder="Escribe algo"
+                class="cuerpo-pregunta"
+                id="cuerpo-pregunta"
+                oninput="autoResize(this)"
+              ></textarea>
             </div>
           </div>
           <div class="submit-pregunta">
@@ -104,14 +115,12 @@
             <button type="submit" class="boton">Publicar</button>
           </div>
         </article>
-        <div>
-          
-        </div>
-        <ul class="lista-posts"></ul>
+        <div></div>
+        <ul class="lista-posts" id="lista-posts"></ul>
       </section>
       <!-- Post de los usuarios-->
-      
-        <!-- Se agregan dinamicamente los posts -->
+
+      <!-- Se agregan dinamicamente los posts -->
 
       <aside class="modulos">
         <!-- books = imagen al lado de "módulos" -->
@@ -130,11 +139,10 @@
           <a href="#" id="em">EMPRENDIMIENTO</a>
         </nav>
       </aside>
-      
     </div>
 
     <!-- /cuerpo de la pagína -->
-    <script src="/javascript/agregar-pregunta.js" type="module"></script>
     <script src="/javascript/aumentar-area-texto.js"></script>
+    <script src="/javascript/components/post.js" type="module"></script>
   </body>
 </html>
