@@ -57,6 +57,7 @@ body {
 .encabezado .menu-usuario {
   display: flex;
   padding: 20px;
+  align-items: center;
 }
 .perfil-encabezado {
   position: relative;
