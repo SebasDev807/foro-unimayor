@@ -12,15 +12,19 @@ function cargarEventListeners() {
 
 function postearPregunta(e) {
   if (e.target.classList.contains("boton")) {
-    const post = e.target.parentElement.previousElementSibling.children[1];
-    leerDatos(post);
+    const post = e.target.parentElement.previousElementSibling;
+    const input = post.querySelector("input");
+    const cuerpo = post.querySelector("textarea");
 
-    // Reiniciar los campos de entrada a su estado original (vacío)
-   const input = post.querySelector("input");
-   const textarea = post.querySelector("textarea");
-   const post.querySelector("textarea").style.height = "";
+    if (input.value === "" || cuerpo.value === "") {
+      alert("Por favor, completa todos los campos.");
+      return; 
+    }else{
+      leerDatos(post);
+    }
   }
 }
+
 
 function leerDatos(post) {
   const infoPost = {
