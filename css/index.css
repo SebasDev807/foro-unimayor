@@ -109,6 +109,10 @@ body {
   margin-top: 80px;
   justify-content: space-between;
 }
+.articulos{
+  position: sticky;
+  top: 90px;
+}
 
 /*box de "estudiante" del contenedor*/
 .estudiante {
@@ -155,7 +159,10 @@ article {
   padding: 10;
   align-items: center;
 }
-
+.modulo-aside{
+  position: sticky;
+  top: 90px;
+}
 .seccion-preguntas {
   box-shadow: 1px 0 4px rgb(0, 0, 0, 0.2);
   padding: 50px;
