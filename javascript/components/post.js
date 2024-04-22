@@ -21,6 +21,8 @@ function postearPregunta(e) {
       return; 
     }else{
       leerDatos(post);
+      input.value = "";
+      cuerpo.value = "";
     }
   }
 }
