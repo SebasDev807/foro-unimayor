@@ -27,7 +27,6 @@ function postearPregunta(e) {
   }
 }
 
-
 function leerDatos(post) {
   const infoPost = {
     imagen: "",
