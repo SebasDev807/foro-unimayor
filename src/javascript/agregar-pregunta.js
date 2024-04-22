@@ -5,7 +5,7 @@
  * el UPDATE de los posts es necesario meter los
  * parrafos dentro de un textArea, aueda pendiente.
  * 
- * */ 
+ * */
 
 import { obtenerHora, obtenerFecha } from "./helpers/obtener-tiempo.js";
 
@@ -42,14 +42,14 @@ botonPublicar.addEventListener("click", () => {
   botonComentar.textContent = "comenta";
   seccion.textContent = "Emprendimiento";
 
-  fotoDePerfil.src = "/imagenes/leonpregunta.png";
+  fotoDePerfil.src = "../../public/imagenes/leonpregunta.png";
   nombreUsuario.textContent = "NekitoKawai";
   hashTag.textContent = "#SempaiMaster";
   horas.textContent = obtenerHora();
 
   tituloPregunta.textContent = inputTitulo.value;
   textoCuerpo.textContent = inputCuerpo.value
-  
+
   horas.textContent = obtenerHora();
   fecha.textContent = obtenerFecha();
 
@@ -89,4 +89,3 @@ botonPublicar.addEventListener("click", () => {
   console.log(p.children);
 
 });
-
