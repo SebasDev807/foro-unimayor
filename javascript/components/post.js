@@ -16,9 +16,9 @@ function postearPregunta(e) {
     leerDatos(post);
 
     // Reiniciar los campos de entrada a su estado original (vacío)
-    post.querySelector("input").value = "";
-    post.querySelector("textarea").value = "";
-    post.querySelector("textarea").style.height = "";
+   const input = post.querySelector("input");
+   const textarea = post.querySelector("textarea");
+   const post.querySelector("textarea").style.height = "";
   }
 }
 
