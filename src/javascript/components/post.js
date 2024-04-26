@@ -2,13 +2,15 @@ import { obtenerFecha, obtenerHora } from "../helpers/obtener-tiempo.js";
 
 const contenedorPregunta = document.querySelector("#pregunta");
 const ulPosts = document.querySelector("#lista-posts");
-const comentarios = document.querySelector('#caja-comentarios');
+const comentarios = document.querySelector("#caja-comentarios");
+const btnCerrarComentarios = document.querySelector("#btn-cerrar-comentarios");
 let listaPost = [];
 
 cargarEventListeners();
 
 function cargarEventListeners() {
   contenedorPregunta.addEventListener("click", postearPregunta);
+  btnCerrarComentarios.addEventListener("click", cerrarComentarios);
 }
 
 function postearPregunta(e) {
@@ -19,7 +21,7 @@ function postearPregunta(e) {
 
     if (input.value === "" || cuerpo.value === "") {
       alert("Por favor, completa todos los campos.");
-      return; 
+      return;
     }
 
     const infoPost = obtenerInfoPost(post);
@@ -71,10 +73,14 @@ function renderizarPost(post) {
 function agregarEventoComentar() {
   const btnComentar = document.querySelector("#btn-comentar");
   if (btnComentar) {
-    btnComentar.addEventListener('click', comentBox);
+    btnComentar.addEventListener("click", comentBox);
   }
 }
 
 function comentBox() {
- comentarios.showModal();
+  comentarios.showModal();
+}
+
+function cerrarComentarios() {
+  comentarios.close();
 }
