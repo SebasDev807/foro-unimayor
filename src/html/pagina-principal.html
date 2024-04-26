@@ -6,7 +6,7 @@
     <link rel="icon" type="../imagenes/png" href="../imagenes/image 2.png" />
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/normalize.css" as="style" />
-
+    <link rel="stylesheet" href="../css/respuesta.css">
     <title>FUM</title>
   </head>
   <body>
@@ -32,6 +32,7 @@
     </header>
     <!-- encabezado de la pagina -->
 
+    
     <!-- cuerpo de la pagína -->
     <div class="contenedor">
       
@@ -119,16 +120,23 @@
             <button type="submit" class="boton">Publicar</button>
           </div>
         </article>
-        <div></div>
+
         <ul class="lista-posts" id="lista-posts"></ul>
-        <dialog id="caja-comentarios">
-          <h2>Comentarios</h2>
-          <p>Comentario</p>
-          <p>Comentario</p>
-          <p>Comentario</p>
-          <p>Comentario</p>
-          <input type="text" placeholder="Agrega un comentario">
-          <button id="btn-cerrar">avion</button>
+      
+        <dialog id="caja-comentarios" aria-modal="false">
+          <div class="header-comentarios">
+              <h3>Titulo</h3>
+              <button id="btn-cerrar-comentarios">X</button>
+          </div>
+          <div class="contenedor-comentarios">
+              <ul class="lista-respuestas">
+                  <h1>Aun no hay comentarios</h1>
+              </ul>
+          </div>
+          <div class="footer-comentarios">
+              <input type="text" placeholder="Agrega un comentario">
+              <button>avión</button>
+          </div>
         </dialog>
       </section>
       <!-- Post de los usuarios-->
