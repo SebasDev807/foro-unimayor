@@ -45,10 +45,10 @@
     <aside class="articulo-estudiante">
       <!-- seccion del perfil activo -->
       <article class="estudiantes">
-        <a href="ver-perfil.html"><img src="../../public/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
+        <a href="ver-perfil.html"><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
         <!-- box del estudiante -->
         <div class="estudiante">
-          <img src="../../public/imagenes/ion_book.png" alt="" />
+          <img src="/imagenes/ion_book.png" alt="" />
           <h3>Estudiante</h3>
         </div>
         <p>Programa</p>
@@ -57,71 +57,71 @@
 
       <article class="estudiantes">
         <!-- imagen top -->
-        <img src="/../../public/imagenes/time.png" alt="" class="time" />
+        <img src="/imagenes/time.png" alt="" class="time" />
         <h2>Más activos</h2>
         <div class="mas-activos">
-          <a href="#"><img src="../../public/imagenes/san.png" /></a>
+          <a href="#"><img src="/imagenes/san.png" /></a>
           <p>
-            San_Torres <img src="../../public/imagenes/check.png" alt="" class="check" />
+            San_Torres <img src="/imagenes/check.png" alt="" class="check" />
           </p>
         </div>
 
         <div class="mas-activos">
-          <a href="#"><img src="../../public/imagenes/alej.png" /></a>
+          <a href="#"><img src="/imagenes/alej.png" /></a>
           <p>BurritoVolador69</p>
-          <img src="../../public/imagenes/check.png" alt="" class="check" />
+          <img src="/imagenes/check.png" alt="" class="check" />
         </div>
 
         <div class="mas-activos">
-          <a href="#"><img src="../../public/imagenes/jd.png" /></a>
+          <a href="#"><img src="/imagenes/jd.png" /></a>
           <p>SGalletaLoca007</p>
-          <img src="../../public/imagenes/check.png" alt="" class="check" />
+          <img src="/imagenes/check.png" alt="" class="check" />
         </div>
         <div class="mas-activos">
-          <a href="#"><img src="../../public/imagenes/gb.png" /></a>
+          <a href="#"><img src="/imagenes/gb.png" /></a>
           <p>StarGhost</p>
           <p></p>
-          <img src="../../public/imagenes/check.png" alt="" class="check" />
+          <img src="/imagenes/check.png" alt="" class="check" />
         </div>
       </article>
     </aside>
 
-    <section class="seccion-preguntas" id="seccion-preguntas">
+    <!-- seccion de preguntas -->
+    <aside style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+      <section class="seccion-preguntas" id="seccion-preguntas">
+        <article class="pregunta">
+          <div class="busqueda">
+            <img src="/imagenes/leonpregunta.png" alt="" />
 
-
-      <article class="pregunta">
-        <div class="busqueda">
-          <img src="../../public/imagenes/leonpregunta.png" alt="" />
-
-          <div class="input-pregunta">
-            <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" />
-            <!-- cambié input por textarea para permitir los saltos de linea  -->
-            <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta"
-              oninput="autoResize(this)"></textarea>
+            <div class="input-pregunta">
+              <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" />
+              <!-- cambie input por textarea para permitir los saltos de linea  -->
+              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta"
+                oninput="autoResize(this)"></textarea>
+            </div>
           </div>
-        </div>
-        <div class="submit-pregunta">
-          <div class="imagenes-pregunta">
-            <a href="#" class="galeria"><img src="../../public/imagenes/galeria.png" alt="" /></a>
-            <a href="#" class="gif"><img src="../../public/imagenes/gif.png" alt="" /></a>
-            <a href="#" class="poll"><img src="../../public/imagenes/poll.png" alt="" /></a>
+          <div class="submit-pregunta">
+            <div class="imagenes-pregunta">
+              <a href="#" class="galeria"><img src="/imagenes/galeria.png" alt="" /></a>
+              <a href="#" class="gif"><img src="/imagenes/gif.png" alt="" /></a>
+              <a href="#" class="poll"><img src="/imagenes/poll.png" alt="" /></a>
+            </div>
+            <button type="submit" class="boton">Publicar</button>
           </div>
-          <button type="submit" class="boton">Publicar</button>
-        </div>
-      </article>
-      <div>
+          <!--Aquí habia un </form> pero no se había iniciado -->
+        </article>
+        <ul class="lista-posts"></ul>
+      </section>
 
-      </div>
-      <ul class="lista-posts"></ul>
-    </section>
-    <!-- Post de los usuarios-->
+      <!-- Post de los usuarios(Se agregan dinamicamente) -->
+      <section id="user-post"></section>
+    </aside>
 
-    <!-- Se agregan dinamicamente los posts -->
-
+    <!-- seccion de modulos -->
     <aside class="modulos">
       <!-- books = imagen al lado de "módulos" -->
       <div class="books">
-        <img src="../../public/imagenes/books.png" alt="" />
+        <img src="/imagenes/books.png" alt="" />
         <h2>Módulos</h2>
         <hr />
       </div>
@@ -141,6 +141,7 @@
   <script type="module" src="../javascript/agregar-pregunta.js"></script>
   <script type="module" src="../javascript/aumentar-area-texto.js"></script>
   <script type="module" src="../services/supabase/supabaseClient.js"></script>
+  <script type="module" src="../javascript/loadUserPosts.js"></script>
 </body>
 
 </html>
