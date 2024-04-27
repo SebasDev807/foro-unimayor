@@ -44,84 +44,110 @@
   <div class="contenedor">
     <aside class="articulo-estudiante">
       <!-- seccion del perfil activo -->
-      <article class="estudiantes">
-        <a href="ver-perfil.html"><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
-        <!-- box del estudiante -->
-        <div class="estudiante">
-          <img src="/imagenes/ion_book.png" alt="" />
-          <h3>Estudiante</h3>
-        </div>
-        <p>Programa</p>
-        <p>Desarrollo de Software</p>
-      </article>
+      <div class="articulos">
+        <article class="estudiantes">
+          <a href="ver-perfil.html"><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
+          <!-- box del estudiante -->
+          <div class="estudiante">
+            <img src="/imagenes/ion_book.png" alt="" />
+            <h3>Estudiante</h3>
+          </div>
+          <p>Programa</p>
+          <p>Desarrollo de Software</p>
+        </article>
 
-      <article class="estudiantes">
-        <!-- imagen top -->
-        <img src="/imagenes/time.png" alt="" class="time" />
-        <h2>Más activos</h2>
-        <div class="mas-activos">
-          <a href="#"><img src="/imagenes/san.png" /></a>
-          <p>
-            San_Torres <img src="/imagenes/check.png" alt="" class="check" />
-          </p>
-        </div>
+        <article class="estudiantes">
+          <!-- imagen top -->
+          <img src="/imagenes/time.png" alt="" class="time" />
+          <h2>Más activos</h2>
+          <div class="mas-activos">
+            <a href="#"><img src="/imagenes/san.png" /></a>
+            <p>
+              San_Torres <img src="/imagenes/check.png" alt="" class="check" />
+            </p>
+          </div>
 
-        <div class="mas-activos">
-          <a href="#"><img src="/imagenes/alej.png" /></a>
-          <p>BurritoVolador69</p>
-          <img src="/imagenes/check.png" alt="" class="check" />
-        </div>
+          <div class="mas-activos">
+            <a href="#"><img src="/imagenes/alej.png" /></a>
+            <p>BurritoVolador69</p>
+            <img src="/imagenes/check.png" alt="" class="check" />
+          </div>
 
-        <div class="mas-activos">
-          <a href="#"><img src="/imagenes/jd.png" /></a>
-          <p>SGalletaLoca007</p>
-          <img src="/imagenes/check.png" alt="" class="check" />
-        </div>
-        <div class="mas-activos">
-          <a href="#"><img src="/imagenes/gb.png" /></a>
-          <p>StarGhost</p>
-          <p></p>
-          <img src="/imagenes/check.png" alt="" class="check" />
-        </div>
-      </article>
+          <div class="mas-activos">
+            <a href="#"><img src="/imagenes/jd.png" /></a>
+            <p>SGalletaLoca007</p>
+            <img src="/imagenes/check.png" alt="" class="check" />
+          </div>
+          <div class="mas-activos">
+            <a href="#"><img src="/imagenes/gb.png" /></a>
+            <p>StarGhost</p>
+            <p></p>
+            <img src="/imagenes/check.png" alt="" class="check" />
+          </div>
+        </article>
+      </div>
     </aside>
+
 
     <!-- seccion de preguntas -->
     <aside style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
       <section class="seccion-preguntas" id="seccion-preguntas">
-        <article class="pregunta">
+
+
+        <article class="pregunta" id="pregunta">
           <div class="busqueda">
-            <img src="/imagenes/leonpregunta.png" alt="" />
+            <img src="../../public/imagenes/leonpregunta.png" alt="" />
 
             <div class="input-pregunta">
-              <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" />
-              <!-- cambie input por textarea para permitir los saltos de linea  -->
-              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta"
+              <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" id="titulo-pregunta" />
+              <!-- cambié input por textarea para permitir los saltos de linea  -->
+              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" id="cuerpo-pregunta"
                 oninput="autoResize(this)"></textarea>
             </div>
           </div>
           <div class="submit-pregunta">
             <div class="imagenes-pregunta">
-              <a href="#" class="galeria"><img src="/imagenes/galeria.png" alt="" /></a>
-              <a href="#" class="gif"><img src="/imagenes/gif.png" alt="" /></a>
-              <a href="#" class="poll"><img src="/imagenes/poll.png" alt="" /></a>
+              <a href="#" class="galeria"><img src="../../public/imagenes/galeria.png" alt="" /></a>
+              <a href="#" class="gif"><img src="../../public/imagenes/gif.png" alt="" /></a>
+              <a href="#" class="poll"><img src="../../public/imagenes/poll.png" alt="" /></a>
             </div>
             <button type="submit" class="boton">Publicar</button>
           </div>
           <!--Aquí habia un </form> pero no se había iniciado -->
         </article>
+
+        <ul class="lista-posts" id="lista-posts"></ul>
+
+        <dialog id="caja-comentarios" aria-modal="false">
+          <div class="header-comentarios">
+            <h3>Titulo</h3>
+            <button id="btn-cerrar-comentarios">X</button>
+          </div>
+          <div class="contenedor-comentarios">
+            <ul class="lista-respuestas">
+              <h1>Aun no hay comentarios</h1>
+            </ul>
+          </div>
+          <div class="footer-comentarios">
+            <input type="text" placeholder="Agrega un comentario">
+            <button>avión</button>
+          </div>
+        </dialog>
+        <div>
+
+        </div>
         <ul class="lista-posts"></ul>
       </section>
+      <!-- Post de los usuarios-->
 
       <!-- Post de los usuarios(Se agregan dinamicamente) -->
       <section id="user-post"></section>
     </aside>
-
-    <!-- seccion de modulos -->
     <aside class="modulos">
+      <div class="modulo-aside"></div>
       <!-- books = imagen al lado de "módulos" -->
       <div class="books">
-        <img src="/imagenes/books.png" alt="" />
+        <img src="../../public/imagenes/books.png" alt="" />
         <h2>Módulos</h2>
         <hr />
       </div>
@@ -136,12 +162,14 @@
       </nav>
     </aside>
   </div>
+  </div>
 
   <!-- /cuerpo de la pagína -->
   <script type="module" src="../javascript/agregar-pregunta.js"></script>
   <script type="module" src="../javascript/aumentar-area-texto.js"></script>
   <script type="module" src="../services/supabase/supabaseClient.js"></script>
-  <script type="module" src="../javascript/loadUserPosts.js"></script>
+  <script type="module" src="../services/supabase/loadUserPosts.js"></script>
+  <!-- <script src="../javascript/components/post.js" -->
 </body>
 
 </html>

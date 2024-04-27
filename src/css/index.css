@@ -1,7 +1,7 @@
 /*Estilos para las paginas*/
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 body {
-  background-image: url("../../public/imagenes/unimayor-transparente.png");
+  background-image: url("/imagenes/unimayor-transparente.png");
   background-size: 25%;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,11 +9,12 @@ body {
   padding: 0 150px;
   font-size: 15px;
   font-family: "Manrope", sans-serif;
+
 }
 
 /*elementos del encabezado*/
 .encabezado {
-  background-image: url("../../public/imagenes/Header.png");
+  background-image: url("/imagenes/Header.png");
   background-size: cover;
   background-repeat: no repeat;
   height: 60px;
@@ -29,7 +30,7 @@ body {
 }
 /*Estilos para la imagen del encabezado*/
 .encabezado img {
-  width: 10rem;
+  width: 4rem;
   height: auto;
   padding: 10px;
   margin-left: 10%;
@@ -57,6 +58,7 @@ body {
 .encabezado .menu-usuario {
   display: flex;
   padding: 20px;
+  align-items: center;
 }
 .perfil-encabezado {
   position: relative;
@@ -109,6 +111,11 @@ body {
   justify-content: space-between;
 }
 
+.articulos{
+  position: sticky;
+  top: 90px;
+}
+
 /*box de "estudiante" del contenedor*/
 .estudiante {
   background-color: #cacaca2f;
@@ -154,7 +161,10 @@ article {
   padding: 10;
   align-items: center;
 }
-
+.modulo-aside{
+  position: sticky;
+  top: 90px;
+}
 .seccion-preguntas {
   box-shadow: 1px 0 4px rgb(0, 0, 0, 0.2);
   padding: 50px;
@@ -204,7 +214,7 @@ article {
 .contenedor-post {
   margin: 10px;
   border-color: #cacaca;
-  width: 410px;
+  width: 380px;
   padding: 10px;
   overflow: hidden;
   font-size: 12px;
@@ -212,7 +222,6 @@ article {
 
 .contenedor-post p {
   margin: 10px;
-  width: 450px;
   max-width: 450px;
   overflow-wrap: break-word;
 }
