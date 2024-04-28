@@ -32,7 +32,7 @@ function showPosts() {
         <button id="btn-comentar">
           <img src="/imagenes/comentarios.png" alt="" />
         </button>
-        <p>${questions.category.name}</p>
+        <p class= "categoria">${questions.category.name}</p>
         <p>${hora}</p>
       </div>
       `;
