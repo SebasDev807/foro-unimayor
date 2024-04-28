@@ -1,4 +1,8 @@
 import { getPosts } from '../services/supabase/posts.js';
+import { obtenerFecha, obtenerHora } from './helpers/obtener-tiempo.js';
+
+const fecha = obtenerFecha();
+const hora = obtenerHora();
 import { handleQuestionClick } from "../javascript/handler/questionClick.js"
 
 function showPosts() {
@@ -12,7 +16,7 @@ function showPosts() {
       // $postElement.className = "posts";
       // $postElement.id = questions.id;
       $postElement.innerHTML = `
-          <div class="header">
+          <div class="contenedor-usuario">
             <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
             <span class="usuario"> ${users.name} </span>
             <span class="username"> @${users.name} </span>
@@ -21,7 +25,7 @@ function showPosts() {
             </button>
           </div>
           <div class="titulo">
-            <h1>${questions.title}</h1>
+            <h2>${questions.title}</h2>
           </div>
         </section>
         <section>
