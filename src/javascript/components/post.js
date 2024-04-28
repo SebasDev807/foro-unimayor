@@ -1,16 +1,15 @@
 import { obtenerFecha, obtenerHora } from "../helpers/obtener-tiempo.js";
-
+import { renderizarComentarios } from "./comentario.js";
 const contenedorPregunta = document.querySelector("#pregunta");
 const ulPosts = document.querySelector("#lista-posts");
-const comentarios = document.querySelector("#caja-comentarios");
-const btnCerrarComentarios = document.querySelector("#btn-cerrar-comentarios");
+
 let listaPost = [];
 
 cargarEventListeners();
 
 function cargarEventListeners() {
   contenedorPregunta.addEventListener("click", postearPregunta);
-  btnCerrarComentarios.addEventListener("click", cerrarComentarios);
+  
 }
 
 function postearPregunta(e) {
@@ -28,7 +27,7 @@ function postearPregunta(e) {
     listaPost.push(infoPost);
     limpiarInput(input, cuerpo);
     renderizarPost(infoPost);
-    agregarEventoComentar();
+    renderizarComentarios();
   }
 }
 
@@ -70,17 +69,9 @@ function renderizarPost(post) {
   ulPosts.insertBefore(contenedorPost, ulPosts.firstElementChild);
 }
 
-function agregarEventoComentar() {
-  const btnComentar = document.querySelector("#btn-comentar");
-  if (btnComentar) {
-    btnComentar.addEventListener("click", comentBox);
-  }
+export const PostComponent = {
+  cargarEventListeners,
+  postearPregunta,
+  renderizarPost
 }
 
-function comentBox() {
-  comentarios.showModal();
-}
-
-function cerrarComentarios() {
-  comentarios.close();
-}
