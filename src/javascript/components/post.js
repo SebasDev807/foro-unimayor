@@ -52,17 +52,24 @@ function renderizarPost(post) {
   contenedorPost.classList.add("contenedor-post");
   contenedorPost.innerHTML = `
     <div class="contenedor-usuario">
-      <p>NekitoKawaii87</p>
-      <p>SempaiMaster</p>
+    <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
+      <p>${users.name}</p>
+      <p>@${users.name}</p>
       <p>${fecha}</p>        
     </div>
-    <h2>${titulo}</h2>
-    <p>${cuerpo}</p>
+    <h2>${questions.title}</h2>
+    <p>${questions.description}</p>
     <div class="contenedor-botones-post">
-      <button id="btn-subir">sube</button>
-      <button id="btn-bajar">baja</button>
-      <button id="btn-comentar">comenta</button>
-      <p>Emprendimiento</p>
+      <button id="btn-subir">
+      <img src="/imagenes/up-botton-blue.png" alt="" />
+      </button>
+      <button id="btn-bajar">
+        <img src="/imagenes/down-botton-white.png" alt="" />
+      </button>
+      <button id="btn-comentar">
+        <img src="/imagenes/comentarios.png" alt="" />
+      </button>
+      <p>${questions.category.name}</p>
       <p>${hora}</p>
     </div>
   `;

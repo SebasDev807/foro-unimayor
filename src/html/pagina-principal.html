@@ -7,7 +7,7 @@
   <link rel="icon" type="png" href="../../public/imagenes/image 2.png" />
   <link rel="stylesheet" href="../css/index.css" />
   <link rel="stylesheet" href="../css/normalize.css" as="style" />
-
+  <link rel="stylesheet" href="../css/respuesta.css">
   <title>FUM</title>
 </head>
 
@@ -90,7 +90,7 @@
 
 
     <!-- seccion de preguntas -->
-    <aside style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <aside style>
       <section class="seccion-preguntas" id="seccion-preguntas">
 
         <article class="pregunta" id="pregunta">
@@ -100,8 +100,7 @@
             <div class="input-pregunta">
               <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" id="titulo-pregunta" />
               <!-- cambié input por textarea para permitir los saltos de linea  -->
-              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" id="cuerpo-pregunta"
-                oninput="autoResize(this)"></textarea>
+              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" id="cuerpo-pregunta"></textarea>
             </div>
           </div>
           <div class="submit-pregunta">
@@ -117,7 +116,7 @@
 
         <ul class="lista-posts" id="lista-posts"></ul>
 
-        <dialog id="caja-comentarios" aria-modal="false">
+        <dialog open id="caja-comentarios" aria-modal="false">
           <div class="header-comentarios">
             <h3>Titulo</h3>
             <button id="btn-cerrar-comentarios">X</button>
@@ -165,9 +164,10 @@
 
   <!-- /cuerpo de la pagína -->
   <!-- <script type="module" src="../javascript/agregar-pregunta.js"></script> -->
-  <!-- <script type="module" src="../javascript/aumentar-area-texto.js"></script> -->
+  <script type="module" src="../javascript/aumentar-area-texto.js"></script>
   <script type="module" src="../services/supabase/supabaseClient.js"></script>
   <script type="module" src="../javascript/loadUserPosts.js"></script>
+  <script src="../javascript/prueba-modal.js"></script>
   <script type="module" src="../javascript/helpers/showThread.js"></script>
   <script type="module" src="../javascript/handler/questionClick.js"></script>
   <!-- <script type="module" src="../services/supabase/answers.js"></script> -->
