@@ -1,4 +1,8 @@
 import { getPosts } from '../services/supabase/posts.js';
+import { obtenerFecha,obtenerHora } from './helpers/obtener-tiempo.js';
+
+const fecha = obtenerFecha();
+const hora = obtenerHora();
 
 function showPosts() {
   getPosts().then((posts) => {
@@ -10,38 +14,27 @@ function showPosts() {
       const postElement = document.createElement("article");
       postElement.className = "posts";
       postElement.innerHTML = `
-        <section>
-          <div class="header">
-            <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
-            <span class="usuario"> ${users.name} </span>
-            <span class="username"> @${users.name} </span>
-            <button class="lineas">
-              <img src="/imagenes/lines.png" alt="" />
-            </button>
-          </div>
-          <div class="titulo">
-            <h1>${questions.title}</h1>
-          </div>
-        </section>
-        <section>
-          <div class="footer">
-            <p>${questions.description}</p>
-            <div class="boton-footer">
-              <button class="boton-subir">
-                <img src="/imagenes/up-botton-blue.png" alt="" />
-              </button>
-              <button class="boton-bajar">
-                <img src="/imagenes/down-botton-white.png" alt="" />
-              </button>
-              <button class="comentarios">
-                <img src="/imagenes/comentarios.png" alt="" />
-              </button>
-            </div>
-            <div class="materia">
-              <p>${questions.category.name}</p>
-            </div>
-          </div>
-        </section>
+      <div class="contenedor-usuario">
+      <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
+        <p>${users.name}</p>
+        <p>@${users.name}</p>
+        <p>${fecha}</p>        
+      </div>
+      <h2>${questions.title}</h2>
+      <p>${questions.description}</p>
+      <div class="contenedor-botones-post">
+        <button id="btn-subir">
+        <img src="/imagenes/up-botton-blue.png" alt="" />
+        </button>
+        <button id="btn-bajar">
+          <img src="/imagenes/down-botton-white.png" alt="" />
+        </button>
+        <button id="btn-comentar">
+          <img src="/imagenes/comentarios.png" alt="" />
+        </button>
+        <p>${questions.category.name}</p>
+        <p>${hora}</p>
+      </div>
       `;
       fragment.appendChild(postElement);
     });

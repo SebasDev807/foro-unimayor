@@ -269,9 +269,6 @@ article {
 .footer {
   margin: 3%;
 }
-.boton-footer {
-  position: absolute;
-}
 .materia {
   width: 23%;
   position: relative;
@@ -419,11 +416,25 @@ article {
 }
 
 .contenedor-botones-post {
-  justify-content: space-between;
+  justify-content: space-evenly;
   display: flex;
   font-size: 12px;
 }
 
 .contenedor-botones-post button {
   width: 20%;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+
+.contenedor-botones-post button {
+  width: 20%;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+
+.contenedor-botones-post p {
+  background: red;
 }
