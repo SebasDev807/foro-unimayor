@@ -150,9 +150,12 @@ body {
   height: 20px;
 }
 article {
+  margin: 10px;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid;
+  border-color: #c9c9c9ff;
   border-radius: 20px;
+  max-width: 100%;
 }
 
 .secciones {
@@ -243,7 +246,6 @@ article {
  Aqui modifican la imagen como les parezca mejor
 */
 .contenedor-usuario img {
-  width: 15%;
 }
 
 .header {

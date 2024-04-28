@@ -12,9 +12,9 @@
 .header-comentarios{
     justify-content: space-between;
     display: flex;
-    top: 10;
-    right: 10px;
+    margin-left: 45%;
     border: 5px;
+    align-items: center;
     
 }
 .header-comentarios button{
