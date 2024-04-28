@@ -1,9 +1,12 @@
-import { getPosts } from '../services/supabase/posts.js';
-import { obtenerFecha, obtenerHora } from './helpers/obtener-tiempo.js';
+// Tu archivo principal
+import { getPosts } from "../services/supabase/posts.js";
+import { obtenerFecha, obtenerHora } from "./helpers/obtener-tiempo.js";
+// import { comentariosHTML } from "../javascript/modal-comentarios.js";
 
 const fecha = obtenerFecha();
 const hora = obtenerHora();
-import { handleQuestionClick } from "../javascript/handler/questionClick.js"
+loadHtml();
+import { handleQuestionClick } from "../javascript/handler/questionClick.js";
 
 function showPosts() {
   getPosts().then((posts) => {
@@ -16,33 +19,24 @@ function showPosts() {
       // $postElement.className = "posts";
       // $postElement.id = questions.id;
       $postElement.innerHTML = `
-          <div class="contenedor-usuario">
-            <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
-            <span class="usuario"> ${users.name} </span>
-            <span class="username"> @${users.name} </span>
-            <button class="lineas">
-              <img src="/imagenes/lines.png" alt="" />
-            </button>
-          </div>
-          <div class="titulo">
-            <h2>${questions.title}</h2>
-          </div>
-        </section>
-        <section>
-          <div class="footer">
-            <p>${questions.description}</p>
-            <div class="boton-footer">
-              <button class="boton-subir">
-                <img src="/imagenes/up-botton-blue.png" alt="" />
-              </button>
-              <button class="boton-bajar">
-                <img src="/imagenes/down-botton-white.png" alt="" />
-              </button>
-            </div>
-            <div class="materia">
-              <p>${questions.category.name}</p>
-            </div>
-          </div>
+      <div class="contenedor-usuario">
+      <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
+        <p>${users.name}</p>
+        <p>@${users.name}</p>
+        <p>${fecha}</p>        
+      </div>
+      <h2>${questions.title}</h2>
+      <p>${questions.description}</p>
+      <div class="contenedor-botones-post">
+        <button id="btn-subir">
+        <img src="/imagenes/up-botton-blue.png" alt="" />
+        </button>
+        <button id="btn-bajar">
+          <img src="/imagenes/down-botton-white.png" alt="" />
+        </button>
+        <p class= "categoria">${questions.category.name}</p>
+        <p>${hora}</p>
+      </div>
       `;
 
       // Crear el elemento de imagen
@@ -51,17 +45,32 @@ function showPosts() {
       $imageElement.src = "/imagenes/comentarios.png";
       $imageElement.alt = "responder pregunta";
       $imageElement.style = "width: 25px; height: 25px;";
+      $imageElement.style.cursor = "pointer";
 
       // Adjuntar el controlador de eventos a la imagen
       $imageElement.addEventListener("click", handleQuestionClick);
 
       // Agregar la imagen al elemento del post
-      $postElement.querySelector(".boton-footer").appendChild($imageElement);
+      const contenedorBotones = $postElement.querySelector(".contenedor-botones-post");
+      contenedorBotones.insertBefore($imageElement, contenedorBotones.firstChild)
 
       $fragment.appendChild($postElement);
     });
 
     $usersPostContainer.appendChild($fragment);
+    loadHtml(); // Esto puede no ser necesario si llamas a loadHtml en el event listener
   });
 }
-document.addEventListener("DOMContentLoaded", showPosts);
+
+function loadHtml() {
+  const botonComentar = document.querySelector("#btn-comentar");
+  if (botonComentar) {
+    botonComentar.addEventListener("click", () => {
+      comentariosHTML();
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  showPosts();
+});
