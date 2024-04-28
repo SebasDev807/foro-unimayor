@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="png" href="../../public/imagenes/image 2.png" />
-  <link rel="stylesheet" href="../css/index.css" />
-  <link rel="stylesheet" href="../css/normalize.css" as="style" />
-
-  <title>FUM</title>
-</head>
-
-<body>
-  <!-- encabezado de la pagina -->
-  <header>
-    <div class="encabezado">
-      <img src="../../public/imagenes/logo.png" alt="logo fum" class="logo-fum" />
-      <input type="text" placeholder="Buscar" />
-      <div class="menu-usuario">
-        <a href=""><img src="../../public/imagenes/notificacion.png" class="menus" /></a>
-        <div class="perfil-encabezado">
-          <!-- PUTOS, REEEE ¡locotas! -->
-          <a href=""><img src="../../public/imagenes/leon-foto-perfil.png" class="menus" />
-          </a>
-          <div class="opciones">
-            <a href="ver-perfil.html" target="_blank">
-              <p>Ver perfil</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="../imagenes/png" href="../imagenes/image 2.png" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/normalize.css" as="style" />
+    <link rel="stylesheet" href="../css/respuesta.css">
+    <title>FUM</title>
+  </head>
+  <body>
+    <!-- encabezado de la pagina -->
+    <header>
+      <div class="encabezado">
+        <img src="/public/imagenes/Logo.png" alt="logo fum" class="logo-fum" />
+        <input type="text" placeholder="Buscar" />
+        <div class="menu-usuario">
+          <a href=""><img src="/imagenes/notificacion.png" class="menus" /></a>
+          <div class="perfil-encabezado">
+            <a href=""
+              ><img src="/imagenes/leon-foto-perfil.png" class="menus" />
             </a>
-            <a href="ver-perfil.html" target="_blank">
-              <p>Editar perfil</p>
-            </a>
-            <a href="login.html" target="_blank">
-              <p>Cerrar sesión</p>
-            </a>
+            <div class="opciones">
+              <a href="ver-perfil.html" target="_blank"><p>Ver perfil</p></a>
+              <a href="ver-perfil.html" target="_blank"><p>Editar perfil</p></a>
+              <a href="login.html" target="_blank"><p>Cerrar sesión</p></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </header>
-  <!-- encabezado de la pagina -->
+    </header>
+    <!-- encabezado de la pagina -->
 
-  <!-- cuerpo de la pagína -->
-  <div class="contenedor">
-    <aside class="articulo-estudiante">
-      <!-- seccion del perfil activo -->
-      <div class="articulos">
+    
+    <!-- cuerpo de la pagína -->
+    <div class="contenedor">
+      
+      <aside class="articulo-estudiante">
+        <!-- seccion del perfil activo -->
+        <div class="articulos">
         <article class="estudiantes">
-          <a href="ver-perfil.html"><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro" /></a>
+          <a href="ver-perfil.html"
+            ><img src="/imagenes/leon-foto-perfil.png" alt="" class="libro"
+          /></a>
           <!-- box del estudiante -->
           <div class="estudiante">
             <img src="/imagenes/ion_book.png" alt="" />
@@ -86,90 +82,93 @@
           </div>
         </article>
       </div>
-    </aside>
+      </aside>
+      
 
-
-    <!-- seccion de preguntas -->
-    <aside style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
       <section class="seccion-preguntas" id="seccion-preguntas">
-
-
         <article class="pregunta" id="pregunta">
           <div class="busqueda">
-            <img src="../../public/imagenes/leonpregunta.png" alt="" />
+            <img src="/imagenes/leonpregunta.png" alt="" />
 
             <div class="input-pregunta">
-              <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" id="titulo-pregunta" />
+              <input
+                type="text"
+                placeholder="Titulo de tu post"
+                class="titulo-pregunta"
+                id="titulo-pregunta"
+              />
               <!-- cambié input por textarea para permitir los saltos de linea  -->
-              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" id="cuerpo-pregunta"
-                oninput="autoResize(this)"></textarea>
+              <textarea
+                type="text"
+                placeholder="Escribe algo"
+                class="cuerpo-pregunta"
+                id="cuerpo-pregunta"
+                oninput="autoResize(this)"
+              ></textarea>
             </div>
           </div>
           <div class="submit-pregunta">
             <div class="imagenes-pregunta">
-              <a href="#" class="galeria"><img src="../../public/imagenes/galeria.png" alt="" /></a>
-              <a href="#" class="gif"><img src="../../public/imagenes/gif.png" alt="" /></a>
-              <a href="#" class="poll"><img src="../../public/imagenes/poll.png" alt="" /></a>
+              <a href="#" class="galeria"
+                ><img src="/imagenes/galeria.png" alt=""
+              /></a>
+              <a href="#" class="gif"><img src="/imagenes/gif.png" alt="" /></a>
+              <a href="#" class="poll"
+                ><img src="/imagenes/poll.png" alt=""
+              /></a>
             </div>
             <button type="submit" class="boton">Publicar</button>
           </div>
-          <!--Aquí habia un </form> pero no se había iniciado -->
         </article>
 
         <ul class="lista-posts" id="lista-posts"></ul>
-
+      
         <dialog id="caja-comentarios" aria-modal="false">
           <div class="header-comentarios">
-            <h3>Titulo</h3>
-            <button id="btn-cerrar-comentarios">X</button>
+              <h3>Titulo</h3>
+              <button id="btn-cerrar-comentarios">X</button>
           </div>
           <div class="contenedor-comentarios">
-            <ul class="lista-respuestas">
-              <h1>Aun no hay comentarios</h1>
-            </ul>
+              <ul class="lista-respuestas">
+                  <h1>Aun no hay comentarios</h1>
+              </ul>
           </div>
           <div class="footer-comentarios">
-            <input type="text" placeholder="Agrega un comentario">
-            <button>avión</button>
+              <input type="text" placeholder="Agrega un comentario">
+              <button>avión</button>
           </div>
         </dialog>
-        <div>
-
-        </div>
-        <ul class="lista-posts"></ul>
       </section>
       <!-- Post de los usuarios-->
 
-      <!-- Post de los usuarios(Se agregan dinamicamente) -->
-      <section id="user-post"></section>
-    </aside>
-    <aside class="modulos">
-      <div class="modulo-aside"></div>
-      <!-- books = imagen al lado de "módulos" -->
-      <div class="books">
-        <img src="../../public/imagenes/books.png" alt="" />
-        <h2>Módulos</h2>
-        <hr />
-      </div>
-      <nav>
-        <a href="#" id="cb">CIENCIAS BASICAS</a>
-        <hr />
-        <a href="#" id="cc">CIENCIAS DE COMPUTACIÓN</a>
-        <hr />
-        <a href="#" id="hc">HABILIDADES DE COMUNICACIÓN</a>
-        <hr />
-        <a href="#" id="em">EMPRENDIMIENTO</a>
-      </nav>
-    </aside>
-  </div>
-  </div>
+      <!-- Se agregan dinamicamente los posts -->
+      <aside class="modulos">
+        <div class="modulo-aside">
+        <!-- books = imagen al lado de "módulos" -->
+        <div class="books">
+          <img src="/imagenes/books.png" alt="" />
+          <h2>Módulos</h2>
+          <hr />
+        </div>
+        <nav>
+          <a href="#" id="cb">CIENCIAS BASICAS</a>
+          <hr />
+          <a href="#" id="cc">CIENCIAS DE COMPUTACIÓN</a>
+          <hr />
+          <a href="#" id="hc">HABILIDADES DE COMUNICACIÓN</a>
+          <hr />
+          <a href="#" id="em">EMPRENDIMIENTO</a>
+        </nav>
+      </aside>
+    </div>
+    </div>
+   
+    <!-- /cuerpo de la pagína -->
+    
+    <script src="../javascript/helpers/aumentar-area-texto.js"></script>
+    <script src="../javascript/prueba-modal.js"></script>
+    <!-- <script src="../javascript/app.js" type="module"></script> -->
 
-  <!-- /cuerpo de la pagína -->
-  <!-- <script type="module" src="../javascript/agregar-pregunta.js"></script> -->
-  <!-- <script type="module" src="../javascript/aumentar-area-texto.js"></script> -->
-  <script type="module" src="../services/supabase/supabaseClient.js"></script>
-  <script type="module" src="../javascript/loadUserPosts.js"></script>
-  <!-- <script src="../javascript/components/post.js" -->
-</body>
-
+    
+  </body>
 </html>

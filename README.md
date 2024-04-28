@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="./public/imagenes/FUM-logo.png"  alt="FUM logo" title="calculator icon" width="125" height="auto" />
+	<img src="./public/imagenes/fum.png"  alt="FUM logo" title="calculator icon" width="125" height="auto" />
 </p>
 
 <p align="center">
