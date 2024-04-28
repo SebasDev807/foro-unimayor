@@ -56,9 +56,41 @@ git clone git@github.com:<your_profile_name>/foro-unimayor.git
 ```
 
 ### Pull Requests
+1. Extract the changes  
+```bash
+git pull origin main # or vite 
+```
+2. Create a new branch for each feature
 
-3. Create a new branch for each feature, fix or improvement.
-4. Send a pull request from each feature branch to **main** branch.
+```bash
+# create a new branch and switch to it
+git checkout -b <branch-name>
+```
+
+3. Make your changes and commit them.
+
+```bash
+# add the changes
+git add .
+# commit the changes
+git commit -m "your commit message"
+```
+
+4. Merge the changes from to vite branch.
+
+```bash
+# switch to main branch
+git switch  vite
+# merge the changes from the feature branch
+git merge <branch-name>
+```
+
+5. Send a pull request from each feature branch to **vite** branch.
+
+```bash
+# push the changes to the remote repository
+git push origin vite
+```
 
 ### License
 
