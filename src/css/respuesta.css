@@ -1,6 +1,7 @@
-dialog{
+.caja-comentarios{
+    display: flex;
     border: none;
-    background: #FFFF;
+    background: #fff;
     border-radius: 20px;
     width: 30%;
     height: 400px;
@@ -26,4 +27,8 @@ dialog{
 }
 .header-comentarios button:hover{
     background-color: #a4a4a4b8 ;
+}
+
+.contenedor-comentarios .lista-respuestas h1 {
+    display: flex;
 }
