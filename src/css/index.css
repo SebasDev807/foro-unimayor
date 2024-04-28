@@ -233,8 +233,10 @@ article {
 .contenedor-usuario {
   display: flex;
   font-size: 12px;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin-top: 10px;
   align-items: center;
+  
 }
 
 /*
@@ -435,6 +437,9 @@ article {
   cursor: pointer;
 }
 
-.contenedor-botones-post p {
-  background: red;
+.categoria{
+  background-color: #E6B136;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 4px ;
 }
