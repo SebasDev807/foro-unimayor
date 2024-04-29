@@ -12,7 +12,7 @@
 .header-comentarios{
     justify-content: space-between;
     display: flex;
-    margin-left: 45%;
+    margin-left: 34%;
     border: 5px;
     align-items: center;
     
@@ -28,7 +28,9 @@
 .header-comentarios button:hover{
     background-color: #a4a4a4b8 ;
 }
-
+.lista-respuestas p{
+    font-size: 14px;
+}
 .contenedor-comentarios .lista-respuestas h1 {
     display: flex;
 }
