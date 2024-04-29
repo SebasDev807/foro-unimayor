@@ -14,7 +14,7 @@ function showPosts() {
     const $usersPostContainer = document.getElementById("user-post");
     const $fragment = document.createDocumentFragment();
 
-    posts.forEach(({ users, questions }) => {
+    posts.forEach(({ users, questions },index) => {
       let contadorSubir = 0; // Inicializar contador de votos positivos
 
       const $postElement = document.createElement("article");
@@ -76,8 +76,8 @@ function showPosts() {
       // Event listener para abrir el modal de comentarios
       const $btnComentar = $postElement.querySelector("#btn-comentar");
       $btnComentar.addEventListener("click", (e) => {
-        comentariosHTML();
-        console.log(e.target);
+        comentariosHTML(index+1);
+       
       });
 
       $fragment.appendChild($postElement);
@@ -87,14 +87,6 @@ function showPosts() {
   });
 }
 
-// function loadHtml() {
-//   const botonComentar = document.querySelector("#btn-comentar");
-//   if (botonComentar) {
-//     botonComentar.addEventListener("click", () => {
-//       comentariosHTML();
-//     });
-//   }
-// }
 
 document.addEventListener("DOMContentLoaded", () => {
   showPosts();
