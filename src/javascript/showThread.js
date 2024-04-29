@@ -1,4 +1,4 @@
-import supabase from "../../services/supabase/supabaseClient";
+import supabase from "../services/supabase/supabaseClient";
 
 async function showThread(questionId) {
   try {
