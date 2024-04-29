@@ -264,6 +264,18 @@ article {
   justify-content: space-between;
   align-items: center;
 }
+.buscar{
+  width: 100%;
+  margin-left: 22%;
+  display: contents;
+}
+.boton-buscar{
+  border: none;
+  border-bottom: groove;
+  background-color: #fccf19ff;
+  width: 6%;
+  border-radius: 5px;
+}
 .info-post{
 display: ruby;
 }

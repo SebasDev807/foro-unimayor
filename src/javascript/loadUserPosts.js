@@ -16,6 +16,8 @@ function showPosts() {
       let contadorBajar = 0; // Inicializar contador de votos negativos
 
       const $postElement = document.createElement("article");
+      // $postElement.className = "posts";
+      // $postElement.id = questions.id;
       $postElement.innerHTML = `
       <div class="contenedor-usuario">
       <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
@@ -26,22 +28,22 @@ function showPosts() {
       <h2>${questions.title}</h2>
       <p>${questions.description}</p>
       <div class="contenedor-botones-post">
-        <div class="acciones-post">
-          <button id="btn-subir">
-            <img src="/imagenes/up-botton-blue.png" alt="" />
-          </button>
-          <span id="contador-subir">${contadorSubir}</span> <!-- Contador de subir -->
-          <button id="btn-bajar">
-            <img src="/imagenes/down-botton-white.png" alt="" />
-          </button>
-          <span id="contador-bajar">${contadorBajar}</span> <!-- Contador de bajar -->
-          <button id="btn-comentar">
-            <img src="/imagenes/comentarios.png" alt="" />
-          </button>
+      <div>
+        <button id="btn-subir">
+        <img src="/imagenes/up-botton-blue.png" alt="" />
+        </button>
+        <span id="contador-subir">${contadorSubir}</span> <!-- Contador de subir -->
+        <button id="btn-bajar">
+          <img src="/imagenes/down-botton-white.png" alt="" />
+        </button>
+        <span id="contador-bajar">${contadorBajar}</span> <!-- Contador de bajar -->
+        <button id="btn-comentar">
+          <img src="/imagenes/comentarios.png" alt="" />
+        </button>
         </div>
-        <div class= "info-post">
-          <p class="categoria">${questions.category.name}</p>
-          <p>${hora}</p>
+        <div>
+        <p class= "categoria">${questions.category.name}</p>
+        <p>${hora}</p>
         </div>
       </div>
       `;
@@ -49,28 +51,18 @@ function showPosts() {
       // Incrementar contador de votos al hacer clic en el botón de subir
       const $btnSubir = $postElement.querySelector("#btn-subir");
       $btnSubir.addEventListener("click", () => {
-        if (contadorSubir === 0) {
-          contadorSubir++;
-          const $contadorSubir = $postElement.querySelector("#contador-subir");
-          $contadorSubir.textContent = contadorSubir;
-        } else {
+        contadorSubir++;
+        const $contadorSubir = $postElement.querySelector("#contador-subir");
+        $contadorSubir.textContent = contadorSubir;
+      });
+
+      // Decrementar el contador de subir al hacer clic en el botón de bajar
+      const $btnBajar = $postElement.querySelector("#btn-bajar");
+      $btnBajar.addEventListener("click", () => {
+        if (contadorSubir > 0) {
           contadorSubir--;
           const $contadorSubir = $postElement.querySelector("#contador-subir");
           $contadorSubir.textContent = contadorSubir;
-        }
-      });
-
-      // Incrementar contador de votos al hacer clic en el botón de bajar
-      const $btnBajar = $postElement.querySelector("#btn-bajar");
-      $btnBajar.addEventListener("click", () => {
-        if (contadorBajar === 0) {
-          contadorBajar++;
-          const $contadorBajar = $postElement.querySelector("#contador-bajar");
-          $contadorBajar.textContent = contadorBajar;
-        } else {
-          contadorBajar--;
-          const $contadorBajar = $postElement.querySelector("#contador-bajar");
-          $contadorBajar.textContent = contadorBajar;
         }
       });
 
