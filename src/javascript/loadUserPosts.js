@@ -13,14 +13,11 @@ function showPosts() {
 
     posts.forEach(({ users, questions }) => {
       let contadorSubir = 0; // Inicializar contador de votos positivos
-      let contadorBajar = 0; // Inicializar contador de votos negativos
 
       const $postElement = document.createElement("article");
-      // $postElement.className = "posts";
-      // $postElement.id = questions.id;
       $postElement.innerHTML = `
       <div class="contenedor-usuario">
-      <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
+        <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
         <p>${users.name}</p>
         <p>@${users.name}</p>
         <p>${fecha}</p>        
@@ -28,22 +25,21 @@ function showPosts() {
       <h2>${questions.title}</h2>
       <p>${questions.description}</p>
       <div class="contenedor-botones-post">
-      <div>
-        <button id="btn-subir">
-        <img src="/imagenes/up-botton-blue.png" alt="" />
-        </button>
-        <span id="contador-subir">${contadorSubir}</span> <!-- Contador de subir -->
-        <button id="btn-bajar">
-          <img src="/imagenes/down-botton-white.png" alt="" />
-        </button>
-        <span id="contador-bajar">${contadorBajar}</span> <!-- Contador de bajar -->
-        <button id="btn-comentar">
-          <img src="/imagenes/comentarios.png" alt="" />
-        </button>
-        </div>
         <div>
-        <p class= "categoria">${questions.category.name}</p>
-        <p>${hora}</p>
+          <button id="btn-subir">
+            <img src="/imagenes/up-botton-blue.png" alt="" />
+          </button>
+          <span id="contador-subir">${contadorSubir}</span> <!-- Contador de subir -->
+          <button id="btn-bajar">
+            <img src="/imagenes/down-botton-white.png" alt="" />
+          </button>
+          <button id="btn-comentar">
+            <img src="/imagenes/comentarios.png" alt="" />
+          </button>
+        </div>
+        <div class="info-post">
+          <p class="categoria">${questions.category.name}</p>
+          <p>${hora}</p>
         </div>
       </div>
       `;
@@ -51,9 +47,14 @@ function showPosts() {
       // Incrementar contador de votos al hacer clic en el botón de subir
       const $btnSubir = $postElement.querySelector("#btn-subir");
       $btnSubir.addEventListener("click", () => {
-        contadorSubir++;
-        const $contadorSubir = $postElement.querySelector("#contador-subir");
-        $contadorSubir.textContent = contadorSubir;
+        if (contadorSubir === 0) {
+          contadorSubir++;
+          const $contadorSubir = $postElement.querySelector("#contador-subir");
+          $contadorSubir.textContent = contadorSubir;
+
+          // Deshabilitar el botón de subir después de incrementar el contador
+          $btnSubir.disabled = true;
+        }
       });
 
       // Decrementar el contador de subir al hacer clic en el botón de bajar
@@ -63,6 +64,9 @@ function showPosts() {
           contadorSubir--;
           const $contadorSubir = $postElement.querySelector("#contador-subir");
           $contadorSubir.textContent = contadorSubir;
+
+          // Habilitar el botón de subir cuando se presiona el botón de bajar
+          $btnSubir.disabled = false;
         }
       });
 
