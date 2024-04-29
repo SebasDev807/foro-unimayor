@@ -31,6 +31,11 @@
 .lista-respuestas p{
     font-size: 14px;
 }
+.lista-respuestas li{
+    border-radius: 5pxpx;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
 .contenedor-comentarios .lista-respuestas h1 {
     display: flex;
+    margin: 5px;
 }
