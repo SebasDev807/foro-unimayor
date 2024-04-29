@@ -1,7 +1,23 @@
+import { responseToQuestion } from "../services/supabase/answers";
+
 const contenedor = document.querySelector("#seccion-preguntas");
 const comentarios = document.createElement("dialog");
 
-export function comentariosHTML() {
+export async function comentariosHTML(id) {
+  // Espera a que la promesa se resuelva y obtiene las respuestas
+  const answers = await responseToQuestion(id);
+
+  // Si hay al menos una respuesta
+
+  const primeraRespuesta = answers[0];
+  let descripcion;
+  
+  if (answers.length === 0) {
+    descripcion = "No hay comentarios"
+  }else{
+    descripcion = primeraRespuesta.description;
+  }
+
   comentarios.id = "caja-comentarios";
   comentarios.innerHTML = `
     <div class="header-comentarios">
@@ -10,7 +26,7 @@ export function comentariosHTML() {
     </div>
     <div class="contenedor-comentarios">
       <ul class="lista-respuestas">
-        <h1>Aun no hay comentarios</h1>
+        <p>${descripcion}</h1>
       </ul>
     </div>
     <div class="footer-comentarios">
@@ -29,5 +45,3 @@ export function comentariosHTML() {
     comentarios.classList.remove("caja-comentarios");
   });
 }
-
-
