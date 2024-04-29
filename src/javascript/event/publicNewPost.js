@@ -9,9 +9,9 @@ function managePublicPostButton(event) {
   event.preventDefault();
 
   // Tomar los valores de los inputs
-  const title = document.getElementById('input-title').value;
-  const description = document.getElementById('input-description').value;
-
+  const title = document.getElementById('titulo-pregunta').value;
+  const description = document.getElementById('cuerpo-pregunta').value;
+  console.log(title, description);
   // Crear un objeto de pregunta con los valores de los inputs
   const newQuestion = {
     title,
