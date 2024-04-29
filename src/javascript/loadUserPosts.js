@@ -1,9 +1,12 @@
 import { getPosts } from "../services/supabase/posts.js";
+import { handleQuestionClick } from "./handler/questionClick.js";
 import { obtenerFecha, obtenerHora } from "./helpers/obtener-tiempo.js";
+import { comentariosHTML } from "./modal-comentarios.js";
+
 
 const fecha = obtenerFecha();
 const hora = obtenerHora();
-loadHtml();
+// loadHtml();
 
 function showPosts() {
   getPosts().then((posts) => {
@@ -76,26 +79,26 @@ function showPosts() {
 
       // Event listener para abrir el modal de comentarios
       const $btnComentar = $postElement.querySelector("#btn-comentar");
-      $btnComentar.addEventListener("click", () => {
+      $btnComentar.addEventListener("click", (e) => {
         comentariosHTML();
+        console.log(e.target);
       });
 
       $fragment.appendChild($postElement);
     });
 
     $usersPostContainer.appendChild($fragment);
-    loadHtml(); // Esto puede no ser necesario si llamas a loadHtml en el event listener
   });
 }
 
-function loadHtml() {
-  const botonComentar = document.querySelector("#btn-comentar");
-  if (botonComentar) {
-    botonComentar.addEventListener("click", () => {
-      comentariosHTML();
-    });
-  }
-}
+// function loadHtml() {
+//   const botonComentar = document.querySelector("#btn-comentar");
+//   if (botonComentar) {
+//     botonComentar.addEventListener("click", () => {
+//       comentariosHTML();
+//     });
+//   }
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
   showPosts();
