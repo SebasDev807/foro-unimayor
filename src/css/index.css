@@ -156,6 +156,7 @@ article {
   border-color: #c9c9c9ff;
   border-radius: 20px;
   max-width: 100%;
+  padding: 20px;
 }
 
 .secciones {
@@ -258,7 +259,14 @@ article {
 .usuario {
   margin-inline: 21px;
 }
-
+.acciones-post{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.info-post{
+display: ruby;
+}
 .lineas {
   position: absolute;
   right: 0px;
@@ -420,12 +428,16 @@ article {
 }
 
 .contenedor-botones-post {
-  justify-content: space-around;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  align-items: center;
+}
+.contenedor-botones-post-comentarios{
   display: flex;
   font-size: 12px;
   align-items: center;
 }
-
 .contenedor-botones-post button {
   width: 20%;
   background:none;
@@ -434,6 +446,25 @@ article {
 }
 
 .contenedor-botones-post button {
+  width: 20%;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+.contenedor-botones-post-comentarios button {
+  width: 20%;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+.footer-comentarios{
+  display: flex;
+  justify-content: center;
+}
+.footer-comentarios input {
+    width: 100%;
+}
+.contenedor-botones-post-comentarios button {
   width: 20%;
   background:none;
   border: none;
