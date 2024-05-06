@@ -16,7 +16,7 @@ export async function comentariosHTML(id, titulo) {
   let descripcion;
 
   if (answers.length === 0) {
-    descripcion = "No hay comentarios";
+    descripcion = "Se el primero en comentar";
   } else {
     descripcion = primeraRespuesta.description;
   }
