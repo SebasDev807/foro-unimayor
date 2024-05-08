@@ -1,15 +1,18 @@
 import { obtenerFecha, obtenerHora } from "../helpers/obtener-tiempo.js";
-import { renderizarComentarios } from "./comentario.js";
+import { comentariosHTML } from "../modal-comentarios.js";
+
 const contenedorPregunta = document.querySelector("#pregunta");
-const ulPosts = document.querySelector("#lista-posts");
+const ulPosts = document.querySelector("#user-post");
+const btnPublicar = document.querySelector("#public-answer");
+const campoBusqueda = document.querySelector("#input-busqueda");
 
 let listaPost = [];
 
 cargarEventListeners();
 
 function cargarEventListeners() {
-  contenedorPregunta.addEventListener("click", postearPregunta);
-  
+  btnPublicar.addEventListener("click", postearPregunta);
+  campoBusqueda.addEventListener("input", filtrarPreguntas);
 }
 
 function postearPregunta(e) {
@@ -27,7 +30,6 @@ function postearPregunta(e) {
     listaPost.push(infoPost);
     limpiarInput(input, cuerpo);
     renderizarPost(infoPost);
-    renderizarComentarios();
   }
 }
 
@@ -49,36 +51,59 @@ function limpiarInput(input, cuerpo) {
 function renderizarPost(post) {
   const { titulo, cuerpo, fecha, hora } = post;
   const contenedorPost = document.createElement("article");
-  contenedorPost.classList.add("contenedor-post");
   contenedorPost.innerHTML = `
-    <div class="contenedor-usuario">
+  <div class="contenedor-usuario">
     <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
-      <p>${users.name}</p>
-      <p>@${users.name}</p>
-      <p>${fecha}</p>        
-    </div>
-    <h2>${questions.title}</h2>
-    <p>${questions.description}</p>
-    <div class="contenedor-botones-post">
+    <p>Joer</p>
+    <p>@$Joer</p>
+    <p>${fecha}</p>        
+  </div>
+  <h2>${titulo}</h2>
+  <p>${cuerpo}</p>
+  <div class="contenedor-botones-post">
+    <div>
       <button id="btn-subir">
-      <img src="/imagenes/up-botton-blue.png" alt="" />
+        <img src="/imagenes/up-botton-blue.png" alt="" />
       </button>
+      <span id="contador-subir">1</span> <!-- Contador de subir -->
       <button id="btn-bajar">
         <img src="/imagenes/down-botton-white.png" alt="" />
       </button>
       <button id="btn-comentar">
         <img src="/imagenes/comentarios.png" alt="" />
       </button>
-      <p>${questions.category.name}</p>
+    </div>
+    <div class="info-post">
+      <p class="categoria">$Emprendimiento</p>
       <p>${hora}</p>
     </div>
-  `;
+  </div>`;
+
+  const btnComentar = contenedorPost.querySelector("#btn-comentar");
+  if (btnComentar) {
+    btnComentar.addEventListener("click", function() {
+      comentariosHTML(0);
+    });
+  }
+
   ulPosts.insertBefore(contenedorPost, ulPosts.firstElementChild);
+}
+
+function filtrarPreguntas() {
+  const textoBusqueda = campoBusqueda.value.toLowerCase();
+
+  ulPosts.childNodes.forEach(post => {
+    const tituloPost = post.querySelector("h2").textContent.toLowerCase();
+    if (tituloPost.includes(textoBusqueda)) {
+      post.style.display = "block";
+    } else {
+      post.style.display = "none";
+    }
+  });
 }
 
 export const PostComponent = {
   cargarEventListeners,
   postearPregunta,
-  renderizarPost
-}
-
+  renderizarPost,
+};

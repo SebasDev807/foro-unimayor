@@ -433,7 +433,11 @@ display: ruby;
   font-size: 12px;
   align-items: center;
 }
-
+.contenedor-botones-post-comentarios{
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+}
 .contenedor-botones-post button {
   width: 20%;
   background:none;
@@ -442,6 +446,25 @@ display: ruby;
 }
 
 .contenedor-botones-post button {
+  width: 20%;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+.contenedor-botones-post-comentarios button {
+  width: 20%;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+.footer-comentarios{
+  display: flex;
+  justify-content: center;
+}
+.footer-comentarios input {
+    width: 100%;
+}
+.contenedor-botones-post-comentarios button {
   width: 20%;
   background:none;
   border: none;

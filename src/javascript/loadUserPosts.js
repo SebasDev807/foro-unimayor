@@ -3,10 +3,8 @@ import { handleQuestionClick } from "./handler/questionClick.js";
 import { obtenerFecha, obtenerHora } from "./helpers/obtener-tiempo.js";
 import { comentariosHTML } from "./modal-comentarios.js";
 
-
 const fecha = obtenerFecha();
 const hora = obtenerHora();
-// loadHtml();
 
 function showPosts() {
   getPosts().then((posts) => {
@@ -76,8 +74,7 @@ function showPosts() {
       // Event listener para abrir el modal de comentarios
       const $btnComentar = $postElement.querySelector("#btn-comentar");
       $btnComentar.addEventListener("click", (e) => {
-        comentariosHTML(index+1);
-       
+        comentariosHTML(index+1, questions.title); // Pasar el título como argumento
       });
 
       $fragment.appendChild($postElement);
@@ -86,7 +83,6 @@ function showPosts() {
     $usersPostContainer.appendChild($fragment);
   });
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   showPosts();
