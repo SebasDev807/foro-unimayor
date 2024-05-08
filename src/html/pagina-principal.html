@@ -97,9 +97,9 @@
             <img src="../../public/imagenes/leonpregunta.png" alt="" />
 
             <div class="input-pregunta">
-              <input type="text" placeholder="Titulo de tu post" class="titulo-pregunta" id="titulo-pregunta" />
+              <input id="titulo-pregunta" type="text" placeholder="Titulo de tu post" class="titulo-pregunta" />
               <!-- cambié input por textarea para permitir los saltos de linea  -->
-              <textarea type="text" placeholder="Escribe algo" class="cuerpo-pregunta" id="cuerpo-pregunta"></textarea>
+              <textarea id="cuerpo-pregunta" type="text" placeholder="Escribe algo" class="cuerpo-pregunta"></textarea>
             </div>
           </div>
           <div class="submit-pregunta">
@@ -108,7 +108,7 @@
               <a href="#" class="gif"><img src="../../public/imagenes/gif.png" alt="" /></a>
               <a href="#" class="poll"><img src="../../public/imagenes/poll.png" alt="" /></a>
             </div>
-            <button type="submit" class="boton">Publicar</button>
+            <button id="public-answer" type="submit" class="boton">Publicar</button>
           </div>
           <!--Aquí habia un </form> pero no se había iniciado -->
         </article>
@@ -131,7 +131,7 @@
           </div>
         </dialog>
 
-       
+
         <ul class="lista-posts"></ul>
       </section>
       <!-- Post de los usuarios-->
@@ -162,14 +162,15 @@
 
   <!-- /cuerpo de la pagína -->
   <!-- <script type="module" src="../javascript/agregar-pregunta.js"></script> -->
-  <script type="module" src="../javascript/aumentar-area-texto.js"></script>
+  <!-- <script type="module" src="../javascript/aumentar-area-texto.js"></script> -->
   <script type="module" src="../services/supabase/supabaseClient.js"></script>
   <script type="module" src="../javascript/loadUserPosts.js"></script>
   <!-- <script src="../javascript/prueba-modal.js"></script> -->
-  <script type="module" src="../javascript/helpers/showThread.js"></script>
+  <script type="module" src="../javascript/showThread.js"></script>
   <script type="module" src="../javascript/handler/questionClick.js"></script>
-  <!-- <script type="module" src="../services/supabase/answers.js"></script> -->
-  <!-- <script src="../javascript/components/post.js" -->
+  <!-- <script type="module" src="../javascript/event/publicNewPost.js"></script> -->
+  <!-- <script type="module" src="../services/supabase/answers.js"></script> publicNewPost -->
+ <script src="../javascript/components/post.js" type="module"></script>
 </body>
 
 </html>
