@@ -86,7 +86,8 @@ body {
   display: block;
 }
 .opciones p,
-.opciones a {
+.opciones a,
+.opciones button {
   font-weight: bold;
   margin: 3px;
   cursor: pointer;
@@ -95,11 +96,12 @@ body {
   text-decoration: none;
   line-height: 30px;
 }
-.opciones a:visited {
+.opciones a:visited, .opciones a:visited {
   color: inherit;
 }
 .opciones p:hover,
-.opciones a:hover {
+.opciones a:hover,
+.opciones button:hover {
   color: white;
   background-color: #0c467f;
 }

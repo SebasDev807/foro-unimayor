@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="../css/normalize.css" as="style" />
   <link rel="stylesheet" href="../css/respuesta.css">
   <title>FUM</title>
+  <script type="module">
+    import { saveUser } from "/src/services/supabase/auth.js";
+    import { logout } from "/src/services/supabase/auth.js";
+
+    await saveUser();
+    
+    document.querySelector(".btn-cerrar-sesion").onclick = logout;
+  </script>
 </head>
 
 <body>
@@ -30,9 +38,9 @@
             <a href="ver-perfil.html" target="_blank">
               <p>Editar perfil</p>
             </a>
-            <a href="login.html" target="_blank">
-              <p>Cerrar sesión</p>
-            </a>
+            <button class="btn-cerrar-sesion" onclick="logout()">
+              Cerrar Sesion
+            </button>
           </div>
     </div>
   </header>
