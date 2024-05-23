@@ -10,19 +10,22 @@
   <link rel="stylesheet" href="../css/perfil.css">
   <title>FUM</title>
   <script type="module">
-    import { getPostByUser } from '/src/services/supabase/posts.js'
-    const questions = await getPostByUser(1)
-    const div = document.querySelector(".posts")
-    let htmlQuestions = ""
+    import { getPostByUser } from '/src/services/supabase/posts.js';
+    import { logout } from "/src/services/supabase/auth.js";
+
+    const questions = await getPostByUser(1);
+    const div = document.querySelector(".posts");
+    let htmlQuestions = "";
     for(const question of questions) {
-      htmlQuestions += `<h3>${question.title}</h3>\n`
-      htmlQuestions += `<p>${question.description}</p>\n`
+      htmlQuestions += `<h3>${question.title}</h3>\n`;
+      htmlQuestions += `<p>${question.description}</p>\n`;
       for(const answer of question.answers) {
-        htmlQuestions += `<p>${answer.description}</p>\n`
+        htmlQuestions += `<p>${answer.description}</p>\n`;
       }
     }
-    div.innerHTML = htmlQuestions
+    div.innerHTML = htmlQuestions;
 
+    document.querySelector(".btn-cerrar-sesion").onclick = logout;
   </script>
 </head>
 
@@ -45,7 +48,7 @@
             <a href="ver-perfil.html" target="_blank">
               <p>Editar perfil</p>
             </a>
-            <button>
+            <button class="btn-cerrar-sesion" onclick="logout()">
               Cerrar sesion
             </button>
           </div>
