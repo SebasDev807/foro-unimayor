@@ -7,15 +7,16 @@ import supabase from "./supabaseClient";
  */
 async function getPosts() {
   try {
-    const { data: userQuestion, error } = await supabase.from("user_questions")
-      .select(`
-        users(id, name),
-        questions(id, title, description, category(name))
-      `);
+    const { data, error } = await supabase
+    .from('questions')
+    .select(`
+      *,
+      users(id, name)
+    `);
 
     if (error) throw new Error("Error fetching data");
 
-    return userQuestion;
+    return data;
   } catch (error) {
     console.error("Error fetching posts:", error.message);
 
