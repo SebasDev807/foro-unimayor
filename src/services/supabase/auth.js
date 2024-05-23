@@ -44,3 +44,11 @@ export async function logout() {
   const { error } = await supabase.auth.signOut();
   window.location.replace("http://localhost:5173/src/html/login.html");
 }
+
+export async function userLogged() {
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+  return user;
+}

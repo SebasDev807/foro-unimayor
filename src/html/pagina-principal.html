@@ -12,6 +12,13 @@
   <script type="module">
     import { saveUser } from "/src/services/supabase/auth.js";
     import { logout } from "/src/services/supabase/auth.js";
+    import { userLogged } from "/src/services/supabase/auth.js";
+
+    const user = await userLogged();
+
+    if (!user) {
+      window.location.replace("http://localhost:5173/src/html/login.html");
+    }
 
     await saveUser();
     
