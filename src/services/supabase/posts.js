@@ -1,3 +1,4 @@
+import { userLogged } from "./auth";
 import supabase from "./supabaseClient";
 /**
  * Asynchronously fetches the posts from a database.
@@ -92,11 +93,4 @@ async function getPostByUser() {
   }
 }
 
-export async function userLogged() {
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-  return user;
-}
 export { getPosts, createPost, getPostByUser };

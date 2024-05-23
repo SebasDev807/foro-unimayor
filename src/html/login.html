@@ -10,7 +10,16 @@
 
     <script type="module">
       import { login } from "/src/services/supabase/auth.js";
+      import { userLogged } from "/src/services/supabase/auth";
+
       document.querySelector("#boton").onclick = login;
+
+      const user = await userLogged();
+      if (user) {
+        window.location.replace(
+          "http://localhost:5173/src/html/pagina-principal.html"
+        );
+      }
     </script>
   </head>
 
