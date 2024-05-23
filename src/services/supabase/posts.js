@@ -81,7 +81,7 @@ async function getPostByUser(userId) {
       *,
       answers(id, description)
     `)
-    .eq('id_user', userId)
+    .eq('id_user', userId);
     return data;
   } catch (error) {
     console.log(error);
