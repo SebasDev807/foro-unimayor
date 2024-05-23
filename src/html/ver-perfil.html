@@ -9,6 +9,21 @@
   <link rel="stylesheet" href="../css/normalize.css" as="style" />
   <link rel="stylesheet" href="../css/perfil.css">
   <title>FUM</title>
+  <script type="module">
+    import { getPostByUser } from '/src/services/supabase/posts.js'
+    const questions = await getPostByUser(1)
+    const div = document.querySelector(".posts")
+    let htmlQuestions = ""
+    for(const question of questions) {
+      htmlQuestions += `<h3>${question.title}</h3>\n`
+      htmlQuestions += `<p>${question.description}</p>\n`
+      for(const answer of question.answers) {
+        htmlQuestions += `<p>${answer.description}</p>\n`
+      }
+    }
+    div.innerHTML = htmlQuestions
+
+  </script>
 </head>
 
 <body>
