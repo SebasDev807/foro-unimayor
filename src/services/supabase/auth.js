@@ -21,26 +21,26 @@ export async function saveUser() {
     return;
   }
 
-  const respuesta = await supabase
-    .from("users")
-    .insert([
+  if (user.email.endsWith("@unimayor.edu.co")) {
+    const respuesta = await supabase.from("users").insert([
       {
         name: user.user_metadata.name,
         email: user.email,
         password: "",
       },
     ]);
-  if (respuesta.error) {
-    console.error("Error al insertar datos ", respuesta.error);
+    if (respuesta.error) {
+      console.error("Error al insertar datos ", respuesta.error);
+    } else {
+      console.log("Datos insertados");
+    }
   } else {
-    console.log("Datos insertados");
+    logout();
   }
 }
 
 export async function logout() {
-    console.log("Cerrando sesion");
+  console.log("Cerrando sesion");
   const { error } = await supabase.auth.signOut();
-  console.log(error);
   window.location.replace("http://localhost:5173/src/html/login.html");
-
 }
