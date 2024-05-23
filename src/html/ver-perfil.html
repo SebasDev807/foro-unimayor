@@ -13,7 +13,7 @@
     import { getPostByUser } from '/src/services/supabase/posts.js';
     import { logout } from "/src/services/supabase/auth.js";
 
-    const questions = await getPostByUser(1);
+    const questions = await getPostByUser();
     const div = document.querySelector(".posts");
     let htmlQuestions = "";
     for(const question of questions) {

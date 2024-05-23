@@ -73,19 +73,30 @@ async function createPost(post, userId = 1) {
   }
 }
 
-async function getPostByUser(userId) {
+async function getPostByUser() {
   try {
+
+    const { email } = await userLogged();
+    const {data: userData} = await supabase.from('users').select(`id`).eq('email', email);
+    const id = userData[0].id;
     const { data, error } = await supabase
     .from('questions')
     .select(`
       *,
       answers(id, description)
     `)
-    .eq('id_user', userId);
+    .eq('id_user',id);
     return data;
   } catch (error) {
     console.log(error);
   }
 }
 
+export async function userLogged() {
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+  return user;
+}
 export { getPosts, createPost, getPostByUser };
