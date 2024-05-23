@@ -1,5 +1,6 @@
 import supabase from "./supabaseClient";
 
+
 export async function login() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -10,17 +11,35 @@ export async function login() {
   console.log(data, error);
 }
 
+export async function signOut() {
+  try {
+    const { error } = await supabase.auth.signOut()
+    
+    if (error) {
+      throw new Error('Error al cerrar sesión')
+    }
+
+    console.log('Sesión cerrada correctamente')
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error.message)
+  }
+}
+
 export async function saveUser() {
   const {
     data: { user },
     error,
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser();  // TODO: Don't works correctly
+
+  console.log(user);
+  // console.log(user);
 
   if (error) {
     console.error("Error al obtener datos de usuario:", error);
     return;
   }
-
+  // console.log(user);
+  console.log(typeof user.id);
   const respuesta = await supabase
     .from("users")
     .insert([
@@ -35,12 +54,4 @@ export async function saveUser() {
   } else {
     console.log("Datos insertados");
   }
-}
-
-export async function logout() {
-    console.log("Cerrando sesion");
-  const { error } = await supabase.auth.signOut();
-  console.log(error);
-  window.location.replace("http://localhost:5173/src/html/login.html");
-
 }

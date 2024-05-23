@@ -1,17 +1,15 @@
 import supabase from "./supabaseClient";
 /**
  * Asynchronously fetches the posts from a database.
- * 
+ *
  * @returns {Promise<Array>} - A promise that resolves to an array of posts if they exist, an empty array if no posts exist, or null if an error occurs.
  */
 async function getPosts() {
   try {
-    const { data: userQuestion, error } = await supabase.from("user_questions")
-      .select(`
-        users(id, name),
-        questions(id, title, description, category(name))
-      `);
-
+    const { data: userQuestion, error } = await supabase
+      .from("questions")
+      .select(`id, title, description`);
+    // console.log(userQuestion);
     if (error) throw new Error("Error fetching data");
 
     return userQuestion;
@@ -23,50 +21,36 @@ async function getPosts() {
 }
 
 function insertCategory() {
-  const characterIntCategory = prompt("Insert the category -> 1 para fisica,  2 para Matemática");
+  const characterIntCategory = prompt(
+    "Insert the category -> 1 para fisica,  2 para Matemática"
+  );
   return characterIntCategory === "1" ? "fisica" : "matematica";
 }
 
 /**
  * Asynchronously creates a new post in a database.
- * 
+ *
  * @param {Object} post - The post to be created.
  * @param {number} userId - The ID of the user who created the post.
  * @returns {Promise<Object>} - A promise that resolves to the created post if successful, or null if an error occurs.
  */
-async function createPost(post, userId = 1) {
+
+async function createPost(post) {
   const client = supabase; // Assume supabaseClient is already configured
-
   try {
-    await client.rpc('start_transaction');
-
+    // Insertar la pregunta
     const { data: postData, error: postError } = await client
-      .from('questions')
+      .from("questions")
       .insert([post]);
-
     if (postError) {
-      throw new Error("Error creating post");
+      console.log(postError);
+      //  throw new Error("Error creating post here");
+      return;
     }
-
-    const userPost = {
-      id_user: userId,
-      id_question: postData[0].id
-    };
-
-    const { data: userPostData, error: userPostError } = await client
-      .from('user_questions')
-      .insert([userPost]);
-
-    if (userPostError) {
-      throw new Error("Error creating user-post association");
-    }
-
-    await client.rpc('commit_transaction');
-
-    return postData;
   } catch (error) {
     console.error("Error creating post:", error.message);
-    await client.rpc('rollback_transaction');
+    // En Supabase, no necesitas llamar a rollback_transaction explícitamente
+    // porque si ocurre un error en cualquiera de las operaciones, no se aplicarán cambios
     return null;
   }
 }
