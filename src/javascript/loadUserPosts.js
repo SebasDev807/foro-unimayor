@@ -9,14 +9,15 @@ function showPosts() {
     const $usersPostContainer = document.getElementById("user-post");
     const $fragment = document.createDocumentFragment();
 
-    posts.forEach(({ id, title, description, users, answers },index) => {
+    posts.forEach(({ title, description },index) => {
       let contadorSubir = 0; // Inicializar contador de votos positivos
-
+      // <p>${users.name}</p>
+      // <p>${fecha}</p>        
+      
       const $postElement = document.createElement("article");
       $postElement.innerHTML = `
       <div class="contenedor-usuario">
-        <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
-        <p>${users?.name}</p>   
+      <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
       </div>
       <h2>${title}</h2>
       <p>${description}</p>
@@ -33,8 +34,12 @@ function showPosts() {
             <img src="/imagenes/comentarios.png" alt="" />
           </button>
         </div>
-      </div>
-      `;
+        <div class="info-post">
+        </div>
+        </div>
+        `;
+        // <p>${hora}</p>
+        // <p class="categoria">${category.name}</p>
 
       // Incrementar contador de votos al hacer clic en el botón de subir
       const $btnSubir = $postElement.querySelector("#btn-subir");
@@ -65,7 +70,7 @@ function showPosts() {
       // Event listener para abrir el modal de comentarios
       const $btnComentar = $postElement.querySelector("#btn-comentar");
       $btnComentar.addEventListener("click", (e) => {
-        comentariosHTML(id, title); // Pasar el título como argumento
+        comentariosHTML(index+1, title); // Pasar el título como argumento
       });
 
       $fragment.appendChild($postElement);

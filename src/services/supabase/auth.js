@@ -39,6 +39,21 @@ export async function saveUser() {
   }
 }
 
+
+export async function signOut() {
+  try {
+    const { error } = await supabase.auth.signOut()
+    
+    if (error) {
+      throw new Error('Error al cerrar sesión')
+    }
+
+    console.log('Sesión cerrada correctamente')
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error.message)
+  }
+}
+
 export async function logout() {
   console.log("Cerrando sesion");
   const { error } = await supabase.auth.signOut();

@@ -38,39 +38,23 @@ function insertCategory() {
  * @param {number} userId - The ID of the user who created the post.
  * @returns {Promise<Object>} - A promise that resolves to the created post if successful, or null if an error occurs.
  */
-async function createPost(post, userId = 1) {
+
+async function createPost(post) {
   const client = supabase; // Assume supabaseClient is already configured
-
   try {
-    await client.rpc("start_transaction");
-
+    // Insertar la pregunta
     const { data: postData, error: postError } = await client
       .from("questions")
       .insert([post]);
-
     if (postError) {
-      throw new Error("Error creating post");
+      console.log(postError);
+      //  throw new Error("Error creating post here");
+      return;
     }
-
-    const userPost = {
-      id_user: userId,
-      id_question: postData[0].id,
-    };
-
-    const { data: userPostData, error: userPostError } = await client
-      .from("user_questions")
-      .insert([userPost]);
-
-    if (userPostError) {
-      throw new Error("Error creating user-post association");
-    }
-
-    await client.rpc("commit_transaction");
-
-    return postData;
   } catch (error) {
     console.error("Error creating post:", error.message);
-    await client.rpc("rollback_transaction");
+    // En Supabase, no necesitas llamar a rollback_transaction explícitamente
+    // porque si ocurre un error en cualquiera de las operaciones, no se aplicarán cambios
     return null;
   }
 }
