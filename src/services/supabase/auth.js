@@ -21,6 +21,7 @@ export async function saveUser() {
     return;
   }
 
+  // todo: validate endpoint edu.co
   if (user.email.endsWith("@unimayor.edu.co")) {
     const respuesta = await supabase.from("users").insert([
       {

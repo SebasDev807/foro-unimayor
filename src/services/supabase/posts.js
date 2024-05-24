@@ -13,7 +13,6 @@ async function getPosts() {
       *,
       users(id, name)
     `);
-
     if (error) throw new Error("Error fetching data");
 
     return data;
@@ -78,4 +77,41 @@ async function getPostByUser() {
   }
 }
 
-export { getPosts, createPost, getPostByUser };
+const responseQuestion = async (comentario, titulo, descripcion) => {
+const findQuestion = (await getPosts()).filter(post => (descripcion.trim() == post.description.trim() && titulo.trim() == post.title.trim()));
+
+try {
+
+  if (Object.hasOwnProperty(findQuestion).length == 0) return;
+  
+} catch (error) {
+  console.log(error.message);
+  return
+}
+  const {id, id_user} = findQuestion[0];
+
+  const userQuestion = {
+    id_question: id,
+    description: comentario,
+    id_user
+  }
+
+
+  const client = supabase; 
+
+  try {
+    const { data: postResponse, error: postError } = await client
+      .from("answers")
+      .insert([userQuestion]);
+    if (postError) {
+      console.log(postError);
+      return;
+    }
+  } catch (error) {
+    console.error("Error creating post:", error.message);
+    return null;
+  }
+}
+
+
+export { getPosts, createPost, getPostByUser, responseQuestion };
