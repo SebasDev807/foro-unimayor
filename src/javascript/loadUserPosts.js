@@ -70,7 +70,7 @@ function showPosts() {
       // Event listener para abrir el modal de comentarios
       const $btnComentar = $postElement.querySelector("#btn-comentar");
       $btnComentar.addEventListener("click", (e) => {
-        comentariosHTML(index+1, title); // Pasar el título como argumento
+        comentariosHTML(index+1, title, description); // Pasar el título como argumento
       });
 
       $fragment.appendChild($postElement);
