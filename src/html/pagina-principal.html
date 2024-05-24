@@ -13,6 +13,7 @@
     import { saveUser } from "/src/services/supabase/auth.js";
     import { logout } from "/src/services/supabase/auth.js";
     import { userLogged } from "/src/services/supabase/auth.js";
+    import { signOut } from "/src/services/supabase/auth.js";
 
     const user = await userLogged();
 
@@ -20,9 +21,10 @@
       window.location.replace("http://localhost:5173/src/html/login.html");
     }
 
-    await saveUser();
+    // await saveUser();
     
-    document.querySelector(".btn-cerrar-sesion").onclick = logout;
+    document.querySelector(".btn-cerrar-sesion").onclick = signOut;
+    // document.addEventListener("onClick")
   </script>
 </head>
 
@@ -45,7 +47,7 @@
             <a href="ver-perfil.html" target="_blank">
               <p>Editar perfil</p>
             </a>
-            <button class="btn-cerrar-sesion" onclick="logout()">
+            <button class="btn-cerrar-sesion">
               Cerrar Sesion
             </button>
           </div>
@@ -183,7 +185,7 @@
   <!-- <script src="../javascript/prueba-modal.js"></script> -->
   <script type="module" src="../javascript/showThread.js"></script>
   <script type="module" src="../javascript/handler/questionClick.js"></script>
-  <!-- <script type="module" src="../javascript/event/publicNewPost.js"></script> -->
+  <script type="module" src="../javascript/event/publicNewPost.js"></script>
   <!-- <script type="module" src="../services/supabase/answers.js"></script> publicNewPost -->
  <script src="../javascript/components/post.js" type="module"></script>
 </body>
