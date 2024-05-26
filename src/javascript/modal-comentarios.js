@@ -1,9 +1,6 @@
+// TODO: add date when is created the answer
 import { responseToQuestion } from "../services/supabase/answers";
 import { responseQuestion } from "../services/supabase/posts.js";
-import { obtenerFecha, obtenerHora } from "./helpers/obtener-tiempo.js";
-
-const fecha = obtenerFecha();
-const hora = obtenerHora();
 
 const contenedor = document.querySelector("#seccion-preguntas");
 const comentarios = document.createElement("dialog");
@@ -35,9 +32,8 @@ export async function comentariosHTML(id, titulo, description) {
         <li>
           <p>${descripcion}</p>
           <div class="contenedor-botones-post-comentarios">
-            ${
-              answers.length > 0
-                ? `
+            ${answers.length > 0
+      ? `
               <button id="btn-subir-descripcion">
                 <img src="/imagenes/up-botton-blue.png" alt="" />
               </button>
@@ -46,8 +42,8 @@ export async function comentariosHTML(id, titulo, description) {
                 <img src="/imagenes/down-botton-white.png" alt="" />
               </button>
             `
-                : ""
-            }
+      : ""
+    }
           </div>
         </li>
       </ul>

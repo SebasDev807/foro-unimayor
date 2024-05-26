@@ -1,5 +1,6 @@
-import { userLogged } from "./auth";
 import supabase from "./supabaseClient";
+import { userLogged } from "./auth";
+
 /**
  * Asynchronously fetches the posts from a database.
  *
@@ -8,11 +9,13 @@ import supabase from "./supabaseClient";
 async function getPosts() {
   try {
     const { data, error } = await supabase
-    .from('questions')
-    .select(`
+      .from('questions')
+      .select(`
       *,
       users(id, name)
     `);
+    console.log("data :", data)
+
     if (error) throw new Error("Error fetching data");
 
     return data;
@@ -37,14 +40,12 @@ function insertCategory() {
  * @param {number} userId - The ID of the user who created the post.
  * @returns {Promise<Object>} - A promise that resolves to the created post if successful, or null if an error occurs.
  */
-
 async function createPost(post) {
-  const client = supabase; // Assume supabaseClient is already configured
   try {
-    // Insertar la pregunta
-    const { data: postData, error: postError } = await client
+    const { data: postData, error: postError } = await supabase
       .from("questions")
       .insert([post]);
+
     if (postError) {
       console.log(postError);
       //  throw new Error("Error creating post here");
@@ -62,15 +63,15 @@ async function getPostByUser() {
   try {
 
     const { email } = await userLogged();
-    const {data: userData} = await supabase.from('users').select(`id`).eq('email', email);
+    const { data: userData } = await supabase.from('users').select(`id`).eq('email', email);
     const id = userData[0].id;
     const { data, error } = await supabase
-    .from('questions')
-    .select(`
+      .from('questions')
+      .select(`
       *,
       answers(id, description)
     `)
-    .eq('id_user',id);
+      .eq('id_user', id);
     return data;
   } catch (error) {
     console.log(error);
@@ -78,17 +79,17 @@ async function getPostByUser() {
 }
 
 const responseQuestion = async (comentario, titulo, descripcion) => {
-const findQuestion = (await getPosts()).filter(post => (descripcion.trim() == post.description.trim() && titulo.trim() == post.title.trim()));
+  const findQuestion = (await getPosts()).filter(post => (descripcion.trim() == post.description.trim() && titulo.trim() == post.title.trim()));
 
-try {
+  try {
 
-  if (Object.hasOwnProperty(findQuestion).length == 0) return;
-  
-} catch (error) {
-  console.log(error.message);
-  return
-}
-  const {id, id_user} = findQuestion[0];
+    if (Object.hasOwnProperty(findQuestion).length == 0) return;
+
+  } catch (error) {
+    console.log(error.message);
+    return
+  }
+  const { id, id_user } = findQuestion[0];
 
   const userQuestion = {
     id_question: id,
@@ -97,7 +98,7 @@ try {
   }
 
 
-  const client = supabase; 
+  const client = supabase;
 
   try {
     const { data: postResponse, error: postError } = await client
@@ -112,6 +113,5 @@ try {
     return null;
   }
 }
-
 
 export { getPosts, createPost, getPostByUser, responseQuestion };

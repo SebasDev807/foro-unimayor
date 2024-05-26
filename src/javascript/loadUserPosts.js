@@ -1,9 +1,9 @@
 // TODO: refresh feature to when adding a new post, it re-renders the content or refreshes
 import { getPosts } from "../services/supabase/posts.js";
-import { responseToQuestion } from "../services/supabase/answers.js";
-import { handleQuestionClick } from "./handler/questionClick.js";
-import { obtenerFecha, obtenerHora } from "./helpers/obtener-tiempo.js";
+// import { responseToQuestion } from "../services/supabase/answers.js";  // used for testing the functyionality
+import { handleQuestionClick } from "./handler/questionClick.js";  // check if is needed to refactor in events
 import { comentariosHTML } from "./modal-comentarios.js";
+import { formatDate } from "./helpers/obtener-tiempo.js";
 
 function renderPosts(posts) {
   const $usersPostContainer = document.getElementById("user-post");
@@ -17,7 +17,7 @@ function renderPosts(posts) {
   $usersPostContainer.appendChild($fragment);
 }
 
-function createPostElement({ id: questionId, title, description, users }) {
+function createPostElement({ id: questionId, title, description, users, date }) {
   const $postElement = document.createElement("article");
   let contadorSubir = 0;
 
@@ -25,11 +25,15 @@ function createPostElement({ id: questionId, title, description, users }) {
 
   $postElement.innerHTML = `
     <div class="contenedor-usuario">
-      <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
-      <p>${userName}</p>
+      <div class="profile-icon">
+        <img class="foto-usuario" src="/imagenes/nik.png" alt="" />
+        <p>${userName}</p>
+      </div>
+      <div class="fecha-publicacion">${formatDate(date)}</div>
     </div>
     <h2>${title}</h2>
     <p>${description}</p>
+
     <div class="contenedor-botones-post">
       <div>
         <button class="btn-subir">
@@ -81,8 +85,9 @@ async function showPosts() {
   if (!posts) return;
   renderPosts(posts);
 
-  const answers = await responseToQuestion(4);
-  console.log(answers);
+  // test feching the answers for a question
+  // const answers = await responseToQuestion(4);
+  // console.log(answers);
 }
 document.addEventListener("DOMContentLoaded", showPosts);
 

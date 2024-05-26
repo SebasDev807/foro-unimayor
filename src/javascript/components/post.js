@@ -1,4 +1,5 @@
-import { obtenerFecha, obtenerHora } from "../helpers/obtener-tiempo.js";
+// TODO: get the date when the answer is created
+// import { obtenerFecha, obtenerHora } from "../helpers/obtener-tiempo.js";
 import { comentariosHTML } from "../modal-comentarios.js";
 
 const contenedorPregunta = document.querySelector("#pregunta");
@@ -38,8 +39,8 @@ function obtenerInfoPost(post) {
     imagen: "",
     titulo: post.querySelector("input").value,
     cuerpo: post.querySelector("textarea").value,
-    hora: obtenerHora(),
-    fecha: obtenerFecha(),
+    // hora: obtenerHora(),
+    // fecha: obtenerFecha(),
   };
 }
 
@@ -81,7 +82,7 @@ function renderizarPost(post) {
 
   const btnComentar = contenedorPost.querySelector("#btn-comentar");
   if (btnComentar) {
-    btnComentar.addEventListener("click", function() {
+    btnComentar.addEventListener("click", function () {
       comentariosHTML(0);
     });
   }

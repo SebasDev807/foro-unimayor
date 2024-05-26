@@ -1,28 +1,24 @@
-const obtenerHora = () => {
-  let now = new Date();
-  let horas = now.getHours();
-  let minutos = now.getMinutes();
-  let ampm = horas >= 12 ? "PM" : "AM";
+function dateTimeISO8601() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+  const day = now.getDate().toString().padStart(2, '0');
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+  const timezoneOffset = now.getTimezoneOffset();
+  const timezoneHours = Math.abs(Math.floor(timezoneOffset / 60)).toString().padStart(2, '0');
+  const timezoneMinutes = (timezoneOffset % 60).toString().padStart(2, '0');
+  const timezoneSign = timezoneOffset >= 0 ? '-' : '+';
 
-  if (horas > 12) {
-    horas -= 12;
-  } else if (horas === 0) {
-    horas = 12;
-  }
-
-  let horaFormateada = `${horas}:${minutos < 10 ? "0" + minutos : minutos} ${ampm}`;
-  return horaFormateada;
+  const timestamp = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}${timezoneSign}${timezoneHours}:${timezoneMinutes}`;
+  return timestamp;
 };
 
-const obtenerFecha = () => {
-  let now = new Date();
-  let diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-  let dia = diasSemana[now.getDay()];
+function formatDate(date) {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(date).toLocaleDateString('es-ES', options);
+}
 
-  let mes = now.getMonth() + 1;
-  let year = now.getFullYear();
-
-  return `${dia}/${mes}/${year}`;
-};
-
-export { obtenerHora, obtenerFecha };
+export { dateTimeISO8601, formatDate }
