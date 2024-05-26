@@ -5,6 +5,9 @@ import { handleQuestionClick } from "./handler/questionClick.js";  // check if i
 import { comentariosHTML } from "./modal-comentarios.js";
 import { formatDate } from "./helpers/obtener-tiempo.js";
 
+import { userLogged } from "../services/supabase/auth.js" //
+
+
 function renderPosts(posts) {
   const $usersPostContainer = document.getElementById("user-post");
   const $fragment = document.createDocumentFragment();
@@ -19,20 +22,24 @@ function renderPosts(posts) {
 
 function createPostElement({ id: questionId, title, description, users, date }) {
   const $postElement = document.createElement("article");
-  let contadorSubir = 0;
 
   const userName = users ? users.name : "Usuario desconocido";
+  const emailUser = users?.email || "Correo desconocido"; // if users is defined, then use users.email, otherwise use "Correo desconocido"
+  let contadorSubir = 0;
 
   $postElement.innerHTML = `
-    <div class="contenedor-usuario">
-      <div class="profile-icon">
-        <img class="foto-usuario" src="/imagenes/nik.png" alt="" />
-        <p>${userName}</p>
+      <div class="contenedor-usuario">
+    <div class="profile-icon">
+      <img class="foto-usuario" src="/imagenes/nik.png" alt="" />
+      <div class="profile-metadata">
+        <span>${userName}</span>
+        <span>${emailUser}</span>
       </div>
-      <div class="fecha-publicacion">${formatDate(date)}</div>
     </div>
-    <h2>${title}</h2>
-    <p>${description}</p>
+    <div class="fecha-publicacion">${formatDate(date)}</div>
+  </div>
+  <h2>${title}</h2>
+  <p>${description}</p>
 
     <div class="contenedor-botones-post">
       <div>
@@ -88,6 +95,11 @@ async function showPosts() {
   // test feching the answers for a question
   // const answers = await responseToQuestion(4);
   // console.log(answers);
+  // test get user mata data auth
+  // console.log("metadata user auth: ",
+  //   userLogged()
+  //     .then(data => console.log(data))
+  //     .catch(error => console.log(error)))
 }
 document.addEventListener("DOMContentLoaded", showPosts);
 
