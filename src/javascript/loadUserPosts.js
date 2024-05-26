@@ -4,7 +4,7 @@ import { getPosts } from "../services/supabase/posts.js";
 import { handleQuestionClick } from "./handler/questionClick.js";  // check if is needed to refactor in events
 import { comentariosHTML } from "./modal-comentarios.js";
 import { formatDate } from "./helpers/obtener-tiempo.js";
-
+import { responseToQuestion } from "../services/supabase/answers.js";
 import { userLogged } from "../services/supabase/auth.js" //
 
 /**
@@ -65,8 +65,7 @@ function createPostElement({ id: questionId, title, description, users, date }) 
     </div>
   `;
 
-  // Event delegation
-  $postElement.addEventListener("click", (e) => {
+  $postElement.addEventListener("click", async (e) => {
     const $target = e.target.closest("button");
     if (!$target) return;
 
@@ -75,7 +74,7 @@ function createPostElement({ id: questionId, title, description, users, date }) 
     } else if ($target.classList.contains("btn-bajar")) {
       contadorSubir = updateCounter($postElement, contadorSubir, -1);
     } else if ($target.classList.contains("btn-comentar")) {
-      comentariosHTML(questionId, title, description);
+      comentariosHTML(questionId, title, description); // draw the modal with the comments
     }
   });
 
