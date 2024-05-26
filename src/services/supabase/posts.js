@@ -60,7 +60,6 @@ async function createPost(post) {
 
 async function getPostByUser() {
   try {
-
     const { email } = await userLogged();
     const {data: userData} = await supabase.from('users').select(`id`).eq('email', email);
     const id = userData[0].id;
