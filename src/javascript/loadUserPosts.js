@@ -7,10 +7,13 @@ import { formatDate } from "./helpers/obtener-tiempo.js";
 
 import { userLogged } from "../services/supabase/auth.js" //
 
-
+/**
+ * Renders a list of posts by creating and appending post elements to a container.
+ * @param {Array} posts - An array of post objects.
+ */
 function renderPosts(posts) {
-  const $usersPostContainer = document.getElementById("user-post");
-  const $fragment = document.createDocumentFragment();
+  const $usersPostContainer = document.getElementById("user-post"),
+    $fragment = document.createDocumentFragment();
 
   posts.forEach((post) => {
     const $postElement = createPostElement(post);
@@ -20,27 +23,31 @@ function renderPosts(posts) {
   $usersPostContainer.appendChild($fragment);
 }
 
+/**
+ * Creates a post element with user information, title, description, and buttons.
+ * @param {Object} post - Post data including id, title, description, users, and date.
+ * @returns {HTMLElement} - The created post element.
+ */
 function createPostElement({ id: questionId, title, description, users, date }) {
   const $postElement = document.createElement("article");
 
-  const userName = users ? users.name : "Usuario desconocido";
-  const emailUser = users?.email || "Correo desconocido"; // if users is defined, then use users.email, otherwise use "Correo desconocido"
+  const userName = users?.name || "Usuario desconocido";
+  const emailUser = users?.email || "Correo desconocido";
   let contadorSubir = 0;
 
   $postElement.innerHTML = `
-      <div class="contenedor-usuario">
-    <div class="profile-icon">
-      <img class="foto-usuario" src="/imagenes/nik.png" alt="" />
-      <div class="profile-metadata">
-        <span>${userName}</span>
-        <span>${emailUser}</span>
+    <div class="contenedor-usuario">
+      <div class="profile-icon">
+        <img class="foto-usuario" src="/imagenes/nik.png" alt="" />
+        <div class="profile-metadata">
+          <span>${userName}</span>
+          <span>${emailUser}</span>
+        </div>
       </div>
+      <div class="fecha-publicacion">${formatDate(date)}</div>
     </div>
-    <div class="fecha-publicacion">${formatDate(date)}</div>
-  </div>
-  <h2>${title}</h2>
-  <p>${description}</p>
-
+    <h2>${title}</h2>
+    <p>${description}</p>
     <div class="contenedor-botones-post">
       <div>
         <button class="btn-subir">
@@ -54,12 +61,11 @@ function createPostElement({ id: questionId, title, description, users, date }) 
           <img src="/imagenes/comentarios.png" alt="" />
         </button>
       </div>
-      <div class="info-post">
-      </div>
+      <div class="info-post"></div>
     </div>
   `;
 
-  // Delegación de eventos
+  // Event delegation
   $postElement.addEventListener("click", (e) => {
     const $target = e.target.closest("button");
     if (!$target) return;
@@ -76,6 +82,13 @@ function createPostElement({ id: questionId, title, description, users, date }) 
   return $postElement;
 }
 
+/**
+ * Updates the counter display and button state.
+ * @param {HTMLElement} $postElement - The post element containing the counter and buttons.
+ * @param {number} counter - The current counter value.
+ * @param {number} increment - The amount to increment the counter.
+ * @returns {number} - The updated counter value.
+ */
 function updateCounter($postElement, counter, increment) {
   const newCounter = Math.max(0, counter + increment);
   const $contadorSubir = $postElement.querySelector(".contador-subir");
@@ -92,97 +105,16 @@ async function showPosts() {
   if (!posts) return;
   renderPosts(posts);
 
-  // test feching the answers for a question
+  // Test fetching the answers for a question (uncomment if needed)
   // const answers = await responseToQuestion(4);
   // console.log(answers);
-  // test get user mata data auth
-  // console.log("metadata user auth: ",
-  //   userLogged()
-  //     .then(data => console.log(data))
-  //     .catch(error => console.log(error)))
+
+  // Test getting user metadata (uncomment if needed)
+  // try {
+  //   const metaData = await userLogged();
+  //   console.log("User metadata:", metaData);
+  // } catch (error) {
+  //   console.error("Error fetching user metadata:", error);
+  // }
 }
 document.addEventListener("DOMContentLoaded", showPosts);
-
-// function comentariosHTML(questionId, title, description) {
-//   // Lógica para abrir el modal de comentarios
-//   console.log("Abrir modal de comentarios", { questionId, title, description });
-// }
-
-
-// function showPosts() {
-//   getPosts().then((posts) => {
-//     console.log(posts);
-//     const $usersPostContainer = document.getElementById("user-post");
-//     const $fragment = document.createDocumentFragment();
-
-//     posts.forEach(({ id: questionId, title, description }, index) => {
-//       let contadorSubir = 0; // Inicializar contador de votos positivos
-//       // <p>${users.name}</p>
-//       // <p>${fecha}</p>
-
-//       const $postElement = document.createElement("article");
-//       $postElement.innerHTML = `
-//       <div class="contenedor-usuario">
-//       <img src="/imagenes/nik.png" alt="" class="foto-usuario" />
-//       </div>
-//       <h2>${title}</h2>
-//       <p>${description}</p>
-//       <div class="contenedor-botones-post">
-//         <div>
-//           <button id="btn-subir">
-//             <img src="/imagenes/up-botton-blue.png" alt="" />
-//           </button>
-//           <span id="contador-subir">${contadorSubir}</span> <!-- Contador de subir -->
-//           <button id="btn-bajar">
-//             <img src="/imagenes/down-botton-white.png" alt="" />
-//           </button>
-//           <button id="btn-comentar">
-//             <img src="/imagenes/comentarios.png" alt="" />
-//           </button>
-//         </div>
-//         <div class="info-post">
-//         </div>
-//         </div>
-//         `;
-//       // <p>${hora}</p>
-//       // <p class="categoria">${category.name}</p>
-
-//       // Incrementar contador de votos al hacer clic en el botón de subir
-//       const $btnSubir = $postElement.querySelector("#btn-subir");
-//       $btnSubir.addEventListener("click", () => {
-//         if (contadorSubir === 0) {
-//           contadorSubir++;
-//           const $contadorSubir = $postElement.querySelector("#contador-subir");
-//           $contadorSubir.textContent = contadorSubir;
-
-//           // Deshabilitar el botón de subir después de incrementar el contador
-//           $btnSubir.disabled = true;
-//         }
-//       });
-
-//       // Decrementar el contador de subir al hacer clic en el botón de bajar
-//       const $btnBajar = $postElement.querySelector("#btn-bajar");
-//       $btnBajar.addEventListener("click", () => {
-//         if (contadorSubir > 0) {
-//           contadorSubir--;
-//           const $contadorSubir = $postElement.querySelector("#contador-subir");
-//           $contadorSubir.textContent = contadorSubir;
-
-//           // Habilitar el botón de subir cuando se presiona el botón de bajar
-//           $btnSubir.disabled = false;
-//         }
-//       });
-
-//       // Event listener para abrir el modal de comentarios
-//       const $btnComentar = $postElement.querySelector("#btn-comentar");
-//       $btnComentar.addEventListener("click", (e) => {
-//         comentariosHTML(questionId, title, description); // Pasar el título como argumento
-//       });
-
-//       $fragment.appendChild($postElement);
-//     });
-
-//     $usersPostContainer.appendChild($fragment);
-//   });
-// }
-// document.addEventListener("DOMContentLoaded", showPosts);

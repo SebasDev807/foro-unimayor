@@ -11,9 +11,8 @@
   <title>FUM</title>
   <script type="module">
     import { saveUser } from "/src/services/supabase/auth.js";
-    import { logout } from "/src/services/supabase/auth.js";
     import { userLogged } from "/src/services/supabase/auth.js";
-    import { signOut } from "/src/services/supabase/auth.js";
+    import { logout } from "/src/services/supabase/auth.js";
 
     const user = await userLogged();
 
@@ -21,10 +20,9 @@
       window.location.replace("http://localhost:5173/src/html/login.html");
     }
 
-    // await saveUser();
-    
-    document.querySelector(".btn-cerrar-sesion").onclick = signOut;
-    // document.addEventListener("onClick")
+    await saveUser();
+
+    document.querySelector(".btn-cerrar-sesion").onclick = logout;
   </script>
 </head>
 
@@ -33,7 +31,7 @@
   <header>
     <div class="encabezado">
       <img src="../../public/imagenes/logo.png" alt="logo fum" class="logo-fum" />
-        <input type="text" id="input-busqueda" placeholder="Buscar" />
+      <input type="text" id="input-busqueda" placeholder="Buscar" />
       <div class="menu-usuario">
         <a href=""><img src="../../public/imagenes/notificacion.png" class="menus" /></a>
         <div class="perfil-encabezado">
@@ -51,7 +49,7 @@
               Cerrar Sesion
             </button>
           </div>
-    </div>
+        </div>
   </header>
 
   <!-- encabezado de la pagina -->
