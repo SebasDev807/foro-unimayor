@@ -7,6 +7,14 @@ const hora = obtenerHora();
 const contenedor = document.querySelector("#seccion-preguntas");
 const comentarios = document.createElement("dialog");
 
+// Lista de nombres de usuarios aleatorios
+const nombresDeUsuarios = ["Usuario1", "Usuario2", "Usuario3", "Usuario4", "Usuario5"];
+
+function obtenerNombreAleatorio() {
+  const indice = Math.floor(Math.random() * nombresDeUsuarios.length);
+  return nombresDeUsuarios[indice];
+}
+
 export async function comentariosHTML(id, titulo) {
   // Espera a que la promesa se resuelva y obtiene las respuestas
   const answers = await responseToQuestion(id);
@@ -16,7 +24,7 @@ export async function comentariosHTML(id, titulo) {
   let descripcion;
 
   if (answers.length === 0) {
-    descripcion = "Se el primero en comentar";
+    descripcion = "Sé el primero en comentar";
   } else {
     descripcion = primeraRespuesta.description;
   }
@@ -31,24 +39,27 @@ export async function comentariosHTML(id, titulo) {
     </div>
     <div class="contenedor-comentarios">
       <ul class="lista-respuestas">
+        <li id="mensaje-no-comentarios" ${answers.length === 0 ? '' : 'style="display:none;"'}>
+          <p>${descripcion}</p>
+        </li>
+        ${answers.length > 0 ? `
         <li>
           <p>${descripcion}</p>
           <div class="contenedor-botones-post-comentarios">
-            ${answers.length > 0 ? `
-              <button id="btn-subir-descripcion">
-                <img src="/imagenes/up-botton-blue.png" alt="" />
-              </button>
-              <span id="contador-subir-descripcion">${contadorSubirDescripcion}</span>
-              <button id="btn-bajar-descripcion">
-                <img src="/imagenes/down-botton-white.png" alt="" />
-              </button>
-            ` : ''}
+            <button id="btn-subir-descripcion">
+              <img src="/imagenes/up-botton-blue.png" alt="" />
+            </button>
+            <span id="contador-subir-descripcion">${contadorSubirDescripcion}</span>
+            <button id="btn-bajar-descripcion">
+              <img src="/imagenes/down-botton-white.png" alt="" />
+            </button>
           </div>
         </li>
+        ` : ''}
       </ul>
     </div>
     <div class="footer-comentarios">
-      <input type="text" id="inputComentario" placeholder="Agrega un comentario" >
+      <input type="text" id="inputComentario" placeholder="Agrega un comentario">
       <button id="btn-avion">
         <img src="/imagenes/paperairplane.png" alt="" style="width: 40px; height: 40px;"> <!-- Imagen en lugar del botón -->
       </button>
@@ -92,15 +103,12 @@ export async function comentariosHTML(id, titulo) {
     });
   }
 
-  // Función para actualizar el contador en la descripción principal
   function actualizarContadorDescripcion() {
     const contadorSubirDescripcionSpan = comentarios.querySelector("#contador-subir-descripcion");
     contadorSubirDescripcionSpan.textContent = contadorSubirDescripcion;
   }
 
-  // Manejador de eventos para el campo de entrada de comentarios
   inputComentario.addEventListener("input", () => {
-    // Habilitar o deshabilitar el botón de enviar según si hay texto en el campo de entrada
     btnAvion.disabled = inputComentario.value.trim() === "";
   });
 
@@ -117,10 +125,17 @@ export async function comentariosHTML(id, titulo) {
     }
   });
 
-  // Función para agregar un comentario al contenedor de comentarios
   function agregarComentario(comentario) {
     const nuevoComentario = document.createElement("li");
+    const nombreUsuario = obtenerNombreAleatorio();
+    const horaActual = obtenerHora();
     nuevoComentario.innerHTML = `
+      <div class="contenedor-usuario-comentario">
+        <img src="/imagenes/nik.png" alt="" class="foto-usuario-comentario" />
+        <div class="contenedor-nombre-usuario">
+          <p><strong>${nombreUsuario}</strong></p>
+        </div>
+      </div>
       <p>${comentario}</p>
       <div class="contenedor-botones-post-comentarios">
         <button class="btn-subir-comentario">
@@ -130,6 +145,7 @@ export async function comentariosHTML(id, titulo) {
         <button class="btn-bajar-comentario">
           <img src="/imagenes/down-botton-white.png" alt="" />
         </button>
+        <span class="hora-comentario">${horaActual}</span>
       </div>
     `;
 
@@ -171,7 +187,8 @@ export async function comentariosHTML(id, titulo) {
 
     listaRespuestas.appendChild(nuevoComentario);
     if (mensajeNoComentarios) {
-      mensajeNoComentarios.style.display = "none"; // Ocultar mensaje de no hay comentarios después de agregar uno
+      mensajeNoComentarios.style.display = "none"; // Ocultar mensaje de no hay comentarios 
     }
-  }
+}
+
 }
