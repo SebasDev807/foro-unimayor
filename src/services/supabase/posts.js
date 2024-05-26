@@ -12,7 +12,7 @@ async function getPosts() {
       .from('questions')
       .select(`
       *,
-      users(id, name)
+      users(id, name, email)
     `);
     console.log("data :", data)
 

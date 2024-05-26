@@ -1,3 +1,5 @@
+import supabase from "../../services/supabase/supabaseClient.js"
+import { userLogged } from "../../services/supabase/auth.js"
 import { createPost } from "../../services/supabase/posts.js";
 import { dateTimeISO8601 } from "../helpers/obtener-tiempo.js";
 
@@ -12,27 +14,63 @@ const $publicPostButton = document.getElementById('public-answer');
  *
  * @param {Event} event - The form submission event.
  */
-function managePublicPostButton(event) {
+async function managePublicPostButton(event) {
   event.preventDefault();
   const title = document.getElementById('titulo-pregunta').value;
   const description = document.getElementById('cuerpo-pregunta').value;
-  console.log(title, description);
+
+  let metaDataUserAuth,
+    relationshipUserEmail = null;
+
+  // 1) get authenticated user metadata
+  try {
+    metaDataUserAuth = await userLogged();
+    // console.log("Metadatos del usuario:", metaDataUserAuth);
+  } catch (error) {
+    console.error("Error al obtener los metadatos del usuario:", error);
+  }
+  // 2) get id user then mack with his email in table (users)
+  try {
+    // Perform a query to the (users) table where the email matches the one provided
+    const { data: users, error } = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", metaDataUserAuth.email)
+      .single(); // Espera solo un resultado
+
+    // if there is an error getting the data, throw an exception
+    if (error) throw new Error("Error al obtener los datos");
+
+    // if no user is found, returns null
+    if (!users) return null;
+
+    // return users.id;
+    relationshipUserEmail = users;
+    // console.log("ID del usuario tomado desde la tabla users:", relationshipUserEmail.id);
+  } catch (error) {
+    // Registra el mensaje de error y devuelve null
+    console.error("Error al obtener el ID del usuario:", error.message);
+    return null;
+  }
+
+  // model the obtained data as the user id in the users table.To manage the linking of tables correctly
   const newQuestion = {
-    id_user: 1, // modific to get the user id from the session(supabase auth)
+    id_user: relationshipUserEmail.id,
     title,
     description,
-    id_category: 1,
-    // IMPOTANT - likes initialized to zero in database, doesn't need to be set
+    id_category: 1, // Modify as needed
     date: dateTimeISO8601(),
   };
 
-  console.log("new public");
-  createPost(newQuestion);
-  // .then(createdQuestion => {
-  //   console.log('Pregunta creada:', createdQuestion);
-  // })
-  // .catch(error => {
-  //   console.error('Error al crear la pregunta:', error);
-  // });
+  console.log("Creating new question:", newQuestion);
+  createPost(newQuestion)
+    .then(createdQuestion => {
+      console.log('Question created:', createdQuestion);
+      // Handle success (e.g., show a success message to the user)
+    })
+    .catch(error => {
+      console.error('Error creating the question:', error);
+      // Handle error (e.g., show an error message to the user)
+    });
 }
 $publicPostButton.addEventListener('click', managePublicPostButton);

@@ -1,3 +1,5 @@
+// TOOD: "falta solamente sincronizar el perfil con la cuenta de autenticada. Para tomar el id correcto y enlazarlo en la base de datos. Igualmente para tomar su imagen de perfil, metadatos, ETC"
+
 import supabase from "./supabaseClient";
 
 export async function login() {
@@ -44,12 +46,13 @@ export async function saveUser() {
 export async function signOut() {
   try {
     const { error } = await supabase.auth.signOut()
-    
+
     if (error) {
       throw new Error('Error al cerrar sesión')
     }
 
     console.log('Sesión cerrada correctamente')
+    window.location.replace("http://localhost:5173/src/html/login.html");
   } catch (error) {
     console.error('Error al cerrar sesión:', error.message)
   }
