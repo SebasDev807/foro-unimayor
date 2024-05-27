@@ -20,7 +20,7 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
           <span>${emailUser}</span>
         </div>
       </div>
-      <div class="fecha-publicacion">${formatDate(date)}</div>
+      <div class="fecha-publicacion">${date}</div>
     </div>
     <h3>${titulo}</h3>
     <p>${description}</p>
@@ -48,10 +48,10 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
   } else {
     answers.forEach((answer) => {
       const comentario = {
-        description: answer.description,
-        userName: answer.id_user.name,
-        emailUser: answer.id_user.email,
-        date: answer.created_at  // Asumiendo que hay un campo 'created_at' en la respuesta
+        answerDescription: answer.description,
+        userName: answer.user_name,
+        emailUser: answer.user_email,
+        date: answer.created_at  // TODO: implement when created the answer the date to cath
       };
       listaRespuestas.appendChild(createComentarioElement(comentario));
     });
@@ -78,7 +78,7 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
     }
   });
 
-  function createComentarioElement({ description, userName, emailUser, date }) {
+  function createComentarioElement({ answerDescription, userName, emailUser, date }) {
     const comentarioElement = document.createElement("li");
     comentarioElement.innerHTML = `
       <div class="contenedor-usuario">
@@ -91,7 +91,7 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
         </div>
         <div class="fecha-publicacion">${formatDate(date)}</div>
       </div>
-      <p>${description}</p>
+      <p>${answerDescription}</p>
       <div class="contenedor-botones-post-comentarios">
         <button class="btn-subir-comentario">
           <img src="/imagenes/up-botton-blue.png" alt="" />
