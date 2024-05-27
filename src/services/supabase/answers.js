@@ -11,17 +11,32 @@ async function responseToQuestion(questionId) {
     // Fetch the response from the 'answers' table in the database where the 'id_question' matches the provided question ID
     const { data: response, error } = await supabase
       .from("answers")
-      .select("description")
+      .select(`
+        *,
+        user: id_user(id, name, email)
+      `)
       .eq("id_question", questionId);
 
-    // If there's an error in fetching the data, throw an error
-    if (error) throw new Error("Error fetching data");
+    // Verificar si hay un error en la consulta
+    if (error) {
+      throw new Error("Error fetching data");
+    }
 
-    // If no responses exist, return an empty array
-    if (!response || response.length === 0) return [];
+    // Mapear los datos de respuesta para incluir el nombre del usuario
+    const responsesWithUser = response.map((res) => {
+      const user = res.user;
+      return {
+        id: res.id,
+        id_question: res.id_question,
+        description: res.description,
+        id_user: user.id,
+        user_name: user.name,
+        user_email: user.email,
+      };
+    });
 
-    // Return the fetched responses
-    return response;
+    // Devolver las respuestas con el nombre del usuario
+    return responsesWithUser;
   } catch (error) {
     // Log the error message and return null
     console.error("Error fetching posts:", error.message);

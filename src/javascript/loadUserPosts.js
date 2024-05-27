@@ -33,6 +33,7 @@ function createPostElement({ id: questionId, title, description, users, date }) 
 
   const userName = users?.name || "Usuario desconocido";
   const emailUser = users?.email || "Correo desconocido";
+  const formatedDate = formatDate(date) || "Fecha desconocida";
   let contadorSubir = 0;
 
   $postElement.innerHTML = `
@@ -44,7 +45,7 @@ function createPostElement({ id: questionId, title, description, users, date }) 
           <span>${emailUser}</span>
         </div>
       </div>
-      <div class="fecha-publicacion">${formatDate(date)}</div>
+      <div class="fecha-publicacion">${formatedDate}</div>
     </div>
     <h2>${title}</h2>
     <p>${description}</p>
@@ -74,7 +75,7 @@ function createPostElement({ id: questionId, title, description, users, date }) 
     } else if ($target.classList.contains("btn-bajar")) {
       contadorSubir = updateCounter($postElement, contadorSubir, -1);
     } else if ($target.classList.contains("btn-comentar")) {
-      comentariosHTML(questionId, title, description); // draw the modal with the comments
+      await comentariosHTML(questionId, title, description, userName, emailUser, formatedDate); // draw the modal with the question and answers
     }
   });
 
