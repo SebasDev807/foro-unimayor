@@ -60,8 +60,6 @@ async function getPostByUser() {
   }
 }
 
-
-
 /**
  * Asynchronously creates a new post in a database.
  *

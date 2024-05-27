@@ -32,6 +32,7 @@ async function responseToQuestion(questionId) {
         id_user: user.id,
         user_name: user.name,
         user_email: user.email,
+        created_at: res.created_at,
       };
     });
 

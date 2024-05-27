@@ -80,11 +80,15 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
 
   function createComentarioElement({ answerDescription, userName, emailUser, date }) {
     const comentarioElement = document.createElement("li");
+    /* TODO
+      1) <img class="foto-usuario" src="/imagenes/nik.png" alt="" />  // add image user not implemented
+      2) remove styles from HTML and add to CSS
+    */
     comentarioElement.innerHTML = `
       <div class="contenedor-usuario">
         <div class="profile-icon">
-          <img class="foto-usuario" src="/imagenes/nik.png" alt="" />
-          <div class="profile-metadata">
+          
+          <div class="profile-metadata" style="margin: 1rem;">
             <span>${userName}</span>
             <span>${emailUser}</span>
           </div>

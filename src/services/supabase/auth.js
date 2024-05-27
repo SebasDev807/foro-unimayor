@@ -1,5 +1,8 @@
 import supabase from "./supabaseClient";
 
+// export const { user_metadata } = await userLogged()
+// console.log(user_metadata.avatar_url)
+
 /**
  * Logs in the user using OAuth with Google provider.
  * @returns {Promise<void>} A promise that resolves when the login is successful.
@@ -81,9 +84,19 @@ export async function saveUser() {
  * @returns {Promise<Object>} The user object if the user is logged in, otherwise null.
  */
 export async function userLogged() {
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-  return user;
+  try {
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
+    if (error) {
+      throw new Error('Error al obtener datos de usuario');
+    }
+
+    return user;
+  } catch (error) {
+    console.error('Error al obtener datos de usuario:', error);
+    return null;
+  }
 }
