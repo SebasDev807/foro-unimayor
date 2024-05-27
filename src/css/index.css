@@ -479,3 +479,7 @@ display: ruby;
   font-size: 14px;
   padding: 4px ;
 }
+.btn-cerrar-sesion{
+  background: none;
+  border: none;
+}

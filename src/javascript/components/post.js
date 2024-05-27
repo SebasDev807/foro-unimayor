@@ -21,7 +21,7 @@ function postearPregunta(e) {
     const input = post.querySelector("input");
     const cuerpo = post.querySelector("textarea");
 
-    if (input.value === "" || cuerpo.value === "") {
+    if (input.value === "" || cuerpo.value === "") {A
       alert("Por favor, completa todos los campos.");
       return;
     }

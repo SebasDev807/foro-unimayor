@@ -5,20 +5,19 @@ import supabase from "./supabaseClient";
  *
  * @returns {Promise<Array>} - A promise that resolves to an array of posts if they exist, an empty array if no posts exist, or null if an error occurs.
  */
+
 async function getPosts() {
   try {
     const { data, error } = await supabase
-    .from('questions')
-    .select(`
-      *,
-      users(id, name)
-    `);
-    if (error) throw new Error("Error fetching data");
-
+      .from('questions')
+      .select('*')
+      .order('id', { ascending: false }); 
+    if (error) {
+      throw new Error("Error fetching data");
+    }
     return data;
   } catch (error) {
     console.error("Error fetching posts:", error.message);
-
     return null;
   }
 }
