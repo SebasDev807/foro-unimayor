@@ -1,7 +1,8 @@
 // TODO: add date when is created the answer
 
 import { responseToQuestion } from "../services/supabase/answers";
-import { responseQuestion } from "../services/supabase/posts.js";
+import { createResponseToQuestion } from "../services/supabase/posts.js";
+import { dateTimeISO8601, formatDate } from "./helpers/obtener-tiempo.js";
 
 const contenedor = document.querySelector("#seccion-preguntas");
 const comentarios = document.createElement("dialog");
@@ -137,18 +138,14 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
   }
 
   function agregarComentario(comentario, titulo, description) {
-    responseQuestion(comentario, titulo, description);
+    createResponseToQuestion(comentario, titulo, description);
     const newComment = {
       description: comentario,
       userName: "Usuario desconocido",  // Cambiar esto si tienes el nombre del usuario
       emailUser: "Correo desconocido",  // Cambiar esto si tienes el correo del usuario
-      date: new Date().toISOString()  // Usar la fecha actual
+      date: formatDate(dateTimeISO8601())  // Usar la fecha actual
     };
+    console.log("newComment modal-comentarios, linea 148: ", newComment);
     listaRespuestas.appendChild(createComentarioElement(newComment));
   }
-}
-
-function formatDate(date) {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(date).toLocaleDateString(undefined, options);
 }

@@ -1,6 +1,7 @@
 // TODO: Implement the functions to insert correct question categorie
 import supabase from "./supabaseClient";
-import { userLogged } from "./auth";
+import { userLogged, } from "./auth";
+import { dateTimeISO8601 } from "../../javascript/helpers/obtener-tiempo.js";
 
 /**
  * Inserts a category based on user input.
@@ -92,7 +93,7 @@ async function createPost(post) {
  * @param {string} descripcion - The description of the question.
  * @returns {Promise<void>} - A promise that resolves when the answer is added successfully, or rejects with an error.
  */
-const responseQuestion = async (comentario, titulo, descripcion) => {
+const createResponseToQuestion = async (comentario, titulo, descripcion) => {
   const findQuestion = (await getPosts()).filter(post => (descripcion.trim() == post.description.trim() && titulo.trim() == post.title.trim()));
 
   try {
@@ -103,19 +104,26 @@ const responseQuestion = async (comentario, titulo, descripcion) => {
     console.log(error.message);
     return
   }
-  const { id, id_user } = findQuestion[0];
+  const { id } = findQuestion[0];
 
+  const { email } = await userLogged();
+  const { data: userData } = await supabase
+    .from("users")
+    .select(`id`)
+    .eq("email", email)
+    .single();
+  const { id: idAuthUser } = userData;
+  // console.log("ID to relationate: ", idAuthUser);
   const userQuestion = {
     id_question: id,
     description: comentario,
-    id_user
+    id_user: idAuthUser,
+    created_at: dateTimeISO8601(),
   }
-
-
-  const client = supabase;
+  // console.log("userQuestion content to public: ", userQuestion);
 
   try {
-    const { data: postResponse, error: postError } = await client
+    const { data: postResponse, error: postError } = await supabase
       .from("answers")
       .insert([userQuestion]);
     if (postError) {
@@ -128,4 +136,4 @@ const responseQuestion = async (comentario, titulo, descripcion) => {
   }
 }
 
-export { getPosts, createPost, getPostByUser, responseQuestion };
+export { getPosts, createPost, getPostByUser, createResponseToQuestion };
