@@ -2,6 +2,8 @@
 
 import { responseToQuestion } from "../services/supabase/answers";
 import { createResponseToQuestion } from "../services/supabase/posts.js";
+import { userLogged } from "../services/supabase/auth.js";
+import supabase from "../services/supabase/supabaseClient.js";
 import { dateTimeISO8601, formatDate } from "./helpers/obtener-tiempo.js";
 
 const contenedor = document.querySelector("#seccion-preguntas");
@@ -137,15 +139,29 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
     return comentarioElement;
   }
 
-  function agregarComentario(comentario, titulo, description) {
-    createResponseToQuestion(comentario, titulo, description);
+  async function agregarComentario(comentario, titulo, description) {
+    const metadata = await userLogged();
+    const name = metadata.user_metadata.name;
+    const { email } = metadata;
+    console.log("metadata modal-comentarios, linea 116: ", metadata);
+
+    const { data: userData } = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", metadata.email)
+      .single();
+    const { id: idAuthUser } = userData;
+
+    await createResponseToQuestion(comentario, titulo, description, idAuthUser);
+
     const newComment = {
-      description: comentario,
-      userName: "Usuario desconocido",  // Cambiar esto si tienes el nombre del usuario
-      emailUser: "Correo desconocido",  // Cambiar esto si tienes el correo del usuario
-      date: formatDate(dateTimeISO8601())  // Usar la fecha actual
+      answerDescription: comentario,
+      userName: name,
+      emailUser: email,
+      date: formatDate(dateTimeISO8601())
     };
     console.log("newComment modal-comentarios, linea 148: ", newComment);
     listaRespuestas.appendChild(createComentarioElement(newComment));
   }
+
 }

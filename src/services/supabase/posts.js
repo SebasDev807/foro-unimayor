@@ -93,39 +93,28 @@ async function createPost(post) {
  * @param {string} descripcion - The description of the question.
  * @returns {Promise<void>} - A promise that resolves when the answer is added successfully, or rejects with an error.
  */
-const createResponseToQuestion = async (comentario, titulo, descripcion) => {
-  const findQuestion = (await getPosts()).filter(post => (descripcion.trim() == post.description.trim() && titulo.trim() == post.title.trim()));
+const createResponseToQuestion = async (comentario, titulo, descripcion, idAuthUser) => {
+  const posts = await getPosts();
+  const findQuestion = posts.filter(post =>
+    descripcion.trim() === post.description.trim() && titulo.trim() === post.title.trim()
+  );
 
   try {
+    if (findQuestion.length === 0) return;
 
-    if (Object.hasOwnProperty(findQuestion).length == 0) return;
+    const { id } = findQuestion[0];
 
-  } catch (error) {
-    console.log(error.message);
-    return
-  }
-  const { id } = findQuestion[0];
+    const userQuestion = {
+      id_question: id,
+      description: comentario,
+      id_user: idAuthUser,
+      created_at: dateTimeISO8601(),
+    };
 
-  const { email } = await userLogged();
-  const { data: userData } = await supabase
-    .from("users")
-    .select(`id`)
-    .eq("email", email)
-    .single();
-  const { id: idAuthUser } = userData;
-  // console.log("ID to relationate: ", idAuthUser);
-  const userQuestion = {
-    id_question: id,
-    description: comentario,
-    id_user: idAuthUser,
-    created_at: dateTimeISO8601(),
-  }
-  // console.log("userQuestion content to public: ", userQuestion);
-
-  try {
     const { data: postResponse, error: postError } = await supabase
       .from("answers")
       .insert([userQuestion]);
+
     if (postError) {
       console.log(postError);
       return;
@@ -134,6 +123,6 @@ const createResponseToQuestion = async (comentario, titulo, descripcion) => {
     console.error("Error creating post:", error.message);
     return null;
   }
-}
+};
 
 export { getPosts, createPost, getPostByUser, createResponseToQuestion };
