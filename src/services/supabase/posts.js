@@ -125,4 +125,29 @@ const createResponseToQuestion = async (comentario, titulo, descripcion, idAuthU
   }
 };
 
-export { getPosts, createPost, getPostByUser, createResponseToQuestion };
+/**
+ * Removes a question from the database.
+ * @param {string} idQuestion - The ID of the question to be removed.
+ * @returns {Promise<Object|null>} - A promise that resolves to the deleted question data, or null if there was an error.
+ */
+async function /*removePost*/ removeQuestion(idQuestion) {
+  try {
+    const { data, error } = await supabase
+      .from('questions')
+      .delete()
+      .eq('id', idQuestion);
+
+    if (error) {
+      console.error("Error deleting question:", error);
+      return null;
+    }
+
+    console.log("Question deleted successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error deleting question:", error.message);
+    return null;
+  }
+}
+
+export { getPosts, createPost, getPostByUser, createResponseToQuestion, removeQuestion };

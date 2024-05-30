@@ -1,5 +1,28 @@
 import supabase from "./supabaseClient";
 
+// Test deleting a question (uncomment if needed)
+// const idPregunta = prompt("prueba, id de pregunta a eliminar")
+// if (await removeQuestion(idPregunta)) alert("pregunta eliminada correctamente")
+// else alert("error al eliminar pregunta")
+
+// Test removing an answer to a question (uncomment if needed)
+// const idRespuesta = prompt("prueba, id de pregunta a eliminar")
+// if (deleteAnswerToAQuestion(15)) alert("respuesta  eliminada correctamente")
+// else alert("error al eliminar respuesta")
+
+// Test fetching the answers for a question (uncomment if needed)
+// const answers = await responseToQuestion(4);
+// console.log(answers);
+
+// Test getting user metadata (uncomment if needed)
+// try {
+//   const metaData = await userLogged();
+//   console.log("User metadata:", metaData);
+// } catch (error) {
+//   console.error("Error fetching user metadata:", error);
+// }
+
+
 /**
  * Asynchronously fetches the response to a question from a database.
  *
@@ -45,4 +68,30 @@ async function responseToQuestion(questionId) {
   }
 }
 
-export { responseToQuestion };
+/**
+ * Deletes an answer to a question from the 'answers' table in Supabase.
+ * @param {number} idAnswer - The ID of the answer to be deleted.
+ * @returns {Promise<object|null>} - A promise that resolves to the deleted answer data if successful, or null if there was an error.
+ */
+async function deleteAnswerToAQuestion(idAnswer) {
+  try {
+    const { data, error } = await supabase
+      .from('answers')
+      .delete()
+      .eq('id', idAnswer)
+    // .single();
+
+    if (error) {
+      console.error("Error deleting answer:", error);
+      return false;
+    }
+
+    // console.log("Answer deleted successfully:", data);
+    return true;
+  } catch (error) {
+    console.error("Error deleting answer:", error.message);
+    return false;
+  }
+}
+
+export { responseToQuestion, deleteAnswerToAQuestion };

@@ -1,10 +1,10 @@
 // TODO: refresh feature to when adding a new post, it re-renders the content or refreshes
-import { getPosts } from "../services/supabase/posts.js";
+import { getPosts, removeQuestion } from "../services/supabase/posts.js";
 // import { responseToQuestion } from "../services/supabase/answers.js";  // used for testing the functyionality
 import { handleQuestionClick } from "./handler/questionClick.js";  // check if is needed to refactor in events
 import { comentariosHTML } from "./modal-comentarios.js";
 import { formatDate } from "./helpers/obtener-tiempo.js";
-import { responseToQuestion } from "../services/supabase/answers.js";
+import { responseToQuestion, deleteAnswerToAQuestion } from "../services/supabase/answers.js";
 import { userLogged } from "../services/supabase/auth.js" //
 
 /**
@@ -104,17 +104,5 @@ async function showPosts() {
   const posts = await getPosts();
   if (!posts) return;
   renderPosts(posts);
-
-  // Test fetching the answers for a question (uncomment if needed)
-  // const answers = await responseToQuestion(4);
-  // console.log(answers);
-
-  // Test getting user metadata (uncomment if needed)
-  // try {
-  //   const metaData = await userLogged();
-  //   console.log("User metadata:", metaData);
-  // } catch (error) {
-  //   console.error("Error fetching user metadata:", error);
-  // }
 }
 document.addEventListener("DOMContentLoaded", showPosts);
