@@ -71,12 +71,10 @@ function createPostElement({ id: questionId, title, description, users, date, li
     if (!$target) return;
 
     if ($target.classList.contains("btn-subir")) {
-      console.log("btn-subir clicked")
-      incrementCounter(questionId); // supabase function
+      incrementCounter(questionId, "questions"); // supabase function
       contadorSubir = updateCounter($postElement, contadorSubir, 1);
     } else if ($target.classList.contains("btn-bajar")) {
-      console.log("btn-bajar clicked")
-      decrementCounter(questionId); // supabase function
+      decrementCounter(questionId, "questions"); // supabase function
       contadorSubir = updateCounter($postElement, contadorSubir, -1);
     } else if ($target.classList.contains("btn-comentar")) {
       await comentariosHTML(questionId, title, description, userName, emailUser, formatedDate); // draw the modal with the question and answers

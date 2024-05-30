@@ -1,10 +1,10 @@
 import supabase from "./supabaseClient";
 
-async function incrementCounter(questionId) {
+async function incrementCounter(questionId, tableName) {
   try {
     // Obtener el contador de "likes" actual
     const { data: currentData, error: fetchError } = await supabase
-      .from("questions")
+      .from(tableName)
       .select("likes")
       .eq("id", questionId);
 
@@ -12,7 +12,7 @@ async function incrementCounter(questionId) {
 
     // Incrementar el contador de "likes"
     const { data: updateData, error: updateError } = await supabase
-      .from("questions")
+      .from(tableName)
       .update({
         likes: currentData[0].likes + 1
       })
@@ -28,23 +28,24 @@ async function incrementCounter(questionId) {
   }
 }
 
-async function decrementCounter(questionId) {
+async function decrementCounter(questionId, tableName) {
   try {
     // Obtener el contador de "likes" actual
     const { data: currentData, error: fetchError } = await supabase
-      .from("questions")
+      .from(tableName)
       .select("likes")
-      .eq("id", questionId);
+      .eq("id", questionId)
+      .single();
 
     if (fetchError) throw new Error("Error fetching data");
 
     // Verificar si los "likes" son mayores que 0 antes de decrementar
-    if (currentData[0].likes > 0) {
+    if (currentData.likes > 0) {
       // Decrementar el contador de "likes"
       const { data: updateData, error: updateError } = await supabase
-        .from("questions")
+        .from(tableName)
         .update({
-          likes: currentData[0].likes - 1
+          likes: currentData.likes - 1
         })
         .eq("id", questionId);
 
@@ -52,15 +53,14 @@ async function decrementCounter(questionId) {
 
       return updateData;
     } else {
-      console.log("No se puede decrementar. Los 'likes' ya son 0.");
+      alert("No se puede decrementar. Los 'likes' ya son 0.");
       return null;
     }
   } catch (error) {
-    console.error("Error decrementing counter:", error.message);
+    alert("Error decrementing counter:", error.message);
 
     return null;
   }
 }
-
 
 export { incrementCounter, decrementCounter };

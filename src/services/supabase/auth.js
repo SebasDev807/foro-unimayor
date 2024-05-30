@@ -1,14 +1,4 @@
-/*
-1) login 
-2) save user - usuario logeado, si es de la universidad, se guarda en la base de datos de lo contrario se redirige a la pagina de login
-3) userLogged - verificar si el usuario esta autenticado con supabase auth
-4) logout - cerrar sesion
-*/
-
 import supabase from "./supabaseClient";
-
-// export const { user_metadata } = await userLogged()
-// console.log(user_metadata.avatar_url)
 
 /**
  * Logs in the user using OAuth with Google provider.
@@ -26,7 +16,6 @@ export async function login() {
     if (error) {
       throw new Error('Error al iniciar sesión');
     }
-    console.log(data);
   } catch (error) {
     console.error('Ocurrió un error al iniciar sesión:', error);
   }
@@ -76,11 +65,9 @@ export async function saveUser() {
         password: "",
       },
     ]);
-    if (respuesta.error) {
-      console.error("Error al insertar datos ", respuesta.error);
-    } else {
-      console.log("Datos insertados");
-    }
+    if (!respuesta.error) alert("Datos insertados");
+    else console.error("Error al insertar datos ", respuesta.error);
+
   } else {
     logout();
   }

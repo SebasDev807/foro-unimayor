@@ -1,28 +1,5 @@
 import supabase from "./supabaseClient";
 
-// Test deleting a question (uncomment if needed)
-// const idPregunta = prompt("prueba, id de pregunta a eliminar")
-// if (await removeQuestion(idPregunta)) alert("pregunta eliminada correctamente")
-// else alert("error al eliminar pregunta")
-
-// Test removing an answer to a question (uncomment if needed)
-// const idRespuesta = prompt("prueba, id de pregunta a eliminar")
-// if (deleteAnswerToAQuestion(15)) alert("respuesta  eliminada correctamente")
-// else alert("error al eliminar respuesta")
-
-// Test fetching the answers for a question (uncomment if needed)
-// const answers = await responseToQuestion(4);
-// console.log(answers);
-
-// Test getting user metadata (uncomment if needed)
-// try {
-//   const metaData = await userLogged();
-//   console.log("User metadata:", metaData);
-// } catch (error) {
-//   console.error("Error fetching user metadata:", error);
-// }
-
-
 /**
  * Asynchronously fetches the response to a question from a database.
  *
@@ -56,6 +33,7 @@ async function responseToQuestion(questionId) {
         user_name: user.name,
         user_email: user.email,
         created_at: res.created_at,
+        likes: res.likes,
       };
     });
 
@@ -86,7 +64,7 @@ async function deleteAnswerToAQuestion(idAnswer) {
       return false;
     }
 
-    // console.log("Answer deleted successfully:", data);
+    alert("Answer deleted successfully:", data);
     return true;
   } catch (error) {
     console.error("Error deleting answer:", error.message);

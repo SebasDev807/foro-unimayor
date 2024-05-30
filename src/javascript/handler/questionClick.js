@@ -7,7 +7,6 @@ import { responseToQuestion } from "../../services/supabase/answers";
  * @returns {void} - A promise that resolves to an array of responses if they exist, an empty array if no responses exist, or null if an error occurs.
  */
 function handleQuestionClick(id) {
-  console.log(id);
   responseToQuestion(id).then((answers) => {
     return answers;
   });

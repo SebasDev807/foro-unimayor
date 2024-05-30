@@ -2,6 +2,7 @@
 
 import { responseToQuestion } from "../services/supabase/answers";
 import { createResponseToQuestion } from "../services/supabase/posts.js";
+import { incrementCounter, decrementCounter } from "../services/supabase/likes.js"
 import { userLogged } from "../services/supabase/auth.js";
 import supabase from "../services/supabase/supabaseClient.js";
 import { dateTimeISO8601, formatDate } from "./helpers/obtener-tiempo.js";
@@ -11,7 +12,6 @@ const comentarios = document.createElement("dialog");
 
 export async function comentariosHTML(id, titulo, description, userName, emailUser, date) {
   const answers = await responseToQuestion(id);
-  console.log("answers modal-comentarios, linea 11: ", answers);
 
   comentarios.id = "caja-comentarios";
   comentarios.innerHTML = `
@@ -54,7 +54,9 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
         answerDescription: answer.description,
         userName: answer.user_name,
         emailUser: answer.user_email,
-        date: answer.created_at  // TODO: implement when created the answer the date to cath
+        date: answer.created_at,  // TODO: implement when created the answer the date to cath
+        answersId: answer.id,
+        likes: answer.likes
       };
       listaRespuestas.appendChild(createComentarioElement(comentario));
     });
@@ -81,8 +83,9 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
     }
   });
 
-  function createComentarioElement({ answerDescription, userName, emailUser, date }) {
+  function createComentarioElement({ answerDescription, userName, emailUser, date, answersId, likes }) {
     const comentarioElement = document.createElement("li");
+    let contadorSubir = likes;
     /* TODO
       1) <img class="foto-usuario" src="/imagenes/nik.png" alt="" />  // add image user not implemented
       2) remove styles from HTML and add to CSS
@@ -103,7 +106,7 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
         <button class="btn-subir-comentario">
           <img src="/imagenes/up-botton-blue.png" alt="" />
         </button>
-        <span class="contador-subir-comentario">0</span>
+        <span class="contador-subir-comentario">${contadorSubir}</span>
         <button class="btn-bajar-comentario">
           <img src="/imagenes/down-botton-white.png" alt="" />
         </button>
@@ -114,12 +117,14 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
     const $btnBajarComentario = comentarioElement.querySelector(".btn-bajar-comentario");
     const $contadorSubir = comentarioElement.querySelector(".contador-subir-comentario");
 
-    let contadorSubir = 0;
+
     let usuarioVotoComentarioSubir = false;
     let usuarioVotoComentarioBajar = false;
 
-    $btnSubirComentario.addEventListener("click", () => {
+    $btnSubirComentario.addEventListener("click", async () => {
       if (!usuarioVotoComentarioSubir) {
+        await incrementCounter(answersId, "answers"); // supabase function
+
         contadorSubir++;
         $contadorSubir.textContent = contadorSubir;
         usuarioVotoComentarioSubir = true;
@@ -127,7 +132,9 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
       }
     });
 
-    $btnBajarComentario.addEventListener("click", () => {
+    $btnBajarComentario.addEventListener("click", async () => {
+      await decrementCounter(answersId, "answers"); // supabase function
+
       if (!usuarioVotoComentarioBajar && contadorSubir > 0) {
         contadorSubir--;
         $contadorSubir.textContent = contadorSubir;
@@ -143,7 +150,6 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
     const metadata = await userLogged();
     const name = metadata.user_metadata.name;
     const { email } = metadata;
-    console.log("metadata modal-comentarios, linea 116: ", metadata);
 
     const { data: userData } = await supabase
       .from("users")
@@ -160,7 +166,6 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
       emailUser: email,
       date: formatDate(dateTimeISO8601())
     };
-    console.log("newComment modal-comentarios, linea 148: ", newComment);
     listaRespuestas.appendChild(createComentarioElement(newComment));
   }
 

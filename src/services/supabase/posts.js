@@ -27,7 +27,6 @@ async function getPosts() {
       *,
       users(id, name, email)
     `);
-    console.log("data :", data)
 
     if (error) throw new Error("Error fetching data");
 
@@ -57,7 +56,7 @@ async function getPostByUser() {
       .eq('id_user', id);
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -72,12 +71,6 @@ async function createPost(post) {
     const { data: postData, error: postError } = await supabase
       .from("questions")
       .insert([post]);
-
-    if (postError) {
-      console.log(postError);
-      //  throw new Error("Error creating post here");
-      return;
-    }
   } catch (error) {
     console.error("Error creating post:", error.message);
     // En Supabase, no necesitas llamar a rollback_transaction explícitamente
@@ -116,7 +109,7 @@ const createResponseToQuestion = async (comentario, titulo, descripcion, idAuthU
       .insert([userQuestion]);
 
     if (postError) {
-      console.log(postError);
+      console.error(postError);
       return;
     }
   } catch (error) {
@@ -142,7 +135,7 @@ async function /*removePost*/ removeQuestion(idQuestion) {
       return null;
     }
 
-    console.log("Question deleted successfully:", data);
+    alert("Question deleted successfully:", data);
     return data;
   } catch (error) {
     console.error("Error deleting question:", error.message);

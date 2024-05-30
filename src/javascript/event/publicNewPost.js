@@ -25,7 +25,6 @@ async function managePublicPostButton(event) {
   // 1) get authenticated user metadata
   try {
     metaDataUserAuth = await userLogged();
-    // console.log("Metadatos del usuario:", metaDataUserAuth);
   } catch (error) {
     console.error("Error al obtener los metadatos del usuario:", error);
   }
@@ -46,7 +45,6 @@ async function managePublicPostButton(event) {
 
     // return users.id;
     relationshipUserEmail = users;
-    // console.log("ID del usuario tomado desde la tabla users:", relationshipUserEmail.id);
   } catch (error) {
     // Registra el mensaje de error y devuelve null
     console.error("Error al obtener el ID del usuario:", error.message);
@@ -62,15 +60,12 @@ async function managePublicPostButton(event) {
     date: dateTimeISO8601(),
   };
 
-  console.log("Creating new question:", newQuestion);
   createPost(newQuestion)
     .then(createdQuestion => {
-      console.log('Question created:', createdQuestion);
-      // Handle success (e.g., show a success message to the user)
+      alert('Question created:', createdQuestion);
     })
     .catch(error => {
-      console.error('Error creating the question:', error);
-      // Handle error (e.g., show an error message to the user)
+      alert('Error creating the question:', error);
     });
 }
 $publicPostButton.addEventListener('click', managePublicPostButton);
