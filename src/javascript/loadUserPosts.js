@@ -1,6 +1,6 @@
 // TODO: refresh feature to when adding a new post, it re-renders the content or refreshes
 import { getPosts, removeQuestion } from "../services/supabase/posts.js";
-// import { responseToQuestion } from "../services/supabase/answers.js";  // used for testing the functyionality
+import { incrementCounter, decrementCounter } from "../services/supabase/likes.js";
 import { handleQuestionClick } from "./handler/questionClick.js";  // check if is needed to refactor in events
 import { comentariosHTML } from "./modal-comentarios.js";
 import { formatDate } from "./helpers/obtener-tiempo.js";
@@ -28,7 +28,7 @@ function renderPosts(posts) {
  * @param {Object} post - Post data including id, title, description, users, and date.
  * @returns {HTMLElement} - The created post element.
  */
-function createPostElement({ id: questionId, title, description, users, date }) {
+function createPostElement({ id: questionId, title, description, users, date }, index) {
   const $postElement = document.createElement("article");
 
   const userName = users?.name || "Usuario desconocido";
@@ -71,8 +71,11 @@ function createPostElement({ id: questionId, title, description, users, date }) 
     if (!$target) return;
 
     if ($target.classList.contains("btn-subir")) {
+      console.log("btn-subir clicked")
+      incrementCounter(questionId); // supabase function
       contadorSubir = updateCounter($postElement, contadorSubir, 1);
     } else if ($target.classList.contains("btn-bajar")) {
+      decrementCounter(questionId); // supabase function
       contadorSubir = updateCounter($postElement, contadorSubir, -1);
     } else if ($target.classList.contains("btn-comentar")) {
       await comentariosHTML(questionId, title, description, userName, emailUser, formatedDate); // draw the modal with the question and answers

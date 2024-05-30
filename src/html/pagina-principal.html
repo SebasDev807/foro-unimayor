@@ -23,6 +23,9 @@
     await saveUser();
 
     document.querySelector(".btn-cerrar-sesion").onclick = logout;
+    await saveUser();
+
+    document.querySelector(".btn-cerrar-sesion").onclick = logout;
   </script>
 </head>
 
@@ -31,6 +34,7 @@
   <header>
     <div class="encabezado">
       <img src="../../public/imagenes/logo.png" alt="logo fum" class="logo-fum" />
+      <input type="text" id="input-busqueda" placeholder="Buscar" />
       <input type="text" id="input-busqueda" placeholder="Buscar" />
       <div class="menu-usuario">
         <a href=""><img src="../../public/imagenes/notificacion.png" class="menus" /></a>
@@ -50,6 +54,7 @@
             </button>
           </div>
         </div>
+      </div>
   </header>
 
   <!-- encabezado de la pagina -->
@@ -185,6 +190,7 @@
   <script type="module" src="../javascript/handler/questionClick.js"></script>
   <script type="module" src="../javascript/event/publicNewPost.js"></script>
   <!-- <script type="module" src="../services/supabase/answers.js"></script> publicNewPost -->
+  <script src="../javascript/components/post.js" type="module"></script>
   <script src="../javascript/components/post.js" type="module"></script>
 </body>
 

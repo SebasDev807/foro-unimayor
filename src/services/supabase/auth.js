@@ -1,3 +1,10 @@
+/*
+1) login 
+2) save user - usuario logeado, si es de la universidad, se guarda en la base de datos de lo contrario se redirige a la pagina de login
+3) userLogged - verificar si el usuario esta autenticado con supabase auth
+4) logout - cerrar sesion
+*/
+
 import supabase from "./supabaseClient";
 
 // export const { user_metadata } = await userLogged()
