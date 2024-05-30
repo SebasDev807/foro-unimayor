@@ -28,13 +28,13 @@ function renderPosts(posts) {
  * @param {Object} post - Post data including id, title, description, users, and date.
  * @returns {HTMLElement} - The created post element.
  */
-function createPostElement({ id: questionId, title, description, users, date }, index) {
+function createPostElement({ id: questionId, title, description, users, date, likes }, index) {
   const $postElement = document.createElement("article");
 
   const userName = users?.name || "Usuario desconocido";
   const emailUser = users?.email || "Correo desconocido";
   const formatedDate = formatDate(date) || "Fecha desconocida";
-  let contadorSubir = 0;
+  let contadorSubir = likes;
 
   $postElement.innerHTML = `
     <div class="contenedor-usuario">
@@ -75,6 +75,7 @@ function createPostElement({ id: questionId, title, description, users, date }, 
       incrementCounter(questionId); // supabase function
       contadorSubir = updateCounter($postElement, contadorSubir, 1);
     } else if ($target.classList.contains("btn-bajar")) {
+      console.log("btn-bajar clicked")
       decrementCounter(questionId); // supabase function
       contadorSubir = updateCounter($postElement, contadorSubir, -1);
     } else if ($target.classList.contains("btn-comentar")) {
