@@ -4,6 +4,7 @@ import { incrementCounter, decrementCounter } from "../services/supabase/likes.j
 import { userLogged } from "../services/supabase/auth.js";
 import supabase from "../services/supabase/supabaseClient.js";
 import { dateTimeISO8601, formatDate } from "./helpers/obtener-tiempo.js";
+import { notificarRespuesta } from "./helpers/notificacion.js";
 
 const contenedor = document.querySelector("#seccion-preguntas");
 const comentarios = document.createElement("dialog");
@@ -164,7 +165,8 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
       .select("id")
       .eq("email", metadata.email)
       .single();
-    const { id: idAuthUser } = userData;
+    const { id, id: idAuthUser } = userData;
+    console.log(name);
 
     await createResponseToQuestion(comentario, titulo, description, idAuthUser);
 
@@ -175,6 +177,7 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
       date: formatDate(dateTimeISO8601())
     };
     listaRespuestas.appendChild(createComentarioElement(newComment));
+    notificarRespuesta(name, comentario);
   }
 
   // Función para eliminar comentario de Supabase y del DOM
@@ -187,3 +190,5 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
     }
   }
 }
+
+
