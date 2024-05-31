@@ -26,7 +26,8 @@ async function getPosts() {
       .select(`
       *,
       users(id, name, email, imgUserGoogle)
-    `);
+    `)
+    .order('id', { ascending: false });
     console.log("data: ", data)
 
 
