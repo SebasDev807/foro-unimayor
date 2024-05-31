@@ -8,14 +8,17 @@ export async function login() {
   try {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo: "http://localhost:5173/src/html/pagina-principal.html",
-      },
+      // options: {
+      //   redirectTo: "http://localhost:5173/src/html/pagina-principal.html",
+      // },
     });
 
     if (error) {
       throw new Error('Error al iniciar sesión');
     }
+
+    // save user data in the database
+    await saveUser();
   } catch (error) {
     console.error('Ocurrió un error al iniciar sesión:', error);
   }
@@ -45,33 +48,51 @@ export async function logout() {
  * @returns {Promise<void>} A promise that resolves when the user data is saved or the user is logged out.
  */
 export async function saveUser() {
-  // take authenticated user data
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  try {
+    // Take authenticated user data
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
 
-  if (error) {
-    console.error("Error al obtener datos de usuario:", error);
-    return;
-  }
+    // if (error) {
+    //   throw new Error('Error al obtener datos de usuario');
+    // }
 
-  // check if email user is from unimayor domain. If it is, save user in database else logout
-  if (user.email.endsWith("@unimayor.edu.co")) {
-    const respuesta = await supabase.from("users").insert([
-      {
-        name: user.user_metadata.name,
-        email: user.email,
-        password: "",
-      },
-    ]);
-    if (!respuesta.error) alert("Datos insertados");
-    else console.error("Error al insertar datos ", respuesta.error);
+    // Check if user exists in database
+    const { data: checkUser, error: errorCheckUser } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", user.email);
 
-  } else {
-    logout();
+    // if (errorCheckUser) {
+    //   console.error("Error al buscar usuario:", errorCheckUser);
+    //   return;
+    // }
+
+    // if (checkUser) {
+    //   // User already exists in the database
+    //   return;
+    // }
+
+    // Check if email user is from unimayor domain. If it is, save user in database; otherwise, logout
+    if (user.email.endsWith("@unimayor.edu.co")) {
+      await supabase.from("users").insert([
+        {
+          name: user.user_metadata.name,
+          email: user.email,
+          imgUserGoogle: user.user_metadata.avatar_url,
+        },
+      ]);
+      alert("Datos insertados");
+    } else {
+      logout();
+    }
+  } catch (error) {
+    console.error("Error al guardar datos de usuario:", error);
   }
 }
+
 
 /**
  * Retrieves the currently logged-in user.

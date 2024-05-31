@@ -33,13 +33,14 @@ function createPostElement({ id: questionId, title, description, users, date, li
 
   const userName = users?.name || "Usuario desconocido";
   const emailUser = users?.email || "Correo desconocido";
+  const imgUserGoogle = users?.imgUserGoogle || "In desconocido";
   const formatedDate = formatDate(date) || "Fecha desconocida";
   let contadorSubir = likes;
 
   $postElement.innerHTML = `
     <div class="contenedor-usuario">
       <div class="profile-icon">
-        <img class="foto-usuario" src="/imagenes/nik.png" alt="" />
+        <img class="foto-usuario" src="${imgUserGoogle}" alt="" />
         <div class="profile-metadata">
           <span>${userName}</span>
           <span>${emailUser}</span>

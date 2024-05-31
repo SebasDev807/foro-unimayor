@@ -179,6 +179,7 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
 
   // Función para eliminar comentario de Supabase y del DOM
   async function eliminarComentario(answersId) {
+
     const { error } = await deleteResponseToQuestion(answersId); // Supabase function to delete
     if (error) {
       console.error("Error eliminando el comentario:", error);

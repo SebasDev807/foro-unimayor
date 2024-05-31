@@ -25,8 +25,10 @@ async function getPosts() {
       .from('questions')
       .select(`
       *,
-      users(id, name, email)
+      users(id, name, email, imgUserGoogle)
     `);
+    console.log("data: ", data)
+
 
     if (error) throw new Error("Error fetching data");
 
