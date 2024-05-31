@@ -33,14 +33,16 @@ function createPostElement({ id: questionId, title, description, users, date, li
 
   const userName = users?.name || "Usuario desconocido";
   const emailUser = users?.email || "Correo desconocido";
-  const imgUserGoogle = users?.imgUserGoogle || "In desconocido";
+  const imgUserGoogle = users?.imgUserGoogle;
   const formatedDate = formatDate(date) || "Fecha desconocida";
   let contadorSubir = likes;
+
+  const imgSrc = imgUserGoogle ? `src="${imgUserGoogle}"` : "";
 
   $postElement.innerHTML = `
     <div class="contenedor-usuario">
       <div class="profile-icon">
-        <img class="foto-usuario" src="${imgUserGoogle}" alt="" />
+        <img class="foto-usuario" ${imgSrc} alt="" />
         <div class="profile-metadata">
           <span>${userName}</span>
           <span>${emailUser}</span>
@@ -84,6 +86,8 @@ function createPostElement({ id: questionId, title, description, users, date, li
 
   return $postElement;
 }
+
+
 
 /**
  * Updates the counter display and button state.
