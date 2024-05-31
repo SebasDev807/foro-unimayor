@@ -9,31 +9,94 @@
   <link rel="stylesheet" href="../css/normalize.css" as="style" />
   <link rel="stylesheet" href="../css/perfil.css">
   <title>FUM</title>
-  <script type="module">
-    import { getPostByUser } from '/src/services/supabase/posts.js';
-    import { logout } from "/src/services/supabase/auth.js";
-    import { userLogged } from "/src/services/supabase/auth.js";
 
-    const user = await userLogged();
 
-    if (!user) {
-      window.location.replace("http://localhost:5173/src/html/login.html");
+  <style>
+    .contenedor-usuario {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      position: relative;
     }
 
-    const questions = await getPostByUser();
-    const div = document.querySelector(".posts");
-    let htmlQuestions = "";
-    for(const question of questions) {
-      htmlQuestions += `<h3>${question.title}</h3>\n`;
-      htmlQuestions += `<p>${question.description}</p>\n`;
-      for(const answer of question.answers) {
-        htmlQuestions += `<p>${answer.description}</p>\n`;
-      }
+    .contenedor-superior {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+      position: relative;
     }
-    div.innerHTML = htmlQuestions;
 
-    document.querySelector(".btn-cerrar-sesion").onclick = logout;
-  </script>
+    .fecha-publicacion {
+      font-size: 0.9em;
+      color: #666;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .post-contenido {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      /* Ajusta la separación entre la fecha y el contenido */
+    }
+
+    .post-contenido div:first-child {
+      flex-grow: 1;
+      margin-right: 10px;
+      /* Espacio entre el contenido y el botón de opciones */
+    }
+
+    h2 {
+      margin: 10px 0;
+      font-size: 1.2em;
+    }
+
+    .contenedor-botones-post {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .btn-opciones {
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .btn-opciones>img {
+      width: 20px;
+      height: auto;
+    }
+
+    .opciones-menu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      margin-top: 5px;
+      right: 0;
+    }
+
+    .opciones-menu.visible {
+      display: block;
+    }
+
+    .btn-eliminar {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+    }
+  </style>
 </head>
 
 <body>
@@ -138,11 +201,104 @@
           </li>
         </ul>
       </div>
+
+      <section class="post-perfil">
+        <h2>Tus Preguntas</h2>
+        <article class="posts">
+        </article>
+      </section>
+      <!-- <section class="your-answensr-perfil-container">
+        <h2>Tus Preguntas</h2>
+        <article class="posts">
+        </article>
+      </section> -->
     </section>
-    <section class="post-perfil">
-      <article class="posts">
-      </article>
-    </section>
+
+    <script type="module">
+      import { getPostByUser } from "../services/supabase/posts.js";
+      import { logout, userLogged } from "../services/supabase/auth.js";
+      import { formatDate } from "../javascript/helpers/obtener-tiempo.js";
+      import { removeQuestion } from "../services/supabase/posts.js"; // Asume que tienes esta función para eliminar un post
+
+      const user = await userLogged();
+
+      if (!user) {
+        window.location.replace("http://localhost:5173/src/html/login.html");
+      }
+
+      const questions = await getPostByUser();
+      console.log(questions);
+      const div = document.querySelector(".posts");
+      let htmlQuestions = "";
+      for (const question of questions) {
+        const formatedDate = formatDate(question.date);
+        const title = question.title;
+        const description = question.description;
+
+        htmlQuestions += `
+      <section class="post-perfil">
+        <div class="contenedor-usuario">
+          <div class="contenedor-superior">
+            <div class="fecha-publicacion">${formatedDate}</div>
+          </div>
+          <div class="post-contenido">
+            <div>
+              <h2>${title}</h2>
+              <p>${description}</p>
+            </div>
+            <div class="contenedor-botones-post">
+              <button class="btn-opciones">
+                <img src="../../public/imagenes/btn-options.png" alt="Options" />
+              </button>
+              <div class="opciones-menu">
+                <button class="btn-eliminar" data-post-id="${question.id}">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+
+
+      }
+      div.innerHTML = htmlQuestions;
+
+      // Add event listener to logout button
+      document.querySelector(".btn-cerrar-sesion").onclick = logout;
+
+      // Add event listeners to option buttons
+      const optionButtons = document.querySelectorAll(".btn-opciones");
+      optionButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+          const menu = button.nextElementSibling; // Aseguramos que el 'button' es el target, no la imagen
+          menu.classList.toggle('visible');
+        });
+      });
+
+      // Add event listener to close the option menu when clicking outside
+      document.addEventListener('click', (event) => {
+        const visibleMenus = document.querySelectorAll('.opciones-menu.visible');
+        visibleMenus.forEach(menu => {
+          if (!menu.contains(event.target) && !menu.previousElementSibling.contains(event.target)) {
+            menu.classList.remove('visible');
+          }
+        });
+      });
+
+      // Add event listeners to delete buttons
+      const deleteButtons = document.querySelectorAll(".btn-eliminar");
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+          const postId = event.target.getAttribute('data-post-id');
+          console.log(postId)
+          const confirmDelete = confirm("¿Está seguro que desea eliminar este post?");
+          if (confirmDelete) {
+            await removeQuestion(postId); // Llama a la función para eliminar el post
+            location.reload(); // Recarga la página para reflejar los cambios
+          }
+        });
+      });
+    </script>
 </body>
 
 </html>
