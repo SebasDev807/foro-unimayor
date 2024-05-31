@@ -27,13 +27,25 @@
 .header-comentarios button:hover {
   background-color: #a4a4a4b8;
 }
+.lista-respuestas {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 .lista-respuestas p {
   font-size: 14px;
 }
+
 .lista-respuestas li {
-  border-radius: 5pxpx;
+  border-radius: 5px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: 1px solid; 
+  border-color: #d3d3d3; 
+  padding: 10px; 
+  margin-bottom: 10px; 
 }
+
 .contenedor-comentarios .lista-respuestas h1 {
   display: flex;
   margin: 5px;
