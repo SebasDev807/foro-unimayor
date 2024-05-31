@@ -94,6 +94,8 @@ body {
   transition: background-color 0.3s;
   text-decoration: none;
   line-height: 30px;
+  background: none;
+  border: none;
 }
 .opciones a:visited,
 .opciones a:visited {

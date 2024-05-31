@@ -51,3 +51,12 @@
   flex-direction: column;
   text-align: left;
 }
+
+.btn-eliminar-comentario{
+  background: none;
+  cursor: pointer;
+  border: none;
+}
+.btn-eliminar-comentario > img{
+  width: 1.5rem;
+}

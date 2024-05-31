@@ -1,8 +1,6 @@
-// TODO: add date when is created the answer
-
 import { responseToQuestion } from "../services/supabase/answers";
-import { createResponseToQuestion } from "../services/supabase/posts.js";
-import { incrementCounter, decrementCounter } from "../services/supabase/likes.js"
+import { createResponseToQuestion, deleteResponseToQuestion } from "../services/supabase/posts.js"; // Asegúrate de importar la función de eliminación
+import { incrementCounter, decrementCounter } from "../services/supabase/likes.js";
 import { userLogged } from "../services/supabase/auth.js";
 import supabase from "../services/supabase/supabaseClient.js";
 import { dateTimeISO8601, formatDate } from "./helpers/obtener-tiempo.js";
@@ -24,11 +22,12 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
         </div>
       </div>
       <div class="fecha-publicacion">${date}</div>
+      <button id="btnCerrarModal">X</button>
     </div>
     <h3>${titulo}</h3>
     <p>${description}</p>
     <div class="header-comentarios">
-      <button id="btnCerrarModal">X</button>
+
     </div>
     <div class="contenedor-comentarios">
       <ul class="lista-respuestas"></ul>
@@ -54,7 +53,7 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
         answerDescription: answer.description,
         userName: answer.user_name,
         emailUser: answer.user_email,
-        date: answer.created_at,  // TODO: implement when created the answer the date to cath
+        date: answer.created_at,
         answersId: answer.id,
         likes: answer.likes
       };
@@ -86,10 +85,6 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
   function createComentarioElement({ answerDescription, userName, emailUser, date, answersId, likes }) {
     const comentarioElement = document.createElement("li");
     let contadorSubir = likes;
-    /* TODO
-      1) <img class="foto-usuario" src="/imagenes/nik.png" alt="" />  // add image user not implemented
-      2) remove styles from HTML and add to CSS
-    */
     comentarioElement.innerHTML = `
       <div class="contenedor-usuario">
         <div class="profile-icon">
@@ -100,7 +95,11 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
           </div>
         </div>
         <div class="fecha-publicacion">${formatDate(date)}</div>
+        <button class="btn-eliminar-comentario">
+        <img src="/imagenes/borrar.png" alt= "">
+        </button> <!-- Añadido botón de eliminar -->
       </div>
+      
       <p>${answerDescription}</p>
       <div class="contenedor-botones-post-comentarios">
         <button class="btn-subir-comentario">
@@ -115,8 +114,8 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
 
     const $btnSubirComentario = comentarioElement.querySelector(".btn-subir-comentario");
     const $btnBajarComentario = comentarioElement.querySelector(".btn-bajar-comentario");
+    const $btnEliminarComentario = comentarioElement.querySelector(".btn-eliminar-comentario"); // Selección del botón de eliminar
     const $contadorSubir = comentarioElement.querySelector(".contador-subir-comentario");
-
 
     let usuarioVotoComentarioSubir = false;
     let usuarioVotoComentarioBajar = false;
@@ -140,6 +139,15 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
         $contadorSubir.textContent = contadorSubir;
         usuarioVotoComentarioBajar = true;
         $btnBajarComentario.disabled = true;
+      }
+    });
+
+    // Evento para eliminar comentario
+    $btnEliminarComentario.addEventListener("click", async () => {
+      const confirmacion = confirm("¿Estás seguro de que deseas eliminar este comentario?");
+      if (confirmacion) {
+        await eliminarComentario(answersId);
+        comentarioElement.remove();
       }
     });
 
@@ -169,4 +177,13 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
     listaRespuestas.appendChild(createComentarioElement(newComment));
   }
 
+  // Función para eliminar comentario de Supabase y del DOM
+  async function eliminarComentario(answersId) {
+    const { error } = await deleteResponseToQuestion(answersId); // Supabase function to delete
+    if (error) {
+      console.error("Error eliminando el comentario:", error);
+    } else {
+      console.log("Comentario eliminado exitosamente.");
+    }
+  }
 }

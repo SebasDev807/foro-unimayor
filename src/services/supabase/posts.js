@@ -38,6 +38,14 @@ async function getPosts() {
   }
 }
 
+export async function deleteResponseToQuestion(id) {
+  const { error } = await supabase
+    .from('answers')
+    .delete()
+    .eq('id', id);
+  return { error };
+}
+
 /**
  * Retrieves posts by the logged-in user.
  * @returns {Promise<Array>} An array of post data.

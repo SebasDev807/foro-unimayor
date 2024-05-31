@@ -73,7 +73,10 @@
 
     .btn-opciones>img {
       width: 20px;
-      height: auto;
+    margin: auto;
+    position: absolute;
+    bottom: 61px;
+    right: 15%;
     }
 
     .opciones-menu {
@@ -87,7 +90,10 @@
     }
 
     .opciones-menu.visible {
-      display: block;
+    position: absolute;
+    bottom: 17px;
+    right: 7px;
+    display: flex;
     }
 
     .btn-eliminar {
@@ -96,19 +102,24 @@
       cursor: pointer;
       padding: 10px;
     }
+    .logo-fum{
+    position: relative;
+    left: 80%;
+    }
   </style>
 </head>
 
 <body>
   <!-- encabezado de la pagina -->
+  <!-- encabezado de la pagina -->
   <header>
     <div class="encabezado">
-      <a href="pagina-principal.html"><img src="../../public/imagenes/FUM logo.png" alt="logo fum"
-          class="logo-fum" /></a>
-      <input type="text" placeholder="Buscar" />
+      <a href="pagina-principal.html"><img src="../../public/imagenes/logo.png" alt="logo fum" class="logo-fum" /></a>
+      <input type="text" id="input-busqueda" placeholder="Buscar" />
       <div class="menu-usuario">
         <a href=""><img src="../../public/imagenes/notificacion.png" class="menus" /></a>
         <div class="perfil-encabezado">
+          <!-- PUTOS, REEEE ¡locotas! -->
           <a href=""><img src="../../public/imagenes/leon-foto-perfil.png" class="menus" />
           </a>
           <div class="opciones">
@@ -118,13 +129,12 @@
             <a href="ver-perfil.html" target="_blank">
               <p>Editar perfil</p>
             </a>
-            <button class="btn-cerrar-sesion" onclick="logout()">
-              Cerrar sesion
+            <button class="btn-cerrar-sesion">
+              Cerrar Sesion
             </button>
           </div>
         </div>
       </div>
-    </div>
   </header>
   <!-- encabezado de la pagina -->
 
