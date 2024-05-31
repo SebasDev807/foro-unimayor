@@ -41,13 +41,11 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 20px;
-      /* Ajusta la separación entre la fecha y el contenido */
     }
 
     .post-contenido div:first-child {
       flex-grow: 1;
       margin-right: 10px;
-      /* Espacio entre el contenido y el botón de opciones */
     }
 
     h2 {
@@ -106,6 +104,7 @@
     position: relative;
     left: 80%;
     }
+    
   </style>
 </head>
 
@@ -125,9 +124,6 @@
           <div class="opciones">
             <a href="ver-perfil.html" target="_blank">
               <p>Ver perfil</p>
-            </a>
-            <a href="ver-perfil.html" target="_blank">
-              <p>Editar perfil</p>
             </a>
             <button class="btn-cerrar-sesion">
               Cerrar Sesion
@@ -187,9 +183,9 @@
 
     <section class="perfil">
       <div class="banner">
-        <img src="../../public/imagenes/banner.png" alt="" class="banner-img">
-        <img src="../../public/imagenes/leonBigImage.png" alt="" class="foto-perfil">
-
+        <img src="../../public/imagenes/banner.png" alt="Banner" class="banner-img">
+        <img src="../../public/imagenes/leon-foto-perfil.png" alt="Foto de Perfil" class="foto-perfil" id="fotoPerfil">
+        <input type="file" id="fileInput" accept="image/*" style="display: none;">
       </div>
 
       <div class="informacion">
@@ -217,18 +213,33 @@
         <article class="posts">
         </article>
       </section>
-      <!-- <section class="your-answensr-perfil-container">
-        <h2>Tus Preguntas</h2>
-        <article class="posts">
-        </article>
-      </section> -->
     </section>
+
+    <script>
+      const fotoPerfil = document.getElementById('fotoPerfil');
+      const fileInput = document.getElementById('fileInput');
+  
+      fotoPerfil.addEventListener('click', () => {
+        fileInput.click();
+      });
+  
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            fotoPerfil.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
 
     <script type="module">
       import { getPostByUser } from "../services/supabase/posts.js";
       import { logout, userLogged } from "../services/supabase/auth.js";
       import { formatDate } from "../javascript/helpers/obtener-tiempo.js";
-      import { removeQuestion } from "../services/supabase/posts.js"; // Asume que tienes esta función para eliminar un post
+      import { removeQuestion } from "../services/supabase/posts.js";
 
       const user = await userLogged();
 
@@ -303,8 +314,8 @@
           console.log(postId)
           const confirmDelete = confirm("¿Está seguro que desea eliminar este post?");
           if (confirmDelete) {
-            await removeQuestion(postId); // Llama a la función para eliminar el post
-            location.reload(); // Recarga la página para reflejar los cambios
+            await removeQuestion(postId);
+            location.reload(); 
           }
         });
       });

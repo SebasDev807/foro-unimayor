@@ -25,18 +25,23 @@
 }
 
 .foto-perfil {
-  height: 150px;
+  height: auto;
   display: flex;
   position: absolute;
   top: 99px;
   right: 38px;
+  cursor: pointer;
+  max-width: 150px; 
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .foto-perfil img {
   height: 100%;
   width: auto;
+  object-fit: cover; 
 }
-
 .informacion {
   flex-grow: 1;
   margin-right: 40%;
