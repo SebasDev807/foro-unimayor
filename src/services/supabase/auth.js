@@ -8,9 +8,9 @@ export async function login() {
   try {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      // options: {
-      //   redirectTo: "http://localhost:5173/src/html/pagina-principal.html",
-      // },
+      options: {
+        redirectTo: "http://localhost:5173/src/html/pagina-principal.html",
+      },
     });
 
     if (error) {
@@ -65,6 +65,7 @@ export async function saveUser() {
       .select("*")
       .eq("email", user.email);
 
+    // TODO: manage errors
     // if (errorCheckUser) {
     //   console.error("Error al buscar usuario:", errorCheckUser);
     //   return;
@@ -84,7 +85,7 @@ export async function saveUser() {
           imgUserGoogle: user.user_metadata.avatar_url,
         },
       ]);
-      alert("Datos insertados");
+      // alert("Datos insertados");
     } else {
       logout();
     }

@@ -27,7 +27,7 @@ async function getPosts() {
       *,
       users(id, name, email, imgUserGoogle)
     `)
-    .order('id', { ascending: false });
+      .order('id', { ascending: false });
     console.log("data: ", data)
 
 
@@ -87,6 +87,8 @@ async function createPost(post) {
     const { data: postData, error: postError } = await supabase
       .from("questions")
       .insert([post]);
+
+    return true
   } catch (error) {
     console.error("Error creating post:", error.message);
     // En Supabase, no necesitas llamar a rollback_transaction explícitamente

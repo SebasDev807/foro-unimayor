@@ -60,12 +60,12 @@ async function managePublicPostButton(event) {
     date: dateTimeISO8601(),
   };
 
-  createPost(newQuestion)
-    .then(createdQuestion => {
-      alert('Question created:', createdQuestion);
-    })
-    .catch(error => {
-      alert('Error creating the question:', error);
-    });
+  const createdQUestion = await createPost(newQuestion)
+  if (createdQUestion) {
+    alert("Pregunta creada exitosamente");
+    window.location.reload() // reload the page to show the new question
+  } else {
+    alert("Error al crear la pregunta");
+  }
 }
 $publicPostButton.addEventListener('click', managePublicPostButton);
