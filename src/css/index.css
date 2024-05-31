@@ -480,3 +480,12 @@ article {
   font-size: 14px;
   padding: 4px;
 }
+
+.foto-usuario{
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.profile-metadata{
+  margin-left: 1rem;
+}
