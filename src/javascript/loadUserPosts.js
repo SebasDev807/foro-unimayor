@@ -11,17 +11,41 @@ import { userLogged } from "../services/supabase/auth.js" //
  * Renders a list of posts by creating and appending post elements to a container.
  * @param {Array} posts - An array of post objects.
  */
-function renderPosts(posts) {
-  const $usersPostContainer = document.getElementById("user-post"),
-    $fragment = document.createDocumentFragment();
+async function renderPosts(posts) {
+  const $usersPostContainer = document.getElementById("user-post");
+  $usersPostContainer.innerHTML = ''; // Clear previous posts
 
-  posts.forEach((post) => {
-    const $postElement = createPostElement(post);
-    $fragment.appendChild($postElement);
+  const $fragment = document.createDocumentFragment();
+
+  const now = new Date();
+  const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
+
+  posts.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    const isRecentA = dateA > fiveMinutesAgo;
+    const isRecentB = dateB > fiveMinutesAgo;
+
+    if (isRecentA && isRecentB) {
+      return dateB - dateA; 
+    } else if (isRecentA) {
+      return -1;
+    } else if (isRecentB) {
+      return 1; 
+    } else {
+      return b.likes - a.likes; 
+    }
   });
+
+  for (const post of posts) {
+    const $postElement = await createPostElement(post);
+    $fragment.appendChild($postElement);
+  }
 
   $usersPostContainer.appendChild($fragment);
 }
+
+
 
 /**
  * Creates a post element with user information, title, description, and buttons.
@@ -80,14 +104,24 @@ function createPostElement({ id: questionId, title, description, users, date, li
       decrementCounter(questionId, "questions"); // supabase function
       contadorSubir = updateCounter($postElement, contadorSubir, -1);
     } else if ($target.classList.contains("btn-comentar")) {
-      await comentariosHTML(questionId, title, description, userName, emailUser, formatedDate); // draw the modal with the question and answers
+      await comentariosHTML(questionId, title, description, userName, emailUser, formatedDate); 
     }
   });
 
   return $postElement;
 }
 
-
+/**
+ * Determines if a post is recent (within the last 5 minutes).
+ * @param {string} date - The date of the post.
+ * @returns {boolean} - True if the post is recent, otherwise false.
+ */
+function isRecentPost(date) {
+  const now = new Date();
+  const postDate = new Date(date);
+  const diffInMinutes = (now - postDate) / 1000 / 60;
+  return diffInMinutes <= 5;
+}
 
 /**
  * Updates the counter display and button state.

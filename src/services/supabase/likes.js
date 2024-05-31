@@ -41,7 +41,6 @@ async function decrementCounter(questionId, tableName) {
 
     // Verificar si los "likes" son mayores que 0 antes de decrementar
     if (currentData.likes > 0) {
-      // Decrementar el contador de "likes"
       const { data: updateData, error: updateError } = await supabase
         .from(tableName)
         .update({

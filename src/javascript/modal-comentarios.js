@@ -1,5 +1,5 @@
 import { responseToQuestion } from "../services/supabase/answers";
-import { createResponseToQuestion, deleteResponseToQuestion } from "../services/supabase/posts.js"; // Asegúrate de importar la función de eliminación
+import { createResponseToQuestion, deleteResponseToQuestion } from "../services/supabase/posts.js"; 
 import { incrementCounter, decrementCounter } from "../services/supabase/likes.js";
 import { userLogged } from "../services/supabase/auth.js";
 import supabase from "../services/supabase/supabaseClient.js";
@@ -8,6 +8,7 @@ import { notificarRespuesta } from "./helpers/notificacion.js";
 
 const contenedor = document.querySelector("#seccion-preguntas");
 const comentarios = document.createElement("dialog");
+
 
 export async function comentariosHTML(id, titulo, description, userName, emailUser, date) {
   const answers = await responseToQuestion(id);
@@ -49,6 +50,8 @@ export async function comentariosHTML(id, titulo, description, userName, emailUs
   if (answers.length === 0) {
     listaRespuestas.innerHTML = `<li>Sé el primero en comentar</li>`;
   } else {
+    answers.sort((a, b) => b.likes - a.likes);
+
     answers.forEach((answer) => {
       const comentario = {
         answerDescription: answer.description,
