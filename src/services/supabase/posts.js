@@ -27,8 +27,8 @@ async function getPosts() {
       *,
       users(id, name, email, imgUserGoogle)
     `)
-    .order('id', { ascending: false });
-    console.log("data: ", data)
+      .order('id', { ascending: false });
+    // console.log("data: ", data)
 
 
     if (error) throw new Error("Error fetching data");

@@ -55,9 +55,9 @@ export async function saveUser() {
       error,
     } = await supabase.auth.getUser();
 
-    // if (error) {
-    //   throw new Error('Error al obtener datos de usuario');
-    // }
+    if (error) {
+      throw new Error('Error al obtener datos de usuario');
+    }
 
     // Check if user exists in database
     const { data: checkUser, error: errorCheckUser } = await supabase
@@ -65,15 +65,15 @@ export async function saveUser() {
       .select("*")
       .eq("email", user.email);
 
-    // if (errorCheckUser) {
-    //   console.error("Error al buscar usuario:", errorCheckUser);
-    //   return;
-    // }
+    if (errorCheckUser) {
+      throw new Error('Error al buscar usuario');
+    }
 
-    // if (checkUser) {
-    //   // User already exists in the database
-    //   return;
-    // }
+    if (checkUser.length > 0) {
+      // User already exists in the database
+      // console.log('Usuario ya existe en la base de datos');
+      return;
+    }
 
     // Check if email user is from unimayor domain. If it is, save user in database; otherwise, logout
     if (user.email.endsWith("@unimayor.edu.co")) {
@@ -84,9 +84,10 @@ export async function saveUser() {
           imgUserGoogle: user.user_metadata.avatar_url,
         },
       ]);
-      alert("Datos insertados");
+      // console.log('Usuario guardado en la base de datos');
     } else {
-      logout();
+      await supabase.auth.signOut();
+      // console.log('Usuario deslogueado por no pertenecer a la universidad');
     }
   } catch (error) {
     console.error("Error al guardar datos de usuario:", error);
