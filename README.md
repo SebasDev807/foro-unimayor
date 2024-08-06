@@ -1,97 +1,36 @@
-<p align="center">
-	<img src="./public/imagenes/FUM-logo.png"  alt="FUM logo" title="calculator icon" width="125" height="auto" />
-</p>
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-<p align="center">
-	 Foro universitario colegio mayor del cauca.
-</p>
+## Getting Started
 
-## Table of contents
-
-- [Table of Contents](#table-of-contents)
-- [How to Contribute](#how-to-contribute)
-  - [Contributor Behavior](#contributor-behavior)
-  - [Setup Development Environment](#setup-development-environment)
-  - [Pull Requests](#pull-requests)
-  - [License](#license)
-
-## How to Contribute
-
-### Contributor Behavior
-
-Be kind to one another. We're striving to make [Conventional Commits](https://www.conventionalcommits.org/) an inclusive
-environment that's great for first time open-source contributors.
-
-Conventional Commits use the [GitHub flow](https://guides.github.com/introduction/flow/) as main versioning workflow
-
-### Setup Development Environment
-
-1. Fork the repository.
-2. Clone your forked repository to your local machine.
+First, run the development server:
 
 ```bash
-# HTTPS
-git clone https://github.com/<your_profile_name>/foro-unimayor.git
-
-# or SSH
-git clone git@github.com:<your_profile_name>/foro-unimayor.git
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-3. Install the dependencies.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-  # using npm
-  npm install
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-4. setup the environment variables on .env file.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-   > **_NOTE:_** you can copy the .env.example file and rename itto .env. Don't forget to fill the variables with the correct values.
+## Learn More
 
-5. Run the application.
+To learn more about Next.js, take a look at the following resources:
 
-```bash
-  # using npm
-  npm run dev
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Pull Requests
-1. Extract the changes  
-```bash
-git pull origin main # or vite 
-```
-2. Create a new branch for each feature
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-```bash
-# create a new branch and switch to it
-git checkout -b <branch-name>
-```
+## Deploy on Vercel
 
-3. Make your changes and commit them.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-```bash
-# add the changes
-git add .
-# commit the changes
-git commit -m "your commit message"
-```
-
-4. Merge the changes from to vite branch.
-
-```bash
-# switch to main branch
-git switch  vite
-# merge the changes from the feature branch
-git merge <branch-name>
-```
-
-5. Send a pull request from each feature branch to **vite** branch.
-
-```bash
-# push the changes to the remote repository
-git push origin vite
-```
-
-### License
-
-[License](./LICENSE)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
