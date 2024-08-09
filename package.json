@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@clerk/nextjs": "5.2.14",
+    "@heroicons/react": "^2.1.5",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "1.1.0",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
@@ -18,7 +20,8 @@
     "react": "18",
     "react-dom": "18",
     "tailwind-merge": "2.4.0",
-    "tailwindcss-animate": "1.0.7"
+    "tailwindcss-animate": "1.0.7",
+    "tslib": "^2.6.3"
   },
   "devDependencies": {
     "@types/node": "20",

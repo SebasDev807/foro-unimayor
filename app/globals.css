@@ -67,3 +67,34 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Heart animation */
+@keyframes pulse-heart {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.icon-heart {
+  color: #d1d5db; 
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.icon-heart.liked {
+  color: #ef4444; 
+  transform: scale(1.2);
+  animation: pulse-heart 1s ease-in-out infinite;
+  fill: #ef4444; 
+}
+
+
