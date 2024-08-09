@@ -1,5 +1,7 @@
 // TODO: Design the photo mode and implement it
 
+"use client";
+
 import {
   ClerkLoaded,
   ClerkLoading,
@@ -8,14 +10,31 @@ import {
   SignedIn,
   SignedOut,
 } from "@clerk/nextjs";
+import { insertUser } from "@/actions/user-sing-in";
 
+import { useTransition } from "react";
 import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const LandingPage = () => {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+
+  // Callback triggered when is clicked, updates user progress
+  const onClick = () => {
+    if (pending) return;
+
+    startTransition(() => {
+      // insertUser().catch(() => toast.error("Something went wrong."));
+      insertUser().catch(() => toast.error("Something went wrong."));
+    });
+  };
+
   return (
     <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-row items-center justify-center p-4 gap-2">
       <div className="relative w-[240px] h-[240px] lg:w-[424px] lg:h-[424px] mb-8 lg:mb-0">
@@ -51,7 +70,14 @@ const LandingPage = () => {
               </SignInButton>
             </SignedOut>
             <SignedIn>
-              <Button size="lg" variant="primary" className="w-full " asChild>
+              {/* here */}
+              <Button
+                size="lg"
+                variant="primary"
+                className="w-full "
+                asChild
+                onClick={onClick}
+              >
                 <Link href="/learn">Continuar aprendiendo</Link>
               </Button>
             </SignedIn>

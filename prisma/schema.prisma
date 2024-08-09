@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  name    String?
+  authUserId    String   @unique
   username    String? @unique
   bio    String?
   email   String   @unique
@@ -26,7 +26,7 @@ model User {
   hashedPassword String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  followingIds String[] @db.ObjectId
+  followingIds String[]
   hasNewNotifications Boolean?
 
   posts Post[]
@@ -39,11 +39,10 @@ model Post {
   body   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  userId  String @db.ObjectId
-  likedIds  String[] @db.ObjectId
+  authUserId  String
+  likedIds  String[]
   
-  
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [authUserId], references: [authUserId], onDelete: Cascade)
 
   comments Comment[]
 }
@@ -53,20 +52,19 @@ model Comment {
   body   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  userId  String @db.ObjectId
+  authUserId  String
   postId  String @db.ObjectId
-  likedIds  String[] @db.ObjectId
+  likedIds  String[]
 
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [authUserId], references: [authUserId], onDelete: Cascade)
   post  Post  @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
-  
 
 model Notification {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   body   String
-  userId  String @db.ObjectId
+  authUserId  String
   createdAt  DateTime @default(now())
 
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [authUserId], references: [authUserId], onDelete: Cascade)
 }
