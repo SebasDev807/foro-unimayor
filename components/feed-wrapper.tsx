@@ -1,15 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import PostInput from './PostInput';
 import Post from './Post';
+import { useRouter } from 'next/navigation'; 
 
-type Props = {
-  children: React.ReactNode;
-};
+const FeedWrapper = () => {
+  const router = useRouter(); 
+  const currentUser = 'Usuario'; // Make the logic in the backend so that this is the value of the user making the post.
 
-export const FeedWrapper = ({ children }: Props) => {
   const [posts, setPosts] = useState([
     {
       avatar: '/avatar.png',
@@ -18,20 +17,24 @@ export const FeedWrapper = ({ children }: Props) => {
       time: '55min',
       content: 'Esta nos va a doler. Fallan China y Venezuela en los Olímpicos.',
       image: '',
+      category: 'Ciencias Básicas',
+      likes: 10, 
+      shares: 5, 
     },
     {
       avatar: '/avatar.png',
       username: 'Unimayor',
       handle: 'Unimayor',
       time: '2h',
-      content: '¡Bienvenidos a UNIMAYOR! Queridos admitidos a primer semestre, tengan en cuenta los pasos a seguir para descargar el recibo y pagar la matrícula financiera HASTA o ANTES del 30 de julio de 2024, para garantizar tu cupo.',
+      content: '¡Bienvenidos a UNIMAYOR! Queridos admitidos a primer semestre...',
       image: '/GTWzvGvW8AAfkuT.jpeg',
+      category: 'Ciencias de Computación',
+      likes: 20, 
+      shares: 8, 
     },
   ]);
 
-  const router = useRouter();
-
-  const handlePost = (newPost: { text: string; image: File | null }) => {
+  const handlePost = (newPost: { text: string; image: File | null; category: string }) => {
     setPosts([
       {
         avatar: '/avatar.png',
@@ -40,16 +43,29 @@ export const FeedWrapper = ({ children }: Props) => {
         time: 'Just now',
         content: newPost.text,
         image: newPost.image ? URL.createObjectURL(newPost.image) : '',
+        category: newPost.category,
+        likes: 0, 
+        shares: 0, 
       },
       ...posts,
     ]);
   };
 
   const handleCommentClick = (post: any) => {
-    // Convertir el post a una cadena JSON
     const postString = encodeURIComponent(JSON.stringify(post));
-    // Navegar a la página de comentarios con la URL construida
     router.push(`/comments?post=${postString}`);
+  };
+
+  const handleEditPost = (index: number, newContent: string) => {
+    setPosts(posts.map((post, i) => i === index ? { ...post, content: newContent } : post));
+  };
+
+  const handleDeletePost = (index: number) => {
+    setPosts(posts.filter((_, i) => i !== index));
+  };
+
+  const handleReportPost = (index: number) => {
+    alert('Post denunciado');
   };
 
   return (
@@ -64,10 +80,16 @@ export const FeedWrapper = ({ children }: Props) => {
           time={post.time}
           content={post.content}
           image={post.image}
+          category={post.category}
+          currentUser={currentUser}
           onCommentClick={() => handleCommentClick(post)}
+          onEditClick={(newContent) => handleEditPost(index, newContent)}
+          onDeleteClick={() => handleDeletePost(index)}
+          onReportClick={() => handleReportPost(index)}
         />
       ))}
-      {children}
     </div>
   );
 };
+
+export default FeedWrapper;

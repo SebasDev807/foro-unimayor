@@ -1,13 +1,20 @@
 
-import React, { Children } from 'react';
-import { FeedWrapper } from '@/components/feed-wrapper'; 
+import React from 'react';
+import  FeedWrapper  from '@/components/feed-wrapper';
+import Modules from '@/components/modules';
 
-const LearnPage = () => { 
+const LearnPage = () => {
   return (
-    <div>
-      <FeedWrapper children={undefined}>
-        {/*  */}
+    <div className="flex flex-row gap-[48px] px-6">
+      <FeedWrapper>
       </FeedWrapper>
+
+      {/* Right Column */}
+      <div className="w-1/4">
+        <div className="sticky top-4">
+          <Modules />
+        </div>
+      </div>
     </div>
   );
 };
