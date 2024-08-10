@@ -1,5 +1,3 @@
-// TODO: rename page to home and check if works
-
 import { Sidebar } from "@/components/sidebar";
 import { MobileHeader } from "@/components/mobile-header";
 

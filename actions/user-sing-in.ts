@@ -1,7 +1,7 @@
 "use server";
 
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { getUser } from "@/prisma/queries";
+import { getAuthUser } from "@/prisma/queries";
 
 import client from "@/lib/prismadb";
 
@@ -22,7 +22,7 @@ export const insertUser = async () => {
     throw new Error("Unauthorized");
   }
 
-  const existingUser = await getUser();
+  const existingUser = await getAuthUser();
   // If user exists, don't insert and redirect to the learn page
   if (existingUser) {
     revalidatePath("/courses");
