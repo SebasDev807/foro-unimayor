@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useEffect, useRef } from 'react';
 import { HeartIcon, ShareIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import { Dialog } from '@headlessui/react';
@@ -17,7 +15,7 @@ interface PostProps {
   onEditClick: (newContent: string) => void;
   onDeleteClick: () => void;
   onReportClick: () => void;
-  onPreviewImage?: () => void;
+  onPreviewImage?: (image: string) => void;
   onClosePreview?: () => void;
 }
 
@@ -41,6 +39,8 @@ const Post: React.FC<PostProps> = ({
   const [likes, setLikes] = useState(0);
   const [shared, setShared] = useState(false);
   const [shares, setShares] = useState(0);
+  const [commented, setCommented] = useState(false);
+  const [comments, setComments] = useState(0);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [showOptions, setShowOptions] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -75,6 +75,8 @@ const Post: React.FC<PostProps> = ({
       content,
       image,
     });
+    setCommented(!commented);
+    setComments(comments + (commented ? -1 : 1)); 
   };
 
   const handleOptionsClick = () => {
@@ -127,6 +129,12 @@ const Post: React.FC<PostProps> = ({
   useEffect(() => {
     setEditContent(content);
   }, [content]);
+
+  const openImagePreview = () => {
+    if (image) {
+      setPreviewImage(image);
+    }
+  };
 
   return (
     <div className="relative p-4 bg-white border border-gray-300 rounded-lg shadow-md max-w-2xl mx-auto mb-4">
@@ -216,7 +224,7 @@ const Post: React.FC<PostProps> = ({
               src={image}
               alt="Post Image"
               className="w-full h-auto cursor-pointer"
-              onClick={onPreviewImage}
+              onClick={openImagePreview}
             />
           )}
           {previewImage && (
@@ -224,7 +232,7 @@ const Post: React.FC<PostProps> = ({
               <div className="relative">
                 <img src={previewImage} alt="Preview" className="max-w-full max-h-screen" />
                 <button
-                  onClick={onClosePreview}
+                  onClick={() => setPreviewImage(null)}
                   className="absolute top-2 right-2 bg-white text-black p-2 rounded"
                 >
                   Cerrar
@@ -247,14 +255,14 @@ const Post: React.FC<PostProps> = ({
               shared ? 'text-green-500 scale-125' : 'text-gray-500'
             }`}
           />
-          <span className="text-sm">{shared ? '' : ''}</span>
+          <span className="text-sm">{shares}</span>
         </div>
         <div className="flex items-center space-x-1 cursor-pointer" onClick={handleComment}>
           <ChatBubbleLeftIcon className="h-6 w-6 text-gray-500" />
-          <span className="text-sm"></span>
+          <span className="text-sm">{comments}</span>
         </div>
-        </div>
-        </div>
+      </div>
+    </div>
   );
 };
 
