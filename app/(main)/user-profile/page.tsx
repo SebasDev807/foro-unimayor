@@ -1,14 +1,14 @@
-import UserProfile from '@/components/userprofile';
-import Modules from '@/components/modules';
+import UserProfile from "@/components/userprofile";
+import Modules from "@/components/trending-list";
 
 const ProfilePage = () => {
   return (
     <div className="flex flex-row gap-[48px] px-6">
       <div className="w-3/4">
-        <UserProfile /> 
+        <UserProfile />
       </div>
-            {/* Right Column */}
-            <div className="w-1/4">
+      {/* Right Column */}
+      <div className="w-1/4">
         <div className="sticky top-4">
           <Modules />
         </div>
