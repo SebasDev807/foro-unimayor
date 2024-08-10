@@ -3,10 +3,11 @@ import { auth } from "@clerk/nextjs/server";
 
 import { cache } from "react";
 
-export const getUser = cache(async () => {
+/**
+ * Retrieves the user details based on the authenticated user ID.
+ */
+export const getAuthUser = cache(async () => {
   const { userId } = auth();
-  console.log(userId);
-
   if (!userId) return null;
 
   // Fetch user details using authUserId
@@ -17,4 +18,14 @@ export const getUser = cache(async () => {
   });
 
   return user;
+});
+
+/**
+ * Retrieves the user details based on the authenticated user ID.
+ */
+export const geAlltUsers = cache(async () => {
+  // Fetch all users
+  const users = await client.user.findMany();
+
+  return users;
 });

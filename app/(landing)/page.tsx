@@ -22,7 +22,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const LandingPage = () => {
-  const router = useRouter();
   const [pending, startTransition] = useTransition();
 
   // Callback triggered when is clicked, updates user progress
@@ -30,7 +29,6 @@ const LandingPage = () => {
     if (pending) return;
 
     startTransition(() => {
-      // insertUser().catch(() => toast.error("Something went wrong."));
       insertUser().catch(() => toast.error("Something went wrong."));
     });
   };
@@ -70,7 +68,6 @@ const LandingPage = () => {
               </SignInButton>
             </SignedOut>
             <SignedIn>
-              {/* here */}
               <Button
                 size="lg"
                 variant="primary"
