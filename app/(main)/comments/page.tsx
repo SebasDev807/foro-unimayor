@@ -1,5 +1,5 @@
 import React from "react";
-import Modules from "@/components/trending-list";
+import { TrendingList } from "@/components/trending-list";
 import Comments from "@/components/comments";
 
 const CommentsPage = () => {
@@ -11,7 +11,7 @@ const CommentsPage = () => {
       {/* Right Column */}
       <div className="w-1/4">
         <div className="sticky top-4">
-          <Modules />
+          <TrendingList />
         </div>
       </div>
     </div>
