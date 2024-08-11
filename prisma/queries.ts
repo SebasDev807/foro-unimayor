@@ -23,9 +23,43 @@ export const getAuthUser = cache(async () => {
 /**
  * Retrieves the user details based on the authenticated user ID.
  */
-export const geAlltUsers = cache(async () => {
+export const getAllUsers = cache(async () => {
   // Fetch all users
   const users = await client.user.findMany();
 
   return users;
+});
+
+/**
+ * Retrieves the user details based on the authenticated user ID.
+ */
+export const getUserDetails = cache(async () => {
+  const user = await getAuthUser();
+  if (!user) return null;
+
+  const followerCount = await client.user.count({
+    where: {
+      followingIds: {
+        has: user.id,
+      },
+    },
+  });
+
+  return {
+    ...user,
+    followerCount,
+  };
+});
+
+/**
+ * Retrieves at random post
+ */
+export const getPosts = cache(async () => {
+  const posts = await client.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return posts;
 });
