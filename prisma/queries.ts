@@ -59,6 +59,7 @@ export const getPosts = cache(async () => {
     orderBy: {
       createdAt: "desc",
     },
+    take: 10, // Limita la consulta a 10 posts
   });
 
   return posts;

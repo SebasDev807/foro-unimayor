@@ -1,6 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { HeartIcon, ShareIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
-import { Dialog } from '@headlessui/react';
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import {
+  HeartIcon,
+  ShareIcon,
+  ChatBubbleLeftIcon,
+  EllipsisVerticalIcon,
+} from "@heroicons/react/24/outline";
+import { Dialog } from "@headlessui/react";
 
 interface PostProps {
   avatar: string;
@@ -9,7 +16,7 @@ interface PostProps {
   time: string;
   content: string;
   image: string;
-  category: string; 
+  category: string;
   currentUser: string;
   onCommentClick: (post: any) => void;
   onEditClick: (newContent: string) => void;
@@ -26,14 +33,14 @@ const Post: React.FC<PostProps> = ({
   time,
   content,
   image,
-  category, 
+  category,
   currentUser,
   onCommentClick,
   onEditClick,
   onDeleteClick,
   onReportClick,
   onPreviewImage,
-  onClosePreview
+  onClosePreview,
 }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
@@ -49,11 +56,11 @@ const Post: React.FC<PostProps> = ({
   const optionsRef = useRef<HTMLDivElement>(null);
 
   const categoryStyles: { [key: string]: string } = {
-    'Ciencias básicas': 'bg-blue-100 border-blue-500 text-blue-700',
-    'Ciencias de computación': 'bg-green-100 border-green-500 text-green-700',
-    'Habilidades comunicativas': 'bg-red-100 border-red-500 text-red-700',
-    'Emprendimiento': 'bg-yellow-100 border-yellow-500 text-yellow-700',
-    'Decanatura': 'bg-purple-100 border-purple-500 text-purple-700',
+    "Ciencias básicas": "bg-blue-100 border-blue-500 text-blue-700",
+    "Ciencias de computación": "bg-green-100 border-green-500 text-green-700",
+    "Habilidades comunicativas": "bg-red-100 border-red-500 text-red-700",
+    Emprendimiento: "bg-yellow-100 border-yellow-500 text-yellow-700",
+    Decanatura: "bg-purple-100 border-purple-500 text-purple-700",
   };
 
   const handleLike = () => {
@@ -63,7 +70,7 @@ const Post: React.FC<PostProps> = ({
 
   const handleShare = () => {
     setShared(!shared);
-    setShares(shares + (shared ? -1 : 1)); 
+    setShares(shares + (shared ? -1 : 1));
   };
 
   const handleComment = () => {
@@ -76,7 +83,7 @@ const Post: React.FC<PostProps> = ({
       image,
     });
     setCommented(!commented);
-    setComments(comments + (commented ? -1 : 1)); 
+    setComments(comments + (commented ? -1 : 1));
   };
 
   const handleOptionsClick = () => {
@@ -88,14 +95,14 @@ const Post: React.FC<PostProps> = ({
   };
 
   const handleSaveEdit = () => {
-    if (editContent.trim() !== '') {
-      onEditClick(editContent); 
+    if (editContent.trim() !== "") {
+      onEditClick(editContent);
       setIsEditing(false);
     }
   };
 
   const handleCancelEdit = () => {
-    setEditContent(content); 
+    setEditContent(content);
     setIsEditing(false);
   };
 
@@ -114,15 +121,18 @@ const Post: React.FC<PostProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (optionsRef.current && !optionsRef.current.contains(event.target as Node)) {
+      if (
+        optionsRef.current &&
+        !optionsRef.current.contains(event.target as Node)
+      ) {
         setShowOptions(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -145,11 +155,18 @@ const Post: React.FC<PostProps> = ({
 
       {/* Modal */}
       {isModalOpen && (
-        <Dialog open={isModalOpen} onClose={handleCloseModal} className="fixed inset-0 flex items-center justify-center z-50">
+        <Dialog
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          className="fixed inset-0 flex items-center justify-center z-50"
+        >
           <Dialog.Panel className="bg-white border border-gray-300 rounded-lg shadow-md p-4">
-            <Dialog.Title className="text-lg font-bold mb-2">Confirmar Eliminación</Dialog.Title>
+            <Dialog.Title className="text-lg font-bold mb-2">
+              Confirmar Eliminación
+            </Dialog.Title>
             <Dialog.Description className="mb-4">
-              ¿Estás seguro de que deseas eliminar este post? Esta acción no se puede deshacer.
+              ¿Estás seguro de que deseas eliminar este post? Esta acción no se
+              puede deshacer.
             </Dialog.Description>
             <div className="flex space-x-2">
               <button
@@ -170,11 +187,22 @@ const Post: React.FC<PostProps> = ({
       )}
 
       <div className="flex items-center mb-3">
-        <img src={avatar} alt="Avatar" className="w-10 h-10 rounded-full mr-3" />
+        <img
+          src={avatar}
+          alt="Avatar"
+          className="w-10 h-10 rounded-full mr-3"
+        />
         <div className="flex-1">
           <div className="flex items-center">
             <div className="font-bold">{username}</div>
-            <span className={`ml-2 text-sm py-1 px-2 rounded ${categoryStyles[category] || 'bg-gray-100 border-gray-500 text-gray-700'}`}>{category}</span>
+            <span
+              className={`ml-2 text-sm py-1 px-2 rounded ${
+                categoryStyles[category] ||
+                "bg-gray-100 border-gray-500 text-gray-700"
+              }`}
+            >
+              {category}
+            </span>
           </div>
           <div className="text-gray-600">@{handle}</div>
           <div className="text-gray-400 text-sm">{time}</div>
@@ -189,17 +217,34 @@ const Post: React.FC<PostProps> = ({
           <div
             ref={optionsRef}
             className={`absolute top-10 right-2 bg-white border border-gray-300 rounded-lg shadow-md p-2 transition-transform transition-opacity duration-300 ease-in-out transform ${
-              showOptions ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+              showOptions
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-2"
             }`}
-            style={{ zIndex: 40 }} 
+            style={{ zIndex: 40 }}
           >
             {username === currentUser ? (
               <>
-                <button className="block w-full text-left px-2 py-1 text-gray-700 hover:bg-gray-100 rounded font-bold" onClick={handleEdit}>Editar</button>
-                <button className="block w-full text-left px-2 py-1 text-red-700 hover:bg-red-100 rounded font-bold" onClick={handleOpenModal}>Eliminar</button>
+                <button
+                  className="block w-full text-left px-2 py-1 text-gray-700 hover:bg-gray-100 rounded font-bold"
+                  onClick={handleEdit}
+                >
+                  Editar
+                </button>
+                <button
+                  className="block w-full text-left px-2 py-1 text-red-700 hover:bg-red-100 rounded font-bold"
+                  onClick={handleOpenModal}
+                >
+                  Eliminar
+                </button>
               </>
             ) : (
-              <button className="block w-full text-left px-2 py-1 text-red-700 hover:bg-red-100 rounded font-bold" onClick={onReportClick}>Denunciar</button>
+              <button
+                className="block w-full text-left px-2 py-1 text-red-700 hover:bg-red-100 rounded font-bold"
+                onClick={onReportClick}
+              >
+                Denunciar
+              </button>
             )}
           </div>
         )}
@@ -212,8 +257,18 @@ const Post: React.FC<PostProps> = ({
             className="w-full p-2 border border-gray-300 rounded"
           />
           <div className="flex space-x-2 mt-2">
-            <button onClick={handleSaveEdit} className="px-4 py-2 bg-blue-500 text-white rounded">Guardar</button>
-            <button onClick={handleCancelEdit} className="px-4 py-2 bg-gray-300 text-black rounded">Cancelar</button>
+            <button
+              onClick={handleSaveEdit}
+              className="px-4 py-2 bg-blue-500 text-white rounded"
+            >
+              Guardar
+            </button>
+            <button
+              onClick={handleCancelEdit}
+              className="px-4 py-2 bg-gray-300 text-black rounded"
+            >
+              Cancelar
+            </button>
           </div>
         </div>
       ) : (
@@ -230,7 +285,11 @@ const Post: React.FC<PostProps> = ({
           {previewImage && (
             <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
               <div className="relative">
-                <img src={previewImage} alt="Preview" className="max-w-full max-h-screen" />
+                <img
+                  src={previewImage}
+                  alt="Preview"
+                  className="max-w-full max-h-screen"
+                />
                 <button
                   onClick={() => setPreviewImage(null)}
                   className="absolute top-2 right-2 bg-white text-black p-2 rounded"
@@ -243,21 +302,30 @@ const Post: React.FC<PostProps> = ({
         </>
       )}
       <div className="flex space-x-4 mt-3">
-        <div className="flex items-center space-x-1 cursor-pointer" onClick={handleLike}>
+        <div
+          className="flex items-center space-x-1 cursor-pointer"
+          onClick={handleLike}
+        >
           <HeartIcon
-            className={`h-6 w-6 ${liked ? 'icon-heart liked' : 'icon-heart'}`}
+            className={`h-6 w-6 ${liked ? "icon-heart liked" : "icon-heart"}`}
           />
           <span className="text-sm">{likes}</span>
         </div>
-        <div className="flex items-center space-x-1 cursor-pointer" onClick={handleShare}>
+        <div
+          className="flex items-center space-x-1 cursor-pointer"
+          onClick={handleShare}
+        >
           <ShareIcon
             className={`h-6 w-6 transition-transform duration-300 ${
-              shared ? 'text-green-500 scale-125' : 'text-gray-500'
+              shared ? "text-green-500 scale-125" : "text-gray-500"
             }`}
           />
           <span className="text-sm">{shares}</span>
         </div>
-        <div className="flex items-center space-x-1 cursor-pointer" onClick={handleComment}>
+        <div
+          className="flex items-center space-x-1 cursor-pointer"
+          onClick={handleComment}
+        >
           <ChatBubbleLeftIcon className="h-6 w-6 text-gray-500" />
           <span className="text-sm">{comments}</span>
         </div>

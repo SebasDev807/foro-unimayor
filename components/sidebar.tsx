@@ -48,7 +48,6 @@ export const Sidebar = ({ className }: Props) => {
           iconSrc="/person.svg"
         />
       </div>
-      {/* TODO: The modal for the provider clerk appears, but it doesn't let you click on it It's like a z-index is preventing it or something similar, because in desktop mode it works correctly */}
       <div className="p-4">
         <ClerkLoading>
           <Loader className="h-5 w-5 text-muted-foreground animate-spin" />

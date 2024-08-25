@@ -17,10 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <ClerkProvider>
+    <ClerkProvider>
+      <html lang="es">
         <body className={manrope.className}>{children}</body>
-      </ClerkProvider>
-    </html>
+      </html>
+    </ClerkProvider>
   );
 }
