@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  MATEMATICA
+  PROGRAMACION
+  SISTEMAS
+}
+
+model User {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  authUserId          String    @unique
+  name                String?
+  username            String?   @unique
+  bio                 String?
+  email               String    @unique
+  emailVerified       DateTime?
+  image               String?
+  coverImage          String?
+  profileImage        String?
+  hashedPassword      String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  followingIds        String[]
+  hasNewNotifications Boolean?
+
+  posts         Post[]
+  comments      Comment[]
+  notifications Notification[]
+}
+
+model Post {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String
+  category   Category
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  authUserId String
+  likedIds   String[]
+
+  user     User      @relation(fields: [authUserId], references: [authUserId], onDelete: Cascade)
+  comments Comment[]
+}
+
+model Comment {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  authUserId String
+  postId     String   @db.ObjectId
+  likedIds   String[]
+
+  user User @relation(fields: [authUserId], references: [authUserId], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String
+  authUserId String
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [authUserId], references: [authUserId], onDelete: Cascade)
+}
