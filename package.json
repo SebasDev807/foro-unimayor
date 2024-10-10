@@ -2,19 +2,23 @@
   "name": "foro-unimayor",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "db:push": "npx prisma db push",
-    "db:seed": "npx prisma db push"
+    "db:clear": "tsx ./scripts/cleanDatabase.ts",
+    "db:seed": "tsx ./scripts/seed.ts",
+    "studio": "npx prisma studio"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.0.35",
     "@clerk/nextjs": "5.2.14",
     "@headlessui/react": "2.1.2",
     "@heroicons/react": "2.1.5",
-    "@prisma/client": "5.18.0",
+    "@prisma/client": "5.19.1",
     "@radix-ui/react-avatar": "1.1.0",
     "@radix-ui/react-dialog": "1.1.1",
     "@radix-ui/react-slot": "1.1.0",
@@ -30,14 +34,16 @@
     "tslib": "2.6.3"
   },
   "devDependencies": {
-    "@types/node": "20",
+    "@types/node": "20.16.5",
     "@types/react": "18",
     "@types/react-dom": "18",
     "eslint": "8",
     "eslint-config-next": "14.2.5",
     "postcss": "8",
-    "prisma": "5.18.0",
+    "prisma": "5.19.1",
     "tailwindcss": "3.4.1",
+    "ts-node": "10.9.2",
+    "tsx": "4.19.0",
     "typescript": "5.5.4"
   }
 }
