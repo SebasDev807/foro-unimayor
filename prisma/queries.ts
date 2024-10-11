@@ -64,3 +64,23 @@ export const getPosts = cache(async () => {
 
   return posts;
 });
+
+/**
+ * Retrieves at random post
+ */
+export const getCommentsPost = cache(async (postId: string) => {
+  const posts = await client.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10, // Limita la consulta a 10 posts
+  });
+
+  const comments = await client.comment.findMany({
+    where: {
+      postId: postId,
+    },
+  });
+
+  return posts;
+});

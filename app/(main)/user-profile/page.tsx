@@ -1,3 +1,5 @@
+// TODO: 1) ya se termino el diseño de la pagina Profile, ahora continuar con Leaderboard y así susesibamente, luego de terminar todo al UI, implementar la API de prisma para obtener los datos de la base de datos.
+
 import { getPosts, getAuthUser } from "@/prisma/queries";
 import { redirect } from "next/navigation";
 
