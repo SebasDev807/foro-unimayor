@@ -22,16 +22,14 @@ async function main() {
       bio: "Bio for user manager",
       email: "user1@example.com",
       emailVerified: new Date(),
-      image: "https://example.com/user1.jpg",
-      coverImage: "https://example.com/user1-cover.jpg",
-      profileImage: "https://example.com/user1-profile.jpg",
+      image: "",
+      coverImage: "",
+      profileImage: "",
       createdAt: new Date(),
       updatedAt: new Date(),
       hasNewNotifications: false,
     },
   });
-
-  // console.log("User created: ", user.username);
 
   // Insert a post for the created user
   const post = await client.post.create({
@@ -56,8 +54,6 @@ async function main() {
       likedIds: [], // Initialize with an empty array if needed
     },
   });
-
-  // console.log("Post created: ", post.body);
 
   console.log("Data seeded successfully");
 }

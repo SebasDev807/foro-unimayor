@@ -30,8 +30,8 @@ export const Info = ({
                   : "/placeholder.svg?height=200&width=600"
               }
               alt={`${name}'s cover`}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
               className="rounded-t-lg"
             />
           </div>
