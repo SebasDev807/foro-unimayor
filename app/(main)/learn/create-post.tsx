@@ -1,9 +1,11 @@
 "use client";
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { useDropzone } from "react-dropzone";
+import { ImageIcon, SmileIcon, CalendarIcon, MapPinIcon } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ImageIcon, SmileIcon, CalendarIcon, MapPinIcon } from "lucide-react";
 
 type Props = {
   name: string;
@@ -55,29 +57,26 @@ export default function CreatePost({ name, image }: Props) {
           </Avatar>
           <div className="flex-grow">
             <textarea
-              className="w-full bg-transparent text-foreground text-lg resize-none outline-none"
+              className="w-full bg-transparent text-foreground text-lg resize-none outline-none overflow-y-auto"
               placeholder="¿Qué está pasando?!"
               rows={3}
+              style={{
+                maxHeight: "80vh", // Máximo 80% del alto de la pantalla
+              }}
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
-            <div
-              {...getRootProps()}
-              className="border-dashed border-2 p-2 mt-2 cursor-pointer"
-            >
-              <input
-                {...getInputProps()}
-                ref={inputRef}
-                onChange={handleFileChange}
-              />
+            <div {...getRootProps()} className="p-2 mt-2 cursor-pointer">
+              <input {...getInputProps()} ref={inputRef} />
               {selectedImage && (
-                <div className="mt-2">
-                  <img
-                    src={URL.createObjectURL(selectedImage)}
-                    alt="Preview"
-                    className="max-w-full h-auto mt-2 rounded-lg"
-                  />
-                </div>
+                <Image
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="Preview"
+                  className="max-w-full h-auto mt-2 rounded-lg"
+                  width={500} // Ajusta el ancho según sea necesario
+                  height={300} // Ajusta la altura según sea necesario
+                  style={{ objectFit: "cover" }} // Ajusta el estilo según sea necesario
+                />
               )}
             </div>
             <div className="flex justify-between items-center mt-2">

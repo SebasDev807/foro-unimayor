@@ -1,5 +1,3 @@
-// TODO: 1) ya se termino el diseño de la pagina Profile, ahora continuar con Leaderboard y así susesibamente, luego de terminar todo al UI, implementar la API de prisma para obtener los datos de la base de datos.
-
 import { getPosts, getAuthUser } from "@/prisma/queries";
 import { redirect } from "next/navigation";
 
@@ -7,7 +5,7 @@ import { FollowBar } from "@/components/follow-bar";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { Post } from "@/components/post-refactor";
-import { Header } from "./header";
+// import { Header } from "./header"; // TODO: make it work with client side
 import { Info } from "./info";
 
 const ProfilePage = async () => {
