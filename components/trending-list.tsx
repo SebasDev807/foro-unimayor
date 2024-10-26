@@ -12,7 +12,7 @@ const trends: Trend[] = [
   {
     topic: "Ciencias básicas",
     posts: "180 mil posts",
-    url: "@/ciencias-basicas",
+    url: "/ciencias-basicas",
   },
   {
     topic: "Ciencias de computación",

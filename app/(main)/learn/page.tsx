@@ -22,30 +22,6 @@ const LearnPage = async () => {
         />
         <div className="w-auto h-auto px-auto">
           <PostList initialPosts={posts} />
-          {/* {posts ? (
-            posts.map((post) => (
-              <div key={post.id} className="mb-10">
-                <Post
-                  avatar={user.image ?? ""}
-                  username={user.name ?? "david"}
-                  handle={"handle"}
-                  time={Date.now().toString()}
-                  content={"Content Test"}
-                  image={user.image ?? ""}
-                  category={"Category test"}
-                  currentUser={user.name ?? "david"}
-                  // onCommentClick={() => {}}
-                  // onEditClick={() => {}}
-                  // onDeleteClick={() => {}}
-                  // onReportClick={() => {}}
-                />
-              </div>
-            ))
-          ) : (
-            <div className="text-2xl">
-              Aun no se han realizado publicaciones, sé el primero en hacerlo
-            </div>
-          )} */}
         </div>
       </FeedWrapper>
       <StickyWrapper>

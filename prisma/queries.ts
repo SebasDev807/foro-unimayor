@@ -1,6 +1,6 @@
 import client from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
-
+import { Category } from "@prisma/client";
 import { cache } from "react";
 
 /**
