@@ -49,9 +49,6 @@ const LearnPage = async () => {
         </div>
       </FeedWrapper>
       <StickyWrapper>
-        <h2 className="mb-4 text-xl font-bold text-black text-center">
-          Módulos
-        </h2>
         <TrendingList />
       </StickyWrapper>
     </div>

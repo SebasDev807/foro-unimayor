@@ -84,3 +84,29 @@ export const getCommentsPost = cache(async (postId: string) => {
 
   return posts;
 });
+
+export const getUsersRankedByLikes = cache(async () => {
+  const users = await client.user.findMany({
+    select: {
+      authUserId: true,
+      name: true,
+      username: true,
+      profileImage: true,
+      comments: {
+        select: {
+          likedIds: true,
+        },
+      },
+    },
+  });
+
+  const rankedUsers = users
+    .map((user) => ({
+      ...user,
+      totalLikes: user.comments.reduce((sum, comment) => sum + comment.likedIds.length, 0),
+    }))
+    .sort((a, b) => b.totalLikes - a.totalLikes)
+    .slice(0, 10); // Obtener los 10 usuarios principales
+
+  return rankedUsers;
+});
