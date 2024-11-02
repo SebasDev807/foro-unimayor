@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 import { ImageIcon, SmileIcon, BarChart2, MapPinIcon } from "lucide-react";
 
+import { createPost } from "@/actions/user-post";
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -13,12 +15,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
 type Props = {
   name: string;
@@ -33,26 +35,26 @@ type Trend = {
 
 const trends: Trend[] = [
   {
-    topic: "Ciencias básicas",
+    topic: "MATEMATICA",
     posts: "180 mil posts",
     url: "@/ciencias-basicas",
   },
   {
-    topic: "Ciencias de computación",
+    topic: "PROGRAMACION",
     posts: "224 mil posts",
     url: "/ciencias-computacion",
   },
   {
-    topic: "Habilidades comunicativas",
+    topic: "SISTEMAS",
     posts: "34,9 mil posts",
     url: "/habilidades-comunicativas",
   },
-  {
-    topic: "Emprendimiento",
-    posts: "59,3 mil posts",
-    url: "/emprendimiento",
-  },
-  { topic: "Decanatura", posts: "40 posts", url: "/decanatura" },
+  // {
+  //   topic: "Emprendimiento",
+  //   posts: "59,3 mil posts",
+  //   url: "/emprendimiento",
+  // },
+  // { topic: "Decanatura", posts: "40 posts", url: "/decanatura" },
 ];
 
 const emojis = ["😀", "😂", "😍", "🤔", "👍", "👎", "🎉", "🔥", "💡", "📚"];
@@ -96,10 +98,11 @@ export default function CreatePost({ name, image }: Props) {
     if (textarea) {
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
-      const newContent = content.substring(0, start) + emoji + content.substring(end);
+      const newContent =
+        content.substring(0, start) + emoji + content.substring(end);
       setContent(newContent);
       setShowEmojiPicker(false);
-      
+
       setTimeout(() => {
         textarea.selectionStart = textarea.selectionEnd = start + emoji.length;
         textarea.focus();
@@ -119,6 +122,50 @@ export default function CreatePost({ name, image }: Props) {
     }
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!content.trim() || !category) {
+  //     console.log("Please enter content and select a category");
+  //     return;
+  //   }
+
+  //   setIsSubmitting(true);
+
+  //   const postData = {
+  //     content,
+  //     category,
+  //     pollOptions: pollOptions.filter((option) => option.trim() !== ""),
+  //   };
+
+  //   try {
+  //     const response = await fetch(
+  //       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/snippet-ON4jpGAljFS7tJkRpkMjgVsjPWXouO.txt",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(postData),
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to create post");
+  //     }
+
+  //     console.log("Post created successfully");
+  //     setContent("");
+  //     setSelectedImage(null);
+  //     setCategory("");
+  //     setPollOptions(["", ""]);
+  //     setShowPollCreator(false);
+  //   } catch (error) {
+  //     console.error("Error creating post:", error);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!content.trim() || !category) {
@@ -128,36 +175,32 @@ export default function CreatePost({ name, image }: Props) {
 
     setIsSubmitting(true);
 
-    const postData = {
-      content,
-      category,
-      pollOptions: pollOptions.filter(option => option.trim() !== ""),
-    };
-
     try {
-      const response = await fetch('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/snippet-ON4jpGAljFS7tJkRpkMjgVsjPWXouO.txt', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
+      let imageUrl: string | undefined = undefined;
+
+      // Aquí puedes agregar la lógica para subir la imagen si selectedImage existe
+      // y obtener la imageUrl
+
+      const result = await createPost({
+        content,
+        category,
+        pollOptions: pollOptions.filter((option) => option.trim() !== ""),
+        imageUrl,
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to create post');
+      if (result.success) {
+        console.log("Post created successfully");
+        setContent("");
+        setSelectedImage(null);
+        setCategory("");
+        setPollOptions(["", ""]);
+        setShowPollCreator(false);
+      } else {
+        throw new Error(result.error);
       }
-
-      console.log("Post created successfully");
-      setContent("");
-      setSelectedImage(null);
-      setCategory("");
-      setPollOptions(["", ""]);
-      setShowPollCreator(false);
-    }
- catch (error) {
+    } catch (error) {
       console.error("Error creating post:", error);
-    } 
-    finally {
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -202,13 +245,20 @@ export default function CreatePost({ name, image }: Props) {
                     key={index}
                     type="text"
                     value={option}
-                    onChange={(e) => handlePollOptionChange(index, e.target.value)}
+                    onChange={(e) =>
+                      handlePollOptionChange(index, e.target.value)
+                    }
                     placeholder={`Opción ${index + 1}`}
                     className="w-full p-2 border rounded"
                   />
                 ))}
                 {pollOptions.length < 4 && (
-                  <Button type="button" onClick={addPollOption} variant="primary" size="sm">
+                  <Button
+                    type="button"
+                    onClick={addPollOption}
+                    variant="primary"
+                    size="sm"
+                  >
                     Añadir opción
                   </Button>
                 )}
@@ -223,7 +273,10 @@ export default function CreatePost({ name, image }: Props) {
                 >
                   <ImageIcon className="h-5 w-5 text-primary" />
                 </Button>
-                <Popover open={showEmojiPicker} onOpenChange={setShowEmojiPicker}>
+                <Popover
+                  open={showEmojiPicker}
+                  onOpenChange={setShowEmojiPicker}
+                >
                   <PopoverTrigger asChild>
                     <Button variant="ghost" size="icon">
                       <SmileIcon className="h-5 w-5 text-primary" />
@@ -266,11 +319,11 @@ export default function CreatePost({ name, image }: Props) {
                   </SelectContent>
                 </Select>
               </div>
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={!content.trim() || !category || isSubmitting}
               >
-                {isSubmitting ? 'Posteando...' : 'Postear'}
+                {isSubmitting ? "Posteando..." : "Postear"}
               </Button>
             </div>
           </div>
