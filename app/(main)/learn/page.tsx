@@ -5,6 +5,7 @@ import { TrendingList } from "@/components/trending-list";
 import { PostList } from "./post-list"; // Ensure this import is correct
 import { getPosts, getAuthUser } from "@/prisma/queries";
 import CreatePost from "./create-post";
+import { Post } from "@/components/post";
 
 const LearnPage = async () => {
   const [user, posts] = await Promise.all([getAuthUser(), getPosts()]);
@@ -17,11 +18,14 @@ const LearnPage = async () => {
     <div className="flex flex-row gap-[48px] px-6">
       <FeedWrapper>
         <CreatePost
+          // TODO: remove hard-coded values
           image={user.image || "image test"}
           name={user.name || "test name"}
         />
-        <div className="w-auto h-auto px-auto">
-          <PostList initialPosts={posts} />
+        <div className="w-auto h-auto px-auto space-y-4">
+          {posts.map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
         </div>
       </FeedWrapper>
       <StickyWrapper>

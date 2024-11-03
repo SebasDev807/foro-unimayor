@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Post from "@/components/Post";
+import Post from "@/components/Post(refactor-first)";
 import {
   HeartIcon,
   ChatBubbleLeftIcon,

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { FollowBar } from "@/components/follow-bar";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
-import { Post } from "@/components/post-refactor";
+import { Post } from "@/components/post";
 // import { Header } from "./header"; // TODO: make it work with client side
 import { Info } from "./info";
 
@@ -27,11 +27,9 @@ const ProfilePage = async () => {
           coverImage={user.coverImage}
           username={user.username}
         />
-        <div className="w-auto h-auto px-auto mt-5">
+        <div className="w-auto h-auto px-auto space-y-4">
           {posts.map((post) => (
-            <div key={post.id} className="mb-10">
-              <Post post={post} />
-            </div>
+            <Post key={post.id} post={post} />
           ))}
         </div>
       </FeedWrapper>

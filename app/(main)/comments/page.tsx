@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { TrendingList } from "@/components/trending-list";
 import { useRouter, useSearchParams } from "next/navigation";
-import Post from "@/components/Post";
+import Post from "@/components/Post(refactor-first)";
 import {
   HeartIcon,
   ChatBubbleLeftIcon,

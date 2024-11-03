@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/components/post-refactor";
+import { Post } from "@/components/post";
 
 type Post = {
   id: string;

@@ -55,14 +55,30 @@ export const getUserDetails = cache(async () => {
  * Retrieves at random post
  */
 export const getPosts = cache(async () => {
+  // Fetch posts in descending order, including comments
   const posts = await client.post.findMany({
     orderBy: {
       createdAt: "desc",
     },
     take: 10, // Limita la consulta a 10 posts
+    include: {
+      comments: true, // Incluir comentarios asociados
+    },
   });
 
-  return posts;
+  // Normalize data to include post stats
+  const normalizedPosts = posts.map((post) => ({
+    ...post,
+    stats: {
+      likes: {
+        length: post.likedIds.length,
+        isLiked: post.likedIds.includes(post.authUserId),
+      },
+      comments: post.comments.length,
+    },
+  }));
+
+  return normalizedPosts;
 });
 
 /**
@@ -103,7 +119,10 @@ export const getUsersRankedByLikes = cache(async () => {
   const rankedUsers = users
     .map((user) => ({
       ...user,
-      totalLikes: user.comments.reduce((sum, comment) => sum + comment.likedIds.length, 0),
+      totalLikes: user.comments.reduce(
+        (sum, comment) => sum + comment.likedIds.length,
+        0
+      ),
     }))
     .sort((a, b) => b.totalLikes - a.totalLikes)
     .slice(0, 10); // Obtener los 10 usuarios principales
