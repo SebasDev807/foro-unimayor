@@ -5,6 +5,7 @@ import { Post } from "@/components/post-refactor";
 type Post = {
   id: string;
   body: string;
+  category: "MATEMATICA" | "PROGRAMACION" | "SISTEMAS";
   createdAt: Date;
   updatedAt: Date;
   authUserId: string;

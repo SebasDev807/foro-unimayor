@@ -1,5 +1,5 @@
 "use client";
-
+import { useState, useTransition } from "react";
 import {
   Card,
   CardHeader,
@@ -15,10 +15,13 @@ import {
   ShareIcon,
 } from "lucide-react";
 
+import { likePostToggle } from "@/actions/user-post";
+
 type PostProps = {
   post: {
     id: string;
     body: string;
+    category: "MATEMATICA" | "PROGRAMACION" | "SISTEMAS";
     createdAt: Date;
     updatedAt: Date;
     authUserId: string;
@@ -27,6 +30,20 @@ type PostProps = {
 };
 
 export const Post = ({ post }: PostProps) => {
+  const [pending, startTransition] = useTransition();
+
+  const handleHartClike = () => {
+    startTransition(() => {
+      likePostToggle(post)
+        .then((response) => {
+          // if (response?.error === "hearts") {
+          // }
+          console.log("like: ", response.message);
+        })
+        .catch((error) => console.error(error));
+    });
+  };
+
   return (
     <Card key={post.id} className="w-full max-w-md mx-auto">
       <CardHeader>
@@ -59,7 +76,7 @@ export const Post = ({ post }: PostProps) => {
       <CardFooter className="border-t border-gray-200 pt-4">
         <div className="flex justify-between w-full text-gray-500">
           <Button variant="ghost" size="sm">
-            <HeartIcon className="h-5 w-5 mr-1" />
+            <HeartIcon onClick={handleHartClike} className="h-5 w-5 mr-1" />
             <span className="text-xs">{post.likedIds.length}</span>
           </Button>
           <Button variant="ghost" size="sm">
