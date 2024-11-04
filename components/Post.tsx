@@ -1,5 +1,5 @@
 "use client";
-import { useState, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
 import {
   Card,
   CardHeader,
@@ -48,32 +48,18 @@ type Props = {
 };
 
 export const Post = ({ post }: Props) => {
+  const [isLiked, setIsLiked] = useState(post.stats?.likes?.isLiked ?? false);
   const [pending, startTransition] = useTransition();
-  const [isLiked, setIsLiked] = useState(post.stats?.likes?.isLiked ?? false); // Estado inicial según el `isLiked`
 
-  const handleHeartClick = () => {
+  const handleHeartClick = useCallback(() => {
     startTransition(() => {
       likePostToggle(post)
-        .then((response) => {
-          if (
-            typeof response?.error === "string" &&
-            response.error === "not-authenticated"
-          ) {
-          }
-          if (!response.error) {
-            setIsLiked(!isLiked); // Cambia el estado de like
-            console.log("like: ", response.message);
-            // eslint-disable-next-line brace-style
-          } else {
-            toast.error("Failed to update like status."); // Notificación de error
-          }
+        .then(() => {
+          setIsLiked((prev) => !prev);
         })
-        .catch((error) => {
-          toast.error("An unexpected error occurred."); // Error inesperado
-          console.error(error);
-        });
+        .catch(() => toast.error("Something went wrong. Please try again."));
     });
-  };
+  }, [post]);
 
   return (
     <Card key={post.id} className="w-full max-w-md mx-auto">
@@ -106,7 +92,12 @@ export const Post = ({ post }: Props) => {
 
       <CardFooter className="border-t border-gray-200 pt-4">
         <div className="flex justify-between w-full text-gray-500">
-          <Button variant="ghost" size="sm" onClick={handleHeartClick}>
+          <Button
+            disabled={pending}
+            variant="ghost"
+            size="sm"
+            onClick={handleHeartClick}
+          >
             <HeartIcon
               className={`h-5 w-5 mr-1 transition-colors duration-300 ${
                 isLiked ? "text-red-500 fill-red-500" : "text-gray-500"

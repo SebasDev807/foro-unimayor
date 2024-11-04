@@ -1,4 +1,5 @@
 "use server";
+// TODO: Solve errot when insert a new user, don't appear the name, email, etc.
 
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { getAuthUser } from "@/prisma/queries";
@@ -10,8 +11,6 @@ import { revalidatePath } from "next/cache";
 
 /**
  * Inserts a new user into the database.
- *
- * @throws {Error} Throws an error if the user is not authenticated or the course is not found.
  */
 export const insertUser = async () => {
   const { userId } = auth();
@@ -26,10 +25,12 @@ export const insertUser = async () => {
     revalidatePath("/courses");
     revalidatePath("/learn");
     redirect("/");
+    // eslint-disable-next-line brace-style
   } else {
     // TODO: proveide another way to generate username if extension is gmail, yahoo, etc.
+    // Obtener la base del nombre de usuario a partir del email
     const email = user.emailAddresses[0].emailAddress;
-    let baseUsername = "@" + email.split("@")[0]; // Generar nombre de usuario basado en la parte antes del "@"
+    let baseUsername = email.split("@")[0];
     let username = baseUsername;
     let suffix = 1;
 

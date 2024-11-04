@@ -1,9 +1,10 @@
 "use client";
+// TODO: Ii's ugly, you can provide a better style Sam jeje.
 
 import React, { useState } from "react";
 import { TrendingList } from "@/components/trending-list";
 import { useRouter, useSearchParams } from "next/navigation";
-import Post from "@/components/Post(refactor-first)";
+import { Post } from "@/components/post";
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
@@ -279,7 +280,8 @@ const CommentsPage: React.FC = () => {
             Volver
           </button>
           <div className="max-w-2xl mx-auto bg-white border border-gray-300 rounded-lg shadow-md mb-4 relative">
-            <Post
+            {/* TODO: solve post error, I remove multiple post files and keeps only one called "post.tsx" */}
+            {/* <Post
               avatar={post.avatar}
               username={post.username}
               handle={post.handle}
@@ -292,7 +294,7 @@ const CommentsPage: React.FC = () => {
               onEditClick={() => {}}
               onDeleteClick={() => {}}
               onReportClick={() => {}}
-            />
+            /> */}
             <div className="border-t border-gray-300 p-4">
               <h2 className="text-xl font-bold mb-2">Comentarios:</h2>
               {replyTo === null && (

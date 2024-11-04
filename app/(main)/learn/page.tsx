@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { TrendingList } from "@/components/trending-list";
-import { PostList } from "./post-list"; // Ensure this import is correct
 import { getPosts, getAuthUser } from "@/prisma/queries";
 import CreatePost from "./create-post";
 import { Post } from "@/components/post";

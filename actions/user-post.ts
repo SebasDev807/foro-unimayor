@@ -12,6 +12,7 @@ type CreatePostData = {
   content: string;
   category: string;
   imageUrl?: string;
+  pollOptions?: string[];
 };
 
 // Creates a new post in the database.
@@ -19,9 +20,7 @@ export async function createPost({ content, category }: CreatePostData) {
   try {
     // Authenticate the user
     const { userId } = auth();
-    if (!userId) {
-      return { error: "not-authenticated" };
-    }
+    if (!userId) throw new Error("Unauthorized");
 
     // Create the post in the database
     const post = await client.post.create({
@@ -76,9 +75,6 @@ export async function likePostToggle(post: Post) {
     });
 
     revalidatePath("/learn");
-
-    // Return a success response
-    return { error: false, message: "Success" };
     // eslint-disable-next-line brace-style
   } catch (error) {
     // Log and return error if toggle fails
