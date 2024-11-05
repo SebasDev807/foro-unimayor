@@ -73,6 +73,15 @@ export async function likePostToggle(post: Post) {
       where: { id: post.id },
       data: { likedIds: updatedLikes },
     });
+    // Update the notification
+    await client.notification.create({
+      data: {
+        body: `${user.fullName} liked your post`,
+        authUserId: userId,
+        type: "LIKE",
+        read: false,
+      },
+    });
 
     revalidatePath("/learn");
     // eslint-disable-next-line brace-style

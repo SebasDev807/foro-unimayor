@@ -1,6 +1,5 @@
 import client from "@/lib/prismadb";
-import { auth, currentUser } from "@clerk/nextjs/server";
-import { Category } from "@prisma/client";
+import { auth } from "@clerk/nextjs/server";
 import { cache } from "react";
 
 /**
@@ -134,4 +133,27 @@ export const getUsersRankedByLikes = cache(async () => {
     .slice(0, 10); // Obtener los 10 usuarios principales
 
   return rankedUsers;
+});
+
+export const getNotifications = cache(async () => {
+  // Obtains the authenticated user ID
+  const { userId } = auth();
+  if (!userId) {
+    throw new Error("User ID is null");
+  }
+
+  const notifications = await client.notification.findMany({
+    where: {
+      authUserId: userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+    include: {
+      user: true,
+    },
+  });
+
+  return notifications;
 });
