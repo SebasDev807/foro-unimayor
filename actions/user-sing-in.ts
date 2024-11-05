@@ -43,7 +43,7 @@ export const insertUser = async () => {
     await client.user.create({
       data: {
         authUserId: userId,
-        name: user.username,
+        name: user.fullName,
         username,
         bio: "...",
         email,

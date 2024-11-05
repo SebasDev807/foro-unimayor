@@ -14,7 +14,6 @@ import { insertUser } from "@/actions/user-sing-in";
 
 import { useTransition } from "react";
 import { Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import Link from "next/link";

@@ -1,7 +1,7 @@
 import { getPosts, getAuthUser } from "@/prisma/queries";
 import { redirect } from "next/navigation";
 
-import { FollowBar } from "@/components/follow-bar";
+import { FollowBar } from "@/components/follow/follow-bar";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { Post } from "@/components/post";
