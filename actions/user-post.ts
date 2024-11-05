@@ -82,3 +82,32 @@ export async function likePostToggle(post: Post) {
     return { error: true, message: "An error occurred" };
   }
 }
+
+// Deletes a post from the database.
+export async function deletePost(post: Post) {
+  try {
+    // Authenticate the user and retrieve the current user
+    const { userId } = auth();
+    const user = await currentUser();
+    if (!userId || !user) throw new Error("Unauthorized");
+
+    // Check if the post exists in the database
+    const existingPost = await client.post.findUnique({
+      where: { id: post.id },
+    });
+    if (!existingPost) return { error: "unexisting" };
+
+    // Check if the user is the author of the post
+    if (existingPost.authUserId !== userId) return { error: "unauthorized" };
+
+    // Delete the post from the database
+    await client.post.delete({ where: { id: post.id } });
+
+    revalidatePath("/learn");
+    // eslint-disable-next-line brace-style
+  } catch (error) {
+    // Log and return error if deletion fails
+    console.error("Error deleting post:", error);
+    return { error: "failed" };
+  }
+}

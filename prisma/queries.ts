@@ -1,5 +1,5 @@
 import client from "@/lib/prismadb";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { Category } from "@prisma/client";
 import { cache } from "react";
 
@@ -55,24 +55,30 @@ export const getUserDetails = cache(async () => {
  * Retrieves at random post
  */
 export const getPosts = cache(async () => {
-  // Fetch posts in descending order, including comments
+  const { userId } = auth();
+  if (!userId) {
+    throw new Error("User ID is null");
+  }
+
+  // Fetch posts in descending order, including comments and user details
   const posts = await client.post.findMany({
     orderBy: {
       createdAt: "desc",
     },
-    take: 10, // Limita la consulta a 10 posts
+    take: 10,
     include: {
-      comments: true, // Incluir comentarios asociados
+      comments: true,
+      user: true,
     },
   });
 
-  // Normalize data to include post stats
+  // Normalize the posts by adding stats
   const normalizedPosts = posts.map((post) => ({
     ...post,
     stats: {
       likes: {
         length: post.likedIds.length,
-        isLiked: post.likedIds.includes(post.authUserId),
+        isLiked: post.likedIds.includes(userId), // <- Este campo se calcula en el servidor
       },
       comments: post.comments.length,
     },
