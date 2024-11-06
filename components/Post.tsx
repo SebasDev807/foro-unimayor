@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState, useTransition } from "react";
+import Link from "next/link";
 import {
   Card,
   CardHeader,
@@ -18,7 +19,6 @@ import {
 import {
   HeartIcon,
   MessageCircleIcon,
-  RepeatIcon,
   ShareIcon,
   MoreVertical,
   Flag,
@@ -65,6 +65,7 @@ type Props = {
       bio: string;
       followerCount: number;
     };
+    image?: string;
   };
   currentUserId: string;
 };
@@ -185,7 +186,6 @@ export const Post = ({ post, currentUserId }: Props) => {
           >
             {post.body}
           </p>
-
           {!isExpanded && post.body.length > 100 && (
             <span
               onClick={toggleExpand}
@@ -202,8 +202,6 @@ export const Post = ({ post, currentUserId }: Props) => {
               menos
             </span>
           )}
-
-          {/* Renderiza la imagen si está disponible */}
           {post.image && (
             <img
               src={post.image}
@@ -229,10 +227,12 @@ export const Post = ({ post, currentUserId }: Props) => {
             />
             <span className="text-xs">{post.likedIds.length}</span>
           </Button>
-          <Button variant="ghost" size="sm">
-            <MessageCircleIcon className="h-5 w-5 mr-1" />
-            {/* <span className="text-xs">{post.likedIds.length}</span> */}
-          </Button>
+          <Link href={`/comments?postId=${post.id}`} passHref>
+            <Button variant="ghost" size="sm" as="a">
+              <MessageCircleIcon className="h-5 w-5 mr-1" />
+              <span className="text-xs">{post.comments.length}</span>
+            </Button>
+          </Link>
           <Button
             variant="ghost"
             size="sm"
@@ -245,7 +245,6 @@ export const Post = ({ post, currentUserId }: Props) => {
                   })
                   .then(() => console.log("Contenido compartido"))
                   .catch(console.error);
-                // eslint-disable-next-line brace-style
               } else {
                 alert(
                   "La funcionalidad de compartir no es compatible en este navegador."
