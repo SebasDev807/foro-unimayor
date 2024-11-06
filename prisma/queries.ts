@@ -155,5 +155,6 @@ export const getNotifications = cache(async () => {
     },
   });
 
+  console.log(notifications);
   return notifications;
 });

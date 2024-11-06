@@ -136,7 +136,7 @@ export const Post = ({ post, currentUserId }: Props) => {
                 {post.user.name}
               </span>
               <span className="text-xs text-gray-500 ml-2">
-                @{post.user.email}
+                {post.user.email}
               </span>
             </div>
           </div>
@@ -181,11 +181,11 @@ export const Post = ({ post, currentUserId }: Props) => {
           <p
             className={`text-gray-700 ${
               !isExpanded ? "line-clamp-3" : "line-clamp-none"
-            } whitespace-pre-wrap break-words`} // Clases de Tailwind
+            } whitespace-pre-wrap break-words`}
           >
             {post.body}
           </p>
-          {/* Mostrar "más..." solo si el contenido es largo */}
+
           {!isExpanded && post.body.length > 100 && (
             <span
               onClick={toggleExpand}
@@ -201,6 +201,15 @@ export const Post = ({ post, currentUserId }: Props) => {
             >
               menos
             </span>
+          )}
+
+          {/* Renderiza la imagen si está disponible */}
+          {post.image && (
+            <img
+              src={post.image}
+              alt="Imagen del post"
+              className="w-full max-h-80 object-cover rounded-md mt-4"
+            />
           )}
         </div>
       </CardContent>

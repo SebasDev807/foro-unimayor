@@ -11,7 +11,7 @@
     "db:push": "npx prisma db push",
     "db:clear": "tsx ./scripts/cleanDatabase.ts",
     "db:seed": "tsx ./scripts/seed.ts",
-    "studio": "npx prisma studio"
+    "db:studio": "npx prisma studio"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.35",

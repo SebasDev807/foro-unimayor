@@ -3,7 +3,7 @@ import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { TrendingList } from "@/components/trending-list";
 import { getPosts, getAuthUser } from "@/prisma/queries";
-import CreatePost from "./create-post";
+import { Form } from "./form";
 import { Post } from "@/components/post";
 
 const LearnPage = async () => {
@@ -16,7 +16,7 @@ const LearnPage = async () => {
   return (
     <div className="flex flex-row gap-[48px] px-6">
       <FeedWrapper>
-        <CreatePost
+        <Form
           // TODO: remove hard-coded values
           image={user.image || "image test"}
           name={user.name || "test name"}

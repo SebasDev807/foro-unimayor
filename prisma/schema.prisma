@@ -49,6 +49,7 @@ model Post {
   updatedAt  DateTime @updatedAt
   authUserId String
   likedIds   String[]
+  image      String?
 
   user     User      @relation(fields: [authUserId], references: [authUserId], onDelete: Cascade)
   comments Comment[]

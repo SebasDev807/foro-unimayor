@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState, useTransition } from "react";
 
-import { Bell, UserPlus, MessageSquare, PinIcon, Heart } from "lucide-react";
+import { Bell, UserPlus, MessageSquare, Heart, Check, X } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { deleteNotification } from "@/actions/user-post";
 import type {
   Notification as NotificationType,
   NotificationType as NotificationEnum,
 } from "@prisma/client";
+import { toast } from "sonner";
 
 type Props = {
   notifications: (NotificationType & {
@@ -22,8 +25,6 @@ export function Notifications({ notifications }: Props) {
     switch (type) {
       case "LIKE":
         return <Heart className="h-5 w-5" />;
-      // case "POST":
-      //   return <PinIcon className="h-5 w-5" />;
       case "FOLLOW":
         return <UserPlus className="h-5 w-5" />;
       case "COMMENT":
@@ -51,6 +52,18 @@ export function Notifications({ notifications }: Props) {
         return notifications;
     }
   };
+
+  const [pending, startTransition] = useTransition();
+
+  const handleDelete = useCallback((id: string) => {
+    startTransition(() => {
+      deleteNotification(id)
+        .then(() => {
+          // setIsLiked((prev) => !prev);
+        })
+        .catch(() => toast.error("Something went wrong. Please try again."));
+    });
+  }, []);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -93,6 +106,19 @@ export function Notifications({ notifications }: Props) {
                 <span className="text-xs text-gray-400">
                   {notification.createdAt.toLocaleString()}
                 </span>
+              </div>
+              <div className="">
+                <Button className="text-blue-500">
+                  <Check className="h-5 w-5" />
+                </Button>
+                <Button
+                  onClick={() => handleDelete(notification.id)}
+                  className="text-red-500"
+                  variant="ghost"
+                  disabled={pending}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
               </div>
             </div>
           ))}

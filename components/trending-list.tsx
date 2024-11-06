@@ -1,36 +1,30 @@
-import React from "react"
-import Link from "next/link"
-import { ChevronRight } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 type Trend = {
-  topic: string
-  posts: string
-  url: string
-}
+  topic: string;
+  posts: string;
+  url: string;
+};
 
 const trends: Trend[] = [
   {
-    topic: "Ciencias básicas",
+    topic: "MATEMATICA",
     posts: "180 mil posts",
-    url: "/ciencias-basicas",
+    url: "/topic/matematica",
   },
   {
-    topic: "Ciencias de computación",
+    topic: "PROGRAMACION",
     posts: "224 mil posts",
-    url: "/ciencias-computacion",
+    url: "/topic/programacion",
   },
   {
-    topic: "Habilidades comunicativas",
+    topic: "SISTEMAS",
     posts: "34,9 mil posts",
-    url: "/habilidades-comunicativas",
+    url: "/topic/sistemas",
   },
-  {
-    topic: "Emprendimiento",
-    posts: "59,3 mil posts",
-    url: "/emprendimiento",
-  },
-  { topic: "Decanatura", posts: "40 posts", url: "/decanatura" },
-]
+];
 
 const Trend = ({ topic, posts, url }: Trend) => {
   return (
@@ -44,13 +38,15 @@ const Trend = ({ topic, posts, url }: Trend) => {
       </div>
       <ChevronRight className="w-5 h-5 text-gray-400" />
     </Link>
-  )
-}
+  );
+};
 
-export  function TrendingList() {
+export function TrendingList() {
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-md">
-      <h2 className="text-xl font-bold p-4  text-[#3fa7f3] text-center">Módulos</h2>
+      <h2 className="text-xl font-bold p-4  text-[#3fa7f3] text-center">
+        Módulos
+      </h2>
       <ul>
         {trends.map((trend, index) => (
           <li key={index} className="last:border-b-0">
@@ -59,5 +55,5 @@ export  function TrendingList() {
         ))}
       </ul>
     </div>
-  )
+  );
 }

@@ -1,45 +1,34 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { toast } from "sonner";
-
 import client from "@/lib/prismadb";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Category, Post } from "@prisma/client";
 
-// Types
-type CreatePostData = {
-  content: string;
-  category: string;
-  imageUrl?: string;
-  pollOptions?: string[];
+type CreatePostParams = {
+  body: string;
+  category: Category;
+  image: string | null;
 };
-
 // Creates a new post in the database.
-export async function createPost({ content, category }: CreatePostData) {
+export async function createPost({ body, category, image }: CreatePostParams) {
   try {
-    // Authenticate the user
     const { userId } = auth();
     if (!userId) throw new Error("Unauthorized");
 
-    // Create the post in the database
     const post = await client.post.create({
       data: {
-        body: content,
+        body,
         category: category as Category,
         authUserId: userId,
+        image, // La cadena Base64 se guarda en MongoDB
         likedIds: [],
       },
     });
 
-    // Revalidate specific path to ensure up-to-date data on relevant pages
     revalidatePath("/learn");
-
-    // Return a success response with the created post data
     return { success: true, data: post };
-    // eslint-disable-next-line brace-style
   } catch (error) {
-    // Log and return error if post creation fails
     console.error("Error creating post:", error);
     return {
       success: false,
@@ -89,6 +78,36 @@ export async function likePostToggle(post: Post) {
     // Log and return error if toggle fails
     console.error("Error toggling like status:", error);
     return { error: true, message: "An error occurred" };
+  }
+}
+
+// Delete notification
+export async function deleteNotification(notificationId: string) {
+  try {
+    // Authenticate the user and retrieve the current user
+    const { userId } = auth();
+    const user = await currentUser();
+    if (!userId || !user) throw new Error("Unauthorized");
+
+    // Check if the notification exists in the database
+    const existingNotification = await client.notification.findUnique({
+      where: { id: notificationId },
+    });
+    if (!existingNotification) return { error: "Notification not found" };
+
+    // Check if the user is the owner of the notification
+    if (existingNotification.authUserId !== userId)
+      return { error: "Unauthorized" };
+
+    // Delete the notification from the database
+    await client.notification.delete({ where: { id: notificationId } });
+
+    revalidatePath("/notifications");
+    // eslint-disable-next-line brace-style
+  } catch (error) {
+    // Log and return error if deletion fails
+    console.error("Error deleting notification:", error);
+    return { error: "Failed to delete notification" };
   }
 }
 
