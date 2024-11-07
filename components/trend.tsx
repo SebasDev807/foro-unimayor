@@ -1,13 +1,15 @@
+import React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { Category } from "@prisma/client";
 
-type Trend = {
-  topic: string;
+type TrendProps = {
+  topic: Category;
   posts: string;
   url: string;
 };
 
-export const Trend = ({ topic, posts, url }: Trend) => {
+export const Trend: React.FC<TrendProps> = ({ topic, posts, url }) => {
   return (
     <Link
       href={url}
