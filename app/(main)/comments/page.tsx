@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getPost, getCurrentUser, createComment } from "@/actions/user-comment";
 import { Comment } from "./comment";
+import { TrendingList } from "@/components/trending-list";
+import { FeedWrapper } from "@/components/feed-wrapper";
+import { StickyWrapper } from "@/components/sticky-wrapper";
 
 export default function CommentsPage({
   searchParams,
@@ -56,44 +59,51 @@ export default function CommentsPage({
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <Post post={post} currentUserId={currentUser?.id} />
+    <div className="flex flex-row gap-[48px] px-6">
+      <FeedWrapper>
+        <div className="max-w-2xl mx-auto p-4">
+          <Post post={post} currentUserId={currentUser?.id} />
 
-      <form action={onSubmit} className="mt-4">
-        <div className="flex items-start space-x-4">
-          <Avatar>
-            <AvatarImage
-              src={currentUser?.image}
-              alt={currentUser?.name || ""}
-            />
-            <AvatarFallback>{currentUser?.name?.[0]}</AvatarFallback>
-          </Avatar>
-          <textarea
-            name="body"
-            placeholder="Añade un comentario..."
-            className="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-[calc(100%-3rem)] resize-y"
-            rows={3}
-            required
-            aria-label="Texto del comentario"
-          />
+          <form action={onSubmit} className="mt-4">
+            <div className="flex items-start space-x-4">
+              <Avatar>
+                <AvatarImage
+                  src={currentUser?.image}
+                  alt={currentUser?.name || ""}
+                />
+                <AvatarFallback>{currentUser?.name?.[0]}</AvatarFallback>
+              </Avatar>
+              <textarea
+                name="body"
+                placeholder="Añade un comentario..."
+                className="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-[calc(100%-3rem)] resize-y"
+                rows={3}
+                required
+                aria-label="Texto del comentario"
+              />
+            </div>
+            <Button type="submit" className="mt-2" disabled={isPending}>
+              {isPending ? "Enviando..." : "Comentar"}
+            </Button>
+          </form>
+
+          <div className="mt-8">
+            <h2 className="text-xl font-bold mb-4">Comentarios</h2>
+            {comments.length === 0 ? (
+              <p>Aún no hay comentarios. ¡Sé el primero en comentar!</p>
+            ) : (
+              <ul className="space-y-4">
+                {comments.map((comment) => (
+                  <Comment key={comment.id} comment={comment} currentUserId={currentUser?.id} />
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-        <Button type="submit" className="mt-2" disabled={isPending}>
-          {isPending ? "Enviando..." : "Comentar"}
-        </Button>
-      </form>
-
-      <div className="mt-8">
-        <h2 className="text-xl font-bold mb-4">Comentarios</h2>
-        {comments.length === 0 ? (
-          <p>Aún no hay comentarios. ¡Sé el primero en comentar!</p>
-        ) : (
-          <ul className="space-y-4">
-            {comments.map((comment) => (
-              <Comment key={comment.id} comment={comment} />
-            ))}
-          </ul>
-        )}
-      </div>
+      </FeedWrapper>
+      <StickyWrapper>
+        <TrendingList />
+      </StickyWrapper>
     </div>
   );
 }
