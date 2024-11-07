@@ -158,3 +158,114 @@ export const getNotifications = cache(async () => {
   console.log(notifications);
   return notifications;
 });
+
+/*
+ *Info like followers, following, etc
+ */
+export const getUserInfo = cache(async () => {
+  const user = await getAuthUser();
+  if (!user) throw new Error("User not found");
+
+  // Post made by the user
+  const posts = await client.post.findMany({
+    where: {
+      authUserId: user.authUserId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+    include: {
+      comments: true,
+      user: true,
+    },
+  });
+
+  // liked posts
+  const likedPosts = await client.post.findMany({
+    where: {
+      likedIds: {
+        has: user.authUserId,
+      },
+    },
+    include: {
+      comments: true,
+      user: true,
+    },
+  });
+
+  // comments
+  const comments = await client.comment.findMany({
+    where: {
+      authUserId: user.authUserId,
+    },
+    include: {
+      post: true,
+      user: true,
+    },
+  });
+
+  // followings
+  const followings = await client.user.findMany({
+    where: {
+      id: {
+        in: user.followingIds,
+      },
+    },
+  });
+
+  // Other users that follow the authenticated user
+  const followers = await client.user.findMany({
+    where: {
+      followingIds: {
+        has: user.id,
+      },
+    },
+  });
+
+  return {
+    posts,
+    likedPosts,
+    comments,
+    followers,
+    followings,
+  };
+});
+
+/**
+ *
+ * */
+export const followings = cache(async () => {
+  const user = await getAuthUser();
+  if (!user) throw new Error("User not found");
+
+  // followings
+  const followings = await client.user.findMany({
+    where: {
+      id: {
+        in: user.followingIds,
+      },
+    },
+  });
+
+  return followings;
+});
+
+/**
+ *
+ * */
+export const followers = cache(async () => {
+  const user = await getAuthUser();
+  if (!user) throw new Error("User not found");
+
+  // Other users that follow the authenticated user
+  const followers = await client.user.findMany({
+    where: {
+      followingIds: {
+        has: user.id,
+      },
+    },
+  });
+
+  return followers;
+});

@@ -40,6 +40,8 @@ type Props = {
     updatedAt: Date;
     authUserId: string;
     likedIds: string[];
+    image: string | null;
+
     stats?: {
       likes: {
         length: number;
@@ -65,7 +67,6 @@ type Props = {
       bio: string;
       followerCount: number;
     };
-    image?: string;
   };
   currentUserId: string;
 };
