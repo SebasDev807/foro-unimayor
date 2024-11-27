@@ -1,55 +1,44 @@
 import React from "react";
-import Link from "next/link";
+import { Trend } from "./Trend";
+import { Category } from "@prisma/client";
 
-type Trend = {
-  topic: string;
+type TrendType = {
+  topic: Category;
   posts: string;
   url: string;
 };
 
-const trends: Trend[] = [
+const trends: TrendType[] = [
   {
-    topic: "Ciencias básicas",
+    topic: Category.MATEMATICA,
     posts: "180 mil posts",
-    url: "@/ciencias-basicas",
+    url: "/topic/matematica",
   },
   {
-    topic: "Ciencias de computación",
+    topic: Category.PROGRAMACION,
     posts: "224 mil posts",
-    url: "/ciencias-computacion",
+    url: "/topic/programacion",
   },
   {
-    topic: "Habilidades comunicativas",
+    topic: Category.SISTEMAS,
     posts: "34,9 mil posts",
-    url: "/habilidades-comunicativas",
+    url: "/topic/sistemas",
   },
-  {
-    topic: "Emprendimiento",
-    posts: "59,3 mil posts",
-    url: "/emprendimiento",
-  },
-  { topic: "Decanatura", posts: "40 posts", url: "/decanatura" },
 ];
 
-const Trend = ({ topic, posts, url }: Trend) => {
+export function TrendingList() {
   return (
-    <div className="flex flex-col items-start justify-between gap-x-2 w-full p-4 bg-white border border-gray-300 rounded-lg shadow-md max-w-2xl mx-auto mb-4">
-      <Link href={url} legacyBehavior>
-        <a className="font-bold text-blue-500 hover:underline">{topic}</a>
-      </Link>
-      <span className="text-sm text-gray-400">{posts}</span>
+    <div className="bg-white rounded-xl overflow-hidden shadow-md">
+      <h2 className="text-xl font-bold p-4 text-[#3fa7f3] text-center">
+        Módulos
+      </h2>
+      <ul>
+        {trends.map((trend, index) => (
+          <li key={index} className="last:border-b-0">
+            <Trend topic={trend.topic} posts={trend.posts} url={trend.url} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
-
-export const TrendingList = () => {
-  return (
-    <ul className="space-y-4">
-      {trends.map((trend, index) => (
-        <li key={index} className="text-gray-700">
-          <Trend topic={trend.topic} posts={trend.posts} url={trend.url} />
-        </li>
-      ))}
-    </ul>
-  );
-};
+}

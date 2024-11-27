@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useState, useTransition } from "react";
-import Link from "next/link";
+import { useState, useTransition } from "react";
 import {
   Card,
   CardHeader,
@@ -18,54 +17,29 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   HeartIcon,
-  MessageCircleIcon,
-  ShareIcon,
   MoreVertical,
   Flag,
   UserPlus,
   VolumeX,
-  Trash,
 } from "lucide-react";
-
-import { deletePost, likePostToggle } from "@/actions/user-post";
+import { likeCommentToggle } from "@/actions/user-comment";
 import { toast } from "sonner";
-import { Category } from "@prisma/client";
 
-type Props = {
-  post: {
+type CommentProps = {
+  comment: {
     id: string;
     body: string;
-    category: Category;
     createdAt: Date;
     updatedAt: Date;
     authUserId: string;
-    likedIds: string[];
-    image: string | null;
-
-    stats?: {
-      likes: {
-        length: number;
-        isLiked: boolean;
-      };
-      comments: number;
-    };
-    comments: {
-      id: string;
-      body: string;
-      createdAt: Date;
-      updatedAt: Date;
-      authUserId: string;
-      postId: string;
-      likedIds: string[];
-    }[];
+    postId: string;
+    likedIds?: string[];
     user: {
       id: string;
       name: string;
       username: string;
       email: string;
       image: string;
-      bio: string;
-      followerCount: number;
     };
   };
   currentUserId: string;
@@ -88,64 +62,52 @@ const formatDate = (date: Date) => {
   }).format(date);
 };
 
-export const Post = ({ post, currentUserId }: Props) => {
-  const [isLiked, setIsLiked] = useState(post.stats?.likes.isLiked ?? false);
+export const Comment = ({ comment, currentUserId }: CommentProps) => {
+  const [isLiked, setIsLiked] = useState(comment.likedIds?.includes(currentUserId) ?? false);
+  const [likeCount, setLikeCount] = useState(comment.likedIds?.length ?? 0);
   const [isExpanded, setIsExpanded] = useState(false);
-
   const [pending, startTransition] = useTransition();
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const handleHeartClick = useCallback(() => {
+  const handleHeartClick = () => {
     startTransition(() => {
-      likePostToggle(post)
+      likeCommentToggle(comment)
         .then(() => {
           setIsLiked((prev) => !prev);
-        })
-        .catch(() => toast.error("Something went wrong. Please try again."));
-    });
-  }, [post]);
-
-  const handleDeletePost = async () => {
-    startTransition(() => {
-      deletePost(post)
-        .then((response) => {
-          if (response?.error === "unexisting") {
-            toast.error("Post does not exist.");
-            return;
-          }
+          setLikeCount((prev) => isLiked ? prev - 1 : prev + 1);
         })
         .catch(() => toast.error("Something went wrong. Please try again."));
     });
   };
 
   return (
-    <Card key={post.id} className="w-full max-w-md mx-auto">
+    <Card className="w-full mx-auto">
       <CardHeader>
         <div className="flex justify-between gap-1">
           <div className="flex gap-1 items-center">
             <Avatar>
               <AvatarImage
-                src={post.user.image || "/placeholder.svg?height=40&width=40"}
-                alt={`@${post.user.name}`}
+                src={comment.user.image || "/placeholder.svg?height=40&width=40"}
+                alt={`@${comment.user.name}`}
               />
-              <AvatarFallback>{getInitials(post.user.name)}</AvatarFallback>
+              <AvatarFallback>{getInitials(comment.user.name)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
               <span className="text-sm font-medium text-gray-900 ml-2">
-                {post.user.name}
+                {comment.user.name}
               </span>
               <span className="text-xs text-gray-500 ml-2">
-                {post.user.email}
+                {comment.user.email}
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="text-xs text-gray-500">
-              {formatDate(post.createdAt)}
+              {formatDate(comment.createdAt)}
             </span>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -166,12 +128,6 @@ export const Post = ({ post, currentUserId }: Props) => {
                   <VolumeX className="mr-2 h-4 w-4" />
                   <span>Mute</span>
                 </DropdownMenuItem>
-                {post.authUserId === currentUserId && (
-                  <DropdownMenuItem onClick={handleDeletePost}>
-                    <Trash className="mr-2 h-4 w-4" />
-                    <span>Remove</span>
-                  </DropdownMenuItem>
-                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -185,9 +141,9 @@ export const Post = ({ post, currentUserId }: Props) => {
               !isExpanded ? "line-clamp-3" : "line-clamp-none"
             } whitespace-pre-wrap break-words`}
           >
-            {post.body}
+            {comment.body}
           </p>
-          {!isExpanded && post.body.length > 100 && (
+          {!isExpanded && comment.body.length > 100 && (
             <span
               onClick={toggleExpand}
               className="text-blue-500 cursor-pointer text-sm"
@@ -202,13 +158,6 @@ export const Post = ({ post, currentUserId }: Props) => {
             >
               menos
             </span>
-          )}
-          {post.image && (
-            <img
-              src={post.image}
-              alt="Imagen del post"
-              className="w-full max-h-80 object-cover rounded-md mt-4"
-            />
           )}
         </div>
       </CardContent>
@@ -226,34 +175,7 @@ export const Post = ({ post, currentUserId }: Props) => {
                 isLiked ? "text-red-500 fill-red-500" : "text-gray-500"
               }`}
             />
-            <span className="text-xs">{post.likedIds.length}</span>
-          </Button>
-          <Link href={`/comments?postId=${post.id}`} passHref>
-            <Button variant="ghost" size="sm" as="a">
-              <MessageCircleIcon className="h-5 w-5 mr-1" />
-              <span className="text-xs">{post.comments.length}</span>
-            </Button>
-          </Link>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => {
-              if (navigator.share) {
-                navigator
-                  .share({
-                    text: post.body.slice(0, 100),
-                    url: window.location.href,
-                  })
-                  .then(() => console.log("Contenido compartido"))
-                  .catch(console.error);
-              } else {
-                alert(
-                  "La funcionalidad de compartir no es compatible en este navegador."
-                );
-              }
-            }}
-          >
-            <ShareIcon className="h-5 w-5" />
+            <span className="text-xs">{likeCount}</span>
           </Button>
         </div>
       </CardFooter>

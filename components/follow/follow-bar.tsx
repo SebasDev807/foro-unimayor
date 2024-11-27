@@ -1,9 +1,12 @@
-import { getAllUsers } from "@/prisma/queries";
+import { getAllUsers, getAuthUser } from "@/prisma/queries";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { FollowButton } from "./follow-button";
 
 export const FollowBar = async () => {
-  const users = await getAllUsers();
+  const [users, currentUser] = await Promise.all([
+    getAllUsers(),
+    getAuthUser(),
+  ]);
 
   return (
     <div className="hidden lg:block w-full">
@@ -30,9 +33,7 @@ export const FollowBar = async () => {
                   <p className="text-gray-500 text-sm">@{user.username}</p>
                 </div>
               </div>
-              <Button variant="primary" className="text-sm px-3 py-1">
-                Follow
-              </Button>
+              <FollowButton user={user} currentUser={currentUser} />
             </div>
           ))}
         </div>
