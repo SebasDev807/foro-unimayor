@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "db:push": "npx prisma db push",
-    "db:clear": "tsx ./scripts/cleanDatabase.ts",
-    "db:seed": "tsx ./scripts/seed.ts",
-    "db:studio": "npx prisma studio",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "db:push": "prisma db push",
+  "db:clear": "tsx ./scripts/cleanDatabase.ts",
+  "db:seed": "tsx ./scripts/seed.ts",
+  "db:studio": "prisma studio",
+  "postinstall": "prisma generate",
+  "vercel-build": "prisma generate && next build"
+},
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.35",
     "@clerk/nextjs": "5.2.14",
