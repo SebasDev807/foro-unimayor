@@ -8,7 +8,11 @@ import { ImageUploader } from "./image-uploader";
 import { PollOptions } from "./poll-options";
 import { EmojiPicker } from "./emoji-picker";
 import { CategorySelect } from "./category-select";
+<<<<<<< HEAD
 import { Image } from "lucide-react"; // Importa el ícono de imagen
+=======
+import { Image } from "lucide-react"; 
+>>>>>>> c3cd5fe (Merge branch 'release-2')
 
 type Category = "MATEMATICA" | "PROGRAMACION" | "SISTEMAS";
 
