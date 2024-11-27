@@ -74,7 +74,7 @@ export const Comment = ({ comment, currentUserId }: CommentProps) => {
 
   const handleHeartClick = () => {
     startTransition(() => {
-      likeCommentToggle(comment)
+      likeCommentToggle(comment.id)
         .then(() => {
           setIsLiked((prev) => !prev);
           setLikeCount((prev) => isLiked ? prev - 1 : prev + 1);
