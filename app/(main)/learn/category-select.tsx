@@ -7,28 +7,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+export enum Category {
+  MATEMATICA = "MATEMATICA",
+  PROGRAMACION = "PROGRAMACION",
+  SISTEMAS = "SISTEMAS",
+}
+
 type CategorySelectProps = {
-  category: string;
-  setCategory: (value: string) => void;
+  category: Category; 
+  setCategory: (value: Category) => void; 
 };
 
 const trends = [
-  { topic: "MATEMATICA", posts: "180 mil posts", url: "/ciencias-basicas" },
-  {
-    topic: "PROGRAMACION",
-    posts: "224 mil posts",
-    url: "/ciencias-computacion",
-  },
-  {
-    topic: "SISTEMAS",
-    posts: "34,9 mil posts",
-    url: "/habilidades-comunicativas",
-  },
+  { topic: Category.MATEMATICA, posts: "180 mil posts", url: "/ciencias-basicas" },
+  { topic: Category.PROGRAMACION, posts: "224 mil posts", url: "/ciencias-computacion" },
+  { topic: Category.SISTEMAS, posts: "34,9 mil posts", url: "/habilidades-comunicativas" },
 ];
 
 export function CategorySelect({ category, setCategory }: CategorySelectProps) {
   return (
-    <Select value={category} onValueChange={setCategory}>
+    <Select value={category} onValueChange={(value) => setCategory(value as Category)}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Selecciona un módulo" />
       </SelectTrigger>

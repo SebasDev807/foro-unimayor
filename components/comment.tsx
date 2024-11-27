@@ -41,7 +41,7 @@ export function Comment({ comment }: CommentProps) {
           <>
             <p>{comment.body.slice(0, maxLength)}...</p>
             <Button 
-              variant="link" 
+              variant="ghost" 
               onClick={toggleExpand}
               className="p-0 h-auto font-normal text-blue-500"
             >
@@ -53,7 +53,7 @@ export function Comment({ comment }: CommentProps) {
         )}
         {isExpanded && (
           <Button 
-            variant="link" 
+            variant="ghost" 
             onClick={toggleExpand}
             className="p-0 h-auto font-normal text-blue-500"
           >

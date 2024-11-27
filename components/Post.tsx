@@ -65,7 +65,7 @@ type Props = {
       email: string;
       image: string;
       bio: string;
-      followerCount: number;
+      followerCount?: number;
     };
   };
   currentUserId: string;
@@ -229,7 +229,7 @@ export const Post = ({ post, currentUserId }: Props) => {
             <span className="text-xs">{post.likedIds.length}</span>
           </Button>
           <Link href={`/comments?postId=${post.id}`} passHref>
-            <Button variant="ghost" size="sm" as="a">
+            <Button variant="ghost" size="sm">
               <MessageCircleIcon className="h-5 w-5 mr-1" />
               <span className="text-xs">{post.comments.length}</span>
             </Button>

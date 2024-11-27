@@ -1,6 +1,7 @@
 import client from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { cache } from "react";
+import { Category } from "@prisma/client";
 
 /**
  * Retrieves the user details based on the authenticated user ID.
@@ -53,12 +54,11 @@ export const getUserDetails = cache(async () => {
 /**
  * Retrieves at random post
  */
-export const getPosts = cache(async () => {
+export const getPosts = cache(async (filter?: { category: Category }) => {
   const { userId } = auth();
   if (!userId) {
     throw new Error("User ID is null");
   }
-
   // Fetch posts in descending order, including comments and user details
   const posts = await client.post.findMany({
     orderBy: {

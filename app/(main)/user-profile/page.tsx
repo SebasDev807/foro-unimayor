@@ -44,14 +44,14 @@ const ProfilePage = async () => {
           <TabsContent value="posts">
             <div className="w-auto h-auto px-auto space-y-4">
               {posts.map((post) => (
-                <Post key={post.id} post={post} />
+                <Post key={post.id} post={post} currentUserId={""} />
               ))}
             </div>
           </TabsContent>
           <TabsContent value="likes">
             <div className="w-auto h-auto px-auto space-y-4">
               {likedPosts.map((post) => (
-                <Post key={post.id} post={post} />
+                <Post key={post.id} post={post} currentUserId={""} />
               ))}
             </div>
           </TabsContent>
@@ -59,7 +59,7 @@ const ProfilePage = async () => {
             <div className="w-auto h-auto px-auto space-y-4">
               {comments.map((comment) => (
                 // <Post key={post.id} post={post} />
-                <Comment key={comment.id} comment={comment} />
+                <Comment key={comment.id} comment={comment} currentUserId={""} />
               ))}
             </div>
           </TabsContent>

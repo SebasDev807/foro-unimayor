@@ -8,9 +8,9 @@ import { ImageUploader } from "./image-uploader";
 import { PollOptions } from "./poll-options";
 import { EmojiPicker } from "./emoji-picker";
 import { CategorySelect } from "./category-select";
+import { Category } from "./category-select";
 import { Image } from "lucide-react"; // Importa el ícono de imagen
 
-type Category = "MATEMATICA" | "PROGRAMACION" | "SISTEMAS";
 
 type Props = {
   name: string;
@@ -29,7 +29,7 @@ async function fileToBase64(file: File): Promise<string> {
 export function Form({ name, image }: Props) {
   const [content, setContent] = useState("");
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [category, setCategory] = useState<Category>("MATEMATICA");
+  const [category, setCategory] = useState<Category>(Category.MATEMATICA);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showPollCreator, setShowPollCreator] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,7 +76,7 @@ export function Form({ name, image }: Props) {
     if (result.success) {
       setContent("");
       setSelectedImage(null);
-      setCategory("MATEMATICA");
+      setCategory(Category.MATEMATICA);
     }
   };
 

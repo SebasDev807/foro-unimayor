@@ -31,7 +31,7 @@ const TopicPage = async ({ params }: { params: { category?: string } }) => {
 
   const [user, posts] = await Promise.all([
     getAuthUser(),
-    getPosts({ where: { category } })
+    getPosts({ category }) 
   ]);
 
   if (!user) {
