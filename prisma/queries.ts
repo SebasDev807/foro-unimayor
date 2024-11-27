@@ -59,8 +59,12 @@ export const getPosts = cache(async (filter?: { category: Category }) => {
   if (!userId) {
     throw new Error("User ID is null");
   }
-  // Fetch posts in descending order, including comments and user details
+
+  // Fetch posts by category if provided
   const posts = await client.post.findMany({
+    where: {
+      category: filter?.category, // Filtra por categoría
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -77,7 +81,7 @@ export const getPosts = cache(async (filter?: { category: Category }) => {
     stats: {
       likes: {
         length: post.likedIds.length,
-        isLiked: post.likedIds.includes(userId), // <- Este campo se calcula en el servidor
+        isLiked: post.likedIds.includes(userId),
       },
       comments: post.comments.length,
     },
@@ -85,6 +89,7 @@ export const getPosts = cache(async (filter?: { category: Category }) => {
 
   return normalizedPosts;
 });
+
 
 /**
  * Retrieves at random post

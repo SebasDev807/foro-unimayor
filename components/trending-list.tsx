@@ -11,17 +11,17 @@ type TrendType = {
 const trends: TrendType[] = [
   {
     topic: Category.MATEMATICA,
-    posts: "180 mil posts",
+    posts: "5 posts",
     url: "/topic/matematica",
   },
   {
     topic: Category.PROGRAMACION,
-    posts: "224 mil posts",
+    posts: "10 posts",
     url: "/topic/programacion",
   },
   {
     topic: Category.SISTEMAS,
-    posts: "34,9 mil posts",
+    posts: "0 posts",
     url: "/topic/sistemas",
   },
 ];

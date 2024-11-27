@@ -31,7 +31,7 @@ const TopicPage = async ({ params }: { params: { category?: string } }) => {
 
   const [user, posts] = await Promise.all([
     getAuthUser(),
-    getPosts({ category }) 
+    getPosts({ category })  // Pasando el filtro de categoría a getPosts
   ]);
 
   if (!user) {
@@ -60,10 +60,4 @@ const TopicPage = async ({ params }: { params: { category?: string } }) => {
   );
 };
 
-export default TopicPage;
-
-export function generateStaticParams() {
-  return Object.keys(categoryMap).map(category => ({
-    category,
-  }));
-}
+export default TopicPage;  
