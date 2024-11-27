@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -129,3 +130,5 @@ export function Form({ name, image }: Props) {
     </div>
   );
 }
+=======
+>>>>>>> 377ca6b (Squashed commit of the following:)
