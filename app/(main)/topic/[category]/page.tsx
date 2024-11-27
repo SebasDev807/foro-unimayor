@@ -3,7 +3,7 @@ import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { TrendingList } from "@/components/trending-list";
 import { getPosts, getAuthUser } from "@/prisma/queries";
-import { Post } from "@/components/post";
+import { Post } from "@/components/Post";
 import { Category } from "@prisma/client";
 
 const categoryMap: { [key: string]: Category } = {

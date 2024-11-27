@@ -2,7 +2,7 @@
 
 import { useState, useTransition, useEffect } from "react";
 import { notFound } from "next/navigation";
-import { Post } from "@/components/post";
+import { Post } from "@/components/Post";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getPost, getCurrentUser, createComment } from "@/actions/user-comment";

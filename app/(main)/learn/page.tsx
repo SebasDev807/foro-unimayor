@@ -4,7 +4,7 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 import { TrendingList } from "@/components/trending-list";
 import { getPosts, getAuthUser } from "@/prisma/queries";
 import { Form } from "./form";
-import { Post } from "@/components/post";
+import { Post } from "@/components/Post";
 
 const LearnPage = async () => {
   const [user, posts] = await Promise.all([getAuthUser(), getPosts()]);

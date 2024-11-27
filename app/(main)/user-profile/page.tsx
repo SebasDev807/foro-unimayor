@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { FollowBar } from "@/components/follow/follow-bar";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
-import { Post } from "@/components/post";
+import { Post } from "@/components/Post";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Header } from "./header";
 import { Info } from "./info";

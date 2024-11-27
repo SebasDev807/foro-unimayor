@@ -1,5 +1,5 @@
 import React from "react";
-import { Trend } from "./Trend";
+import { Trend } from "./trend";
 import { Category } from "@prisma/client";
 
 type TrendType = {
