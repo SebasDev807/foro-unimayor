@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 085a5e0 (test-2)
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -12,15 +8,7 @@ import { ImageUploader } from "./image-uploader";
 import { PollOptions } from "./poll-options";
 import { EmojiPicker } from "./emoji-picker";
 import { CategorySelect } from "./category-select";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Image } from "lucide-react"; // Importa el ícono de imagen
-=======
-import { Image } from "lucide-react"; 
->>>>>>> c3cd5fe (Merge branch 'release-2')
-=======
-import { Image } from "lucide-react"; // Importa el ícono de imagen
->>>>>>> 085a5e0 (test-2)
 
 type Category = "MATEMATICA" | "PROGRAMACION" | "SISTEMAS";
 
@@ -136,10 +124,4 @@ export function Form({ name, image }: Props) {
       </form>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
->>>>>>> 377ca6b (Squashed commit of the following:)
-=======
-}
->>>>>>> 085a5e0 (test-2)
