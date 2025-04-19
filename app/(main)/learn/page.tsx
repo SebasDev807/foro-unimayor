@@ -10,7 +10,7 @@ const LearnPage = async () => {
   const [user, posts] = await Promise.all([getAuthUser(), getPosts()]);
 
   if (!user) {
-    redirect("/login");
+    redirect("/");
   }
 
   return (
