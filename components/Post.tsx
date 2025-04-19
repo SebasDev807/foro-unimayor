@@ -1,5 +1,4 @@
 "use client";
-
 import { useCallback, useState, useTransition } from "react";
 import Link from "next/link";
 import {
@@ -60,7 +59,7 @@ type Props = {
     }[];
     user: {
       id: string;
-      name: string;
+      name: string | null;
       username: string;
       email: string;
       image: string;
@@ -71,9 +70,11 @@ type Props = {
   currentUserId: string;
 };
 
-const getInitials = (name: string) => {
-  const names = name.split(" ");
-  const initials = names.map((n) => n[0]).join("");
+// Maneja valores nulos o vacíos
+const getInitials = (name: string | null | undefined) => {
+  if (!name) return "";
+  const parts = name.trim().split(/\s+/);
+  const initials = parts.map((n) => n[0] || "").join("");
   return initials.toUpperCase();
 };
 
@@ -104,7 +105,7 @@ export const Post = ({ post, currentUserId }: Props) => {
         .then(() => {
           setIsLiked((prev) => !prev);
         })
-        .catch(() => toast.error("Something went wrong. Please try again."));
+        .catch(() => toast.error("Algo salió mal. Intenta de nuevo."));
     });
   }, [post]);
 
@@ -113,13 +114,15 @@ export const Post = ({ post, currentUserId }: Props) => {
       deletePost(post)
         .then((response) => {
           if (response?.error === "unexisting") {
-            toast.error("Post does not exist.");
+            toast.error("El post no existe.");
             return;
           }
         })
-        .catch(() => toast.error("Something went wrong. Please try again."));
+        .catch(() => toast.error("Algo salió mal. Intenta de nuevo."));
     });
   };
+
+  const displayName = post.user.name ?? post.user.username;
 
   return (
     <Card key={post.id} className="w-full max-w-md mx-auto">
@@ -129,13 +132,13 @@ export const Post = ({ post, currentUserId }: Props) => {
             <Avatar>
               <AvatarImage
                 src={post.user.image || "/placeholder.svg?height=40&width=40"}
-                alt={`@${post.user.name}`}
+                alt={`@${displayName}`}
               />
-              <AvatarFallback>{getInitials(post.user.name)}</AvatarFallback>
+              <AvatarFallback>{getInitials(displayName)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
               <span className="text-sm font-medium text-gray-900 ml-2">
-                {post.user.name}
+                {displayName}
               </span>
               <span className="text-xs text-gray-500 ml-2">
                 {post.user.email}
@@ -156,20 +159,20 @@ export const Post = ({ post, currentUserId }: Props) => {
               <DropdownMenuContent align="end">
                 <DropdownMenuItem>
                   <Flag className="mr-2 h-4 w-4" />
-                  <span>Report</span>
+                  <span>Reportar</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <UserPlus className="mr-2 h-4 w-4" />
-                  <span>Follow</span>
+                  <span>Seguir</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <VolumeX className="mr-2 h-4 w-4" />
-                  <span>Mute</span>
+                  <span>Silenciar</span>
                 </DropdownMenuItem>
                 {post.authUserId === currentUserId && (
                   <DropdownMenuItem onClick={handleDeletePost}>
                     <Trash className="mr-2 h-4 w-4" />
-                    <span>Remove</span>
+                    <span>Eliminar</span>
                   </DropdownMenuItem>
                 )}
               </DropdownMenuContent>
@@ -244,7 +247,6 @@ export const Post = ({ post, currentUserId }: Props) => {
                     text: post.body.slice(0, 100),
                     url: window.location.href,
                   })
-                  .then(() => console.log("Contenido compartido"))
                   .catch(console.error);
               } else {
                 alert(

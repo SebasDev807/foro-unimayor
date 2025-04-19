@@ -9,8 +9,7 @@ import { PollOptions } from "./poll-options";
 import { EmojiPicker } from "./emoji-picker";
 import { CategorySelect } from "./category-select";
 import { Category } from "./category-select";
-import { Image } from "lucide-react"; // Importa el ícono de imagen
-
+import { Image as ImageIcon } from "lucide-react"; // Importa el ícono de imagen
 
 type Props = {
   name: string;
@@ -109,7 +108,7 @@ export function Form({ name, image }: Props) {
                   }
                   className="p-2 hover:bg-gray-100 rounded-full"
                 >
-                  <Image className="text-gray-600" size={20} />
+                  <ImageIcon className="text-gray-600" size={20} />
                 </button>
 
                 {/* Selector de categoría */}

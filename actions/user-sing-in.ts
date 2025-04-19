@@ -22,8 +22,8 @@ export const insertUser = async () => {
 
   const existingUser = await getAuthUser();
   if (existingUser) {
-    revalidatePath("/courses");
     revalidatePath("/learn");
+    revalidatePath("/");
     redirect("/");
     // eslint-disable-next-line brace-style
   } else {
@@ -57,8 +57,8 @@ export const insertUser = async () => {
       },
     });
 
-    revalidatePath("/");
     revalidatePath("/learn");
+    revalidatePath("/");
     redirect("/");
   }
 };

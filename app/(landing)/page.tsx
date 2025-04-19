@@ -49,8 +49,8 @@ const LandingPage = () => {
             <SignedOut>
               <SignUpButton
                 mode="modal"
-                forceRedirectUrl="/learn"
-                fallbackRedirectUrl="/learn"
+                forceRedirectUrl="/" // Redirección principal
+                fallbackRedirectUrl="/" // Redirección de respaldo
               >
                 <Button size="lg" variant="primary" className="w-full">
                   Empezar
@@ -58,8 +58,8 @@ const LandingPage = () => {
               </SignUpButton>
               <SignInButton
                 mode="modal"
-                forceRedirectUrl="/learn"
-                fallbackRedirectUrl="/learn"
+                forceRedirectUrl="/" // Redirección principal
+                fallbackRedirectUrl="/" // Redirección de respaldo
               >
                 <Button size="lg" variant="primaryOutline" className="w-full">
                   Ya tengo una cuenta
